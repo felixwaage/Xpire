@@ -30,3 +30,8 @@ Xpire - Manage your fridge and get rich!
 - Push-Benachrichtigungen aus der PWA möglich? (Milena & Yvonne) 
 - Grundlagen PWA-Entwicklung mit React (alle)
 - Logo (Andrea)
+
+# Produkt-API
+
+Es gibt den Service Openfoodfacts: https://world.openfoodfacts.org/
+Dieser bietet sowohl eine API als auch die Möglichkeit zur Kopie einer eigenen Datenbank an.
