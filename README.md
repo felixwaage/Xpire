@@ -15,3 +15,11 @@ Xpire - Manage your fridge and get rich!
 - Mitgliederverwaltung
 - Tipps für die Lagerung automatisch anzeigen
 - Status für das Produkt
+
+# ToDo's
+
+- Produktdatenbank (Felix)
+- JSON-File aus der PWA offline speichern (Fabio & Jonas)
+- Push-Benachrichtigungen aus der PWA möglich? (Milena & Yvonne) 
+- Grundlagen PWA-Entwicklung mit React (alle)
+- Logo (Andrea)
