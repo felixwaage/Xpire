@@ -16,7 +16,7 @@ Xpire - Manage your fridge and get rich!
 - Tipps für die Lagerung automatisch anzeigen
 - Status für das Produkt
 
-# ToDo's
+# ToDo's - bis 29.05.
 
 - Produktdatenbank (Felix)
 - JSON-File aus der PWA offline speichern (Fabio & Jonas)
