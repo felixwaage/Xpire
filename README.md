@@ -16,6 +16,13 @@ Xpire - Manage your fridge and get rich!
 - Tipps für die Lagerung automatisch anzeigen
 - Status für das Produkt
 
+# Technologien
+
+- PWA 
+- Frontend: React; Backend: NestJS
+- Lokale Entwicklung
+- lokale Datenspeicherung: JSON-File
+
 # ToDo's - bis 29.05.
 
 - Produktdatenbank (Felix)
