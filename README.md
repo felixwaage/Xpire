@@ -30,6 +30,7 @@ Xpire - Manage your fridge and get rich!
 - Push-Benachrichtigungen aus der PWA möglich? (Milena & Yvonne) 
 - Grundlagen PWA-Entwicklung mit React (alle)
 - Logo (Andrea)
+- Mockups für die App (evtl. Verena und Andrea)
 
 # Produkt-API
 
