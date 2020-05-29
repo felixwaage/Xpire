@@ -25,7 +25,7 @@ Xpire - Manage your fridge and get rich!
 
 # ToDo's - bis 29.05.
 
-- Produktdatenbank (Felix)
+- Produktdatenbank (Felix) - done
 - JSON-File aus der PWA offline speichern (Fabio & Jonas)
 - Push-Benachrichtigungen aus der PWA möglich? (Milena & Yvonne) 
 - Grundlagen PWA-Entwicklung mit React (alle)
@@ -36,3 +36,6 @@ Xpire - Manage your fridge and get rich!
 
 Es gibt den Service Openfoodfacts: https://world.openfoodfacts.org/
 Dieser bietet sowohl eine API als auch die Möglichkeit zur Kopie einer eigenen Datenbank an.
+
+Beispiel: https://world.openfoodfacts.org/api/v0/product/4316268552370.json
+
