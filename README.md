@@ -53,3 +53,7 @@ Link: https://medium.com/better-programming/everything-you-need-to-know-about-pw
 ## Grundlagen PWA mit React
 
 Link: 
+
+## Mockups für die Version 1
+
+Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&scaling=min-zoom
