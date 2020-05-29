@@ -27,23 +27,29 @@ Xpire - Manage your fridge and get rich!
 
 - Produktdatenbank (Felix) - done
 - JSON-File aus der PWA offline speichern (Fabio & Jonas) - done
-- Push-Benachrichtigungen aus der PWA möglich? (Milena & Yvonne) 
-- Grundlagen PWA-Entwicklung mit React (alle)
-- Logo (Andrea)
-- Mockups für die App (evtl. Verena und Andrea)
+- Push-Benachrichtigungen aus der PWA möglich? (Milena & Yvonne) - done
+- Grundlagen PWA-Entwicklung mit React (alle) - done
+- Logo (Andrea) - done
+- Mockups für die App (evtl. Verena und Andrea) - in Progress
 
-# Produkt-API
+# Ergebnisse
+## Produkt-API
 
 Es gibt den Service Openfoodfacts: https://world.openfoodfacts.org/
 Dieser bietet sowohl eine API als auch die Möglichkeit zur Kopie einer eigenen Datenbank an.
 
 Beispiel: https://world.openfoodfacts.org/api/v0/product/4316268552370.json
 
-# Lokale Datenspeicherung
+## Lokale Datenspeicherung
 
 LokiJS - Library zum Zugriff auf IndexedDB
 https://github.com/techfort/LokiJS
 
-# Push-Benachrichtigungen aus der PWA
+## Push-Benachrichtigungen aus der PWA
 
 Keine Push-Benachrichtigungen auf Apple geräten. In Chrome trotzdem möglich auch unter Apple.
+Link: https://medium.com/better-programming/everything-you-need-to-know-about-pwas-push-notifications-e870bb54e14f
+
+## Grundlagen PWA mit React
+
+Link: 
