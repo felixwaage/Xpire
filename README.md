@@ -31,11 +31,12 @@ Xpire - Manage your fridge and get rich!
 - Grundlagen PWA-Entwicklung mit React (alle) - done
 - Logo (Andrea) - done
 - [Mockups für die App](https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A19&scaling=min-zoom) (Verena und Andrea) - done
-- Push-Benachrichtigungen
-- Http-Requests
-- App-Icon
-- IndexedDB
-- Deployment des Projekts als GitHub-Page
+- Push-Benachrichtigungen (Yvonne) - in progress
+- Http-Requests (Felix) - done
+- App-Icon (Milena) - in progress
+- IndexedDB (Fabio & Jonas) - done
+- Deployment des Projekts als GitHub-Page (Milena) - in progress
+- 
 
 # Ergebnisse
 ## Produkt-API
@@ -45,10 +46,15 @@ Dieser bietet sowohl eine API als auch die Möglichkeit zur Kopie einer eigenen 
 
 Beispiel: https://world.openfoodfacts.org/api/v0/product/4316268552370.json
 
-## Lokale Datenspeicherung
+## Indexed-DB
 
 LokiJS - Library zum Zugriff auf IndexedDB
 https://github.com/techfort/LokiJS
+
+- LokiJS hat nichts mit der nativen IndexedDB im Browser zu tun
+- LokiJS ist einfach :)!
+- Insert --> done
+- Die Daten der werden zum aktuellen stand nicht dauerhaft gespeichert
 
 ## Push-Benachrichtigungen aus der PWA
 
@@ -73,3 +79,8 @@ Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&sca
 ## App-Icon
 
 - Verschieden große Icons müssen hinterglegt werden
+- Testen ist notwendig --> Deployment auf Github-Pages abwarten
+
+# Implementierung
+## ListView
+- Liste (MaterialUI)
