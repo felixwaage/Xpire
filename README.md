@@ -31,6 +31,11 @@ Xpire - Manage your fridge and get rich!
 - Grundlagen PWA-Entwicklung mit React (alle) - done
 - Logo (Andrea) - done
 - [Mockups für die App](https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A19&scaling=min-zoom) (Verena und Andrea) - done
+- Push-Benachrichtigungen
+- Http-Requests
+- App-Icon
+- IndexedDB
+- Deployment des Projekts als GitHub-Page
 
 # Ergebnisse
 ## Produkt-API
@@ -50,6 +55,13 @@ https://github.com/techfort/LokiJS
 Keine Push-Benachrichtigungen auf Apple geräten. In Chrome trotzdem möglich auch unter Apple.
 Link: https://medium.com/better-programming/everything-you-need-to-know-about-pwas-push-notifications-e870bb54e14f
 
+Folgende Bestandteile sind notwendig:
+- Push-API (verwendet die Push-Serives der Webbrowser)
+- Notifaction-API (erstellen der Nachricht)
+- Service Worker (muss im Browser registriert werden)
+
+- Es sind Zustimmungen des Nutzer notwendig (lediglich wenige Zeilen Code)
+
 ## Grundlagen PWA mit React
 
 Link: 
@@ -57,3 +69,7 @@ Link:
 ## Mockups für die Version 1
 
 Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&scaling=min-zoom
+
+## App-Icon
+
+- Verschieden große Icons müssen hinterglegt werden
