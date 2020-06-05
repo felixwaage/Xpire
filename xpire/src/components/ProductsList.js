@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,9 +21,11 @@ const useStyles = makeStyles((theme) => ({
     },
     listitem: {
         padding: '1rem',
-        borderWidth: '0.2rem',
+        margin: '0.5rem',
+        borderWidth: '0.1rem',
         borderStyle: 'solid',
-        borderColor: 'colorPrimary'
+        borderRadius: '0.5rem',
+        borderColor: theme.palette.primary.main
     }
 }));
 
@@ -58,11 +61,9 @@ export default function ProductsList() {
                         </ListItemAvatar>
                         <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
                         <ListItemSecondaryAction>
-                            <Checkbox
+                            <CloseIcon 
                                 edge="end"
-                                onChange={handleToggle(value)}
-                                checked={checked.indexOf(value) !== -1}
-                                inputProps={{ 'aria-labelledby': labelId }}
+                                color="primary"
                             />
                         </ListItemSecondaryAction>
                     </ListItem>
