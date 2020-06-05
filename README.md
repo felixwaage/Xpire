@@ -1,6 +1,8 @@
 # Xpire
 Xpire - Manage your fridge and get rich!
 
+Verfügbar unter: https://felixwaage.github.io/Xpire/ 
+
 # Version 1
 
 - Manuelles Eingeben des Mindesthaltbarkeitsdatum
