@@ -35,10 +35,16 @@ Verfügbar unter: https://felixwaage.github.io/Xpire/
 - [Mockups für die App](https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A19&scaling=min-zoom) (Verena und Andrea) - done
 - Push-Benachrichtigungen (Yvonne) - in progress
 - Http-Requests (Felix) - done
-- App-Icon (Milena) - in progress
+- App-Icon (Milena) - done
 - IndexedDB (Fabio & Jonas) - done
-- Deployment des Projekts als GitHub-Page (Milena) - in progress
-- 
+- Deployment des Projekts als GitHub-Page (Milena) - done
+
+- hinzufügen eines Produktes bis 19.06. 
+  - Verena macht das Frontend
+  - Milena & Yvonne & Felix sprechen sich ab
+ 
+ - anlegen der Datenbank bis 19.06. (Jonas & Fabio)
+  - "DB-Model" und Implementierung
 
 # Ergebnisse
 ## Produkt-API
@@ -83,15 +89,31 @@ Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&sca
 - Verschieden große Icons müssen hinterglegt werden
 - Testen ist notwendig --> Deployment auf Github-Pages abwarten
 
+## Deployment auf GitHub-Pages
+- github-pg branch 
+- es muss ein neuer productiv build erzeugt werden, damit dies deployed wird
+- npm run deploy
+
 # Implementierung
 ## ListView
 - Liste (MaterialUI)
+
+## Add-Product-Page (Verena)
+- Produkte hinzufügen
+
+## Datenbank und Datenspeicherung (Jonas & Fabio)
+- Datenbankmodel
+- Datenzugriffe
+
+## Konzept (Milena, Yvonne, Verena und Felix)
+
+## Seminararbeit (Andrea)
 
 
 # Compatibility
 
 | Feature | Android | iOS |
 | ------ | ------ | ------ |
-| Icons on Homescreen | Yes | / |
+| Icons on Homescreen | Yes | Yes |
 | Push-Notifications | Yes | ? |
 
