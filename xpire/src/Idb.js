@@ -1,41 +1,41 @@
-import React, { Component } from 'react'
-import loki from 'lokijs'
+import React, { useState } from 'react'
+import Dexie from 'dexie'
 
-class Idb extends Component {
+function Idb() {
 
-    constructor(props) {
-        super(props)
+    const [allProducts, setProducts] = useState([]);
+    const db = new Dexie();
 
-        this.state = {
-            products: []
-        }
-    }
-
-
-    componentDidMount() {
-        let db = new loki("xpire.db", {
-            autoload: true,
-            autosave: true,
-            autosaveInterval: 4000
+    const handler = async () => {
+        db.version(1).stores({
+            products: "++id,name,expireDate"
         });
-
-        let products = db.addCollection('products');
-        products.insert({ name: 'Kartoffelpuffer', expireDate: "30.05.2020" });
-        //var odin = users.findOne({ name: 'Thor' });
-        console.log("Products: " + products.toString());
-        console.log(db);
+        await db.products.add({
+            name: 'Kartoffel',
+            expireDate: '23.08.3021'
+        });
+        setProducts(db.products);
+        await db.products.toArray().then(function (arr) {
+            console.log(arr);
+            setProducts(arr);
+        });
     }
 
-    render() {
-        return (
-            <div>
-                <p>Test</p>
-                <input></input>
-                <input></input>
-                <button>Submit</button>
-            </div>
-        )
+    const deleteAProduct = () => {
+        db.products.where('id').equals(1);
     }
+
+    return (
+        <div>
+            <button onClick={handler}>Test</button>
+            <button onClick={deleteAProduct}>Delete</button>
+            <ul>
+                {allProducts.map((product) =>
+                    <li>{product.name}</li>
+                )}
+            </ul>
+        </div>
+    )
 }
 
 export default Idb
