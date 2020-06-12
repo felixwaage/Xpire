@@ -12,6 +12,7 @@ function App() {
       <AppHeader />
       <ProductsList />
       <FloatingButton />
+      <Idb></Idb>
     </div>
   );
 }
