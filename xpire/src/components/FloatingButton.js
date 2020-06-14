@@ -44,7 +44,7 @@ class FloatingButton extends React.Component {
     render() {
 
         return (
-            <Fab position='absolute' color="primary" aria-label="add" onClick={this.handleClick}>
+            <Fab position='fixed' color="primary" aria-label="add" onClick={this.handleClick}>
                 <AddIcon />
             </Fab>
         );
