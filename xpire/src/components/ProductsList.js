@@ -10,17 +10,12 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        maxWidth: '90%',
-        marginTop: '1rem',
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        backgroundColor: theme.palette.background.paper,
+        padding: '1rem'
+    },
+    listitemframe: {
+        margin: '0.6rem'
     },
     listitem: {
-        padding: '1rem',
-        margin: '0.5rem',
         borderWidth: '0.1rem',
         borderStyle: 'solid',
         borderRadius: '0.5rem',
@@ -37,21 +32,23 @@ export default function ProductsList() {
             {['Mehl', 'Schlagsahne', 'Banane', 'Schokoladeneis'].map((value) => {
                 const labelId = `checkbox-list-secondary-label-${value}`;
                 return (
-                    <ListItem key={value} className={classes.listitem} button>
-                        <ListItemAvatar>
-                            <Avatar
-                                alt={`Avatar n°${value + 1}`}
-                                src={`/static/images/avatar/${value + 1}.jpg`}
-                            />
-                        </ListItemAvatar>
-                        <ListItemText id={labelId} primary={`${value}`} secondary={`Gültig bis: 24.07.2020`}/>
-                        <ListItemSecondaryAction>
-                            <CloseIcon 
-                                edge="end"
-                                color="primary"
-                            />
-                        </ListItemSecondaryAction>
-                    </ListItem>
+                    <div className={classes.listitemframe}>
+                        <ListItem key={value} className={classes.listitem} button>
+                            <ListItemAvatar>
+                                <Avatar
+                                    alt={`Avatar n°${value + 1}`}
+                                    src={`/static/images/avatar/${value + 1}.jpg`}
+                                />
+                            </ListItemAvatar>
+                            <ListItemText id={labelId} primary={`${value}`} secondary={`Gültig bis: 24.07.2020`}/>
+                            <ListItemSecondaryAction>
+                                <CloseIcon 
+                                    edge="end"
+                                    color="primary"
+                                />
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                    </div>
                 );
             })}
         </List>

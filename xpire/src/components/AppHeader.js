@@ -45,14 +45,14 @@ export default function AppHeader() {
     return (
         <div className={classes.root}>
 
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
                         Xpire
-          </Typography>
+                    </Typography>
                     {auth && (
                         <div>
                             <IconButton
