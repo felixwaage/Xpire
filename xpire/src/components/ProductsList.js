@@ -29,22 +29,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ProductsList() {
+export default function ProductsList(props) {
     const classes = useStyles();
 
     return (
         <List dense className={classes.root}>
-            {['Mehl', 'Schlagsahne', 'Banane', 'Schokoladeneis'].map((value) => {
-                const labelId = `checkbox-list-secondary-label-${value}`;
+            {props.products.map((value) => {
+                const labelId = `checkbox-list-secondary-label-${value.name}`;
                 return (
-                    <ListItem key={value} className={classes.listitem} button>
+                    <ListItem key={value.id} className={classes.listitem} button>
                         <ListItemAvatar>
                             <Avatar
                                 alt={`Avatar n°${value + 1}`}
                                 src={`/static/images/avatar/${value + 1}.jpg`}
                             />
                         </ListItemAvatar>
-                        <ListItemText id={labelId} primary={`${value}`} secondary={`Gültig bis: 24.07.2020`}/>
+                        <ListItemText id={labelId} primary={`${value.name}`} secondary={value.vailid_until}/>
                         <ListItemSecondaryAction>
                             <CloseIcon 
                                 edge="end"
