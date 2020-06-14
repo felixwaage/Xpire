@@ -21,6 +21,13 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '0.5rem',
         borderColor: theme.palette.primary.main
     }
+    ,
+    bar: {
+        height: '0.5rem',
+        width: '100%',
+        marginTop: '0.3rem',
+        backgroundColor: theme.palette.primary.main,
+    }
 }));
 
 
@@ -40,13 +47,20 @@ export default function ProductsList(props) {
                                     src={`/static/images/avatar/${value + 1}.jpg`}
                                 />
                             </ListItemAvatar>
-                            <ListItemText id={labelId} primary={`${value.name}`} secondary={value.vailid_until}/>
-                            <ListItemSecondaryAction>
+                            {/*<ListItemText id={labelId} primary={`${value.name}`} secondary={value.vailid_until}/>*/}
+                            <ListItemText id={labelId} primary={`${value.name}`} secondary={
+                                <div>
+                                    <div>Gültig bis: {value.vailid_until}</div>
+                                    <div className={classes.bar}></div>
+                              </div>
+                            }/>
+                            {/*<ListItemSecondaryAction>
                                 <CloseIcon 
                                     edge="end"
                                     color="primary"
+                                    //onClick={this.handleClick}
                                 />
-                            </ListItemSecondaryAction>
+                            </ListItemSecondaryAction>*/}
                         </ListItem>
                     </div>
                 );
