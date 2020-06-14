@@ -69,7 +69,7 @@ class App extends React.Component {
         {this.state.addProduct && <AddProduct navigate={this.showProductList} add={this.addProductToList}/> }
         {!this.state.addProduct && <ProductsList products={products} />}
         {!this.state.addProduct && <FloatingButton navigate={this.showAddProduct}/>}
-      
+        {/*<Idb></Idb>*/}
       </div>
     );
     
