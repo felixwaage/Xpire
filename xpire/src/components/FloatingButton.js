@@ -1,35 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        maxWidth: '90%',
-        marginTop: '1rem',
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        backgroundColor: theme.palette.background.paper,
-    },
+const styles = theme => ({
     fab: {
         position: 'absolute',
         bottom: theme.spacing(4),
         right: theme.spacing(4),
     },
-}));
-
-
-{/*export default function FloatingButton() {
-    const classes = useStyles();
-
-    return (
-        <Fab className={classes.fab} position='absolute' color="primary" aria-label="add" onClick={() => this.sendFeedbackMessage('ThumbsDown')}>
-            <AddIcon />
-        </Fab>
-    );
-}*/}
+});
 
 class FloatingButton extends React.Component {
     constructor(props) {
@@ -42,13 +22,14 @@ class FloatingButton extends React.Component {
       }
 
     render() {
+        const { classes } = this.props;
 
         return (
-            <Fab position='absolute' color="primary" aria-label="add" onClick={this.handleClick}>
+            <Fab color="primary" aria-label="add" className={classes.fab} onClick={this.handleClick}>
                 <AddIcon />
             </Fab>
         );
     }
 }
 
-export default FloatingButton;
+export default withStyles(styles)(FloatingButton);
