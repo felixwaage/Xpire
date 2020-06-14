@@ -21,12 +21,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function FloatingButton() {
+{/*export default function FloatingButton() {
     const classes = useStyles();
 
     return (
-        <Fab className={classes.fab} position='static' color="primary" aria-label="add">
+        <Fab className={classes.fab} position='absolute' color="primary" aria-label="add" onClick={() => this.sendFeedbackMessage('ThumbsDown')}>
             <AddIcon />
         </Fab>
     );
+}*/}
+
+class FloatingButton extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event) {
+        this.props.navigate();
+      }
+
+    render() {
+
+        return (
+            <Fab position='absolute' color="primary" aria-label="add" onClick={this.handleClick}>
+                <AddIcon />
+            </Fab>
+        );
+    }
 }
+
+export default FloatingButton;
