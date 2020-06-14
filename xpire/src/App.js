@@ -7,7 +7,31 @@ import ProductsList from './components/ProductsList';
 import AddProduct from './components/AddProduct';
 import FloatingButton from './components/FloatingButton';
 
+var products = [{
+    id: "1",
+    name: "Pizza",
+    amount: 1,
+    purchase_date: "2020-06-14",
+    vailid_until: "2021-09-12"
+  },
+  {
+    id: "2",
+    name: "Döner",
+    amount: 1,
+    purchase_date: "2020-06-14",
+    vailid_until: "2021-09-12"
+  },
+  {
+    id: "3",
+    name: "Fisch",
+    amount: 1,
+    purchase_date: "2020-06-14",
+    vailid_until: "2021-09-12"
+  }
+];
+
 class App extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -25,13 +49,25 @@ class App extends React.Component {
     this.setState({ addProduct: false });
   }
 
+  addProductToList(name,amount,purchase_date,vailid_until){
+    var newProduct = {
+      id: Math.random()*100,
+      name,
+      amount,
+      purchase_date,
+      vailid_until
+    }
+
+    products.push(newProduct);
+  }
+
   render() {
 
     return (
       <div className="App"> 
         <AppHeader /> 
-        {this.state.addProduct && <AddProduct navigate={this.showProductList}/> }
-        {!this.state.addProduct && <ProductsList />}
+        {this.state.addProduct && <AddProduct navigate={this.showProductList} add={this.addProductToList}/> }
+        {!this.state.addProduct && <ProductsList products={products} />}
         {!this.state.addProduct && <FloatingButton navigate={this.showAddProduct}/>}
         {/*<Idb></Idb>*/}
       </div>

@@ -47,11 +47,32 @@ class AddProduct extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.addProduct = this.addProduct.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+        this.state = {
+            name: "",
+            amount: "",
+            purchase_date: "",
+            vailid_unitil: ""
+        }
+    }
+
+    addProduct(event){
+        this.props.add(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
+        this.props.navigate();
     }
 
     handleClick(event) {
         this.props.navigate();
-      }
+    }
+
+    handleInput(event) {
+        const value = event.target.value;
+        this.setState({
+            ...this.state,
+            [event.target.id]: value
+        })
+    }
 
     render() {
         const { classes } = this.props;
@@ -73,35 +94,39 @@ class AddProduct extends React.Component {
                 </div>
                 <form className={classes.form}>
                     <TextField
-                        id="productTitle-input"
+                        id="name"
                         label="Titel"
                         margin="dense"
                         variant="outlined"
                         className={classes.textField}
+                        onChange={this.handleInput}
                     />
                     <br />
                     <TextField
-                        id="productCount-input"
+                        id="amount"
                         label="Anzahl"
                         margin="dense"
                         variant="outlined"
                         className={classes.textField}
+                        onChange={this.handleInput}
                     />                           
                     <br />
                     <TextField
-                        id="buyDate-input"
+                        id="purchase_date"
                         label="Eingekauft am"
                         margin="dense"
                         variant="outlined"
                         className={classes.textField}
+                        onChange={this.handleInput}
                     />
                     <br />
                     <TextField
-                        id="dueDate-input"
+                        id="vailid_unitil"
                         label="Gültig bis"
                         margin="dense"
                         variant="outlined"
                         className={classes.textField}
+                        onChange={this.handleInput}
                     />
                     <br />
                     
@@ -109,7 +134,8 @@ class AddProduct extends React.Component {
                         id="SaveButton"
                         variant="contained"
                         color="primary"
-                        className={classes.submitButton}>
+                        className={classes.submitButton}
+                        onClick={this.addProduct}>
                         Speichern
                     </Button>
                 </form>                           
