@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     },
     fab: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: theme.spacing(4),
         right: theme.spacing(4),
     },
@@ -25,7 +25,7 @@ export default function FloatingButton() {
     const classes = useStyles();
 
     return (
-        <Fab className={classes.fab} position='absolute' color="primary" aria-label="add">
+        <Fab className={classes.fab} position='static' color="primary" aria-label="add">
             <AddIcon />
         </Fab>
     );
