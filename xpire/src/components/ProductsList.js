@@ -33,13 +33,18 @@ const useStyles = makeStyles((theme) => ({
 export default function ProductsList(props) {
     const classes = useStyles();
 
+    const handleListItemClick = (id) => {
+        props.showProduct(id);
+    }
+
     return (
         <List dense className={classes.root}>
             {props.products.map((value) => {
                 const labelId = `checkbox-list-secondary-label-${value.name}`;
+                const productId = value.id;
                 return (
                     <div className={classes.listitemframe}>
-                        <ListItem key={value.id} className={classes.listitem} button>
+                        <ListItem className={classes.listitem} button onClick={() => handleListItemClick(value.id)}>
                             <ListItemAvatar>
                                 <Avatar
                                     alt={`Avatar n°${value + 1}`}
@@ -47,7 +52,7 @@ export default function ProductsList(props) {
                                 />
                             </ListItemAvatar>
                             {/*<ListItemText id={labelId} primary={`${value.name}`} secondary={value.vailid_until}/>*/}
-                            <ListItemText id={labelId} primary={`${value.name}`} secondary={
+                            <ListItemText primary={`${value.name}`} secondary={
                                 <div>
                                     <div>Gültig bis: {value.vailid_until}</div>
                                     <div className={classes.bar}></div>
