@@ -51,6 +51,7 @@ class ShowProduct extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.addProduct = this.addProduct.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.handleClickDelete = this.handleClickDelete.bind(this);
         this.state = {
             name: "",
             amount: "",
@@ -76,6 +77,11 @@ class ShowProduct extends React.Component {
         })
     }
 
+    handleClickDelete(event) {
+        this.props.delete(this.props.product.id);
+        this.props.navigate();
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -91,6 +97,7 @@ class ShowProduct extends React.Component {
                         <DeleteIcon 
                             edge="end"
                             className={classes.deleteIcon}
+                            onClick={this.handleClickDelete}
                         />
                     </div>
                 </div>
