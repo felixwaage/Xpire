@@ -98,6 +98,10 @@ Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&sca
 ## ListView
 - Liste (MaterialUI)
 
+## nächste Schritte
+- delete product 
+- show product
+- update product
 ## Add-Product-Page (Verena)
 - Produkte hinzufügen
 
