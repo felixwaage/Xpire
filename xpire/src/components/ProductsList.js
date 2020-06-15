@@ -20,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
         borderStyle: 'solid',
         borderRadius: '0.5rem',
         borderColor: theme.palette.primary.main
-    }
-    ,
+    },
     bar: {
         height: '0.5rem',
         width: '100%',
