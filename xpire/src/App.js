@@ -44,6 +44,7 @@ class App extends React.Component {
     this.showAddProduct = this.showAddProduct.bind(this);
     this.showProductList = this.showProductList.bind(this);
     this.showProduct = this.showProduct.bind(this);
+    this.deleteProduct = this.deleteProduct.bind(this);
   }
 
   showAddProduct() {
@@ -65,8 +66,11 @@ class App extends React.Component {
 
     var product = products.find(e => e.id === id);
     this.setState({ showProductObj: product });
+  }
 
-    console.log(id);
+  deleteProduct(id){
+    var index = products.findIndex(e => e.id === id);
+    products.splice(index,1);
   }
 
   addProductToList(name,amount,purchase_date,vailid_until){ 
@@ -87,7 +91,7 @@ class App extends React.Component {
       <div className="App"> 
         <AppHeader /> 
         {this.state.addProductVisible && <AddProduct navigate={this.showProductList} add={this.addProductToList}/> }
-        {this.state.showProductVisible && <ShowProduct navigate={this.showProductList} product={this.state.showProductObj}/>}
+        {this.state.showProductVisible && <ShowProduct navigate={this.showProductList} product={this.state.showProductObj} delete={this.deleteProduct}/>}
         {this.state.productListVisible && <ProductsList products={products} showProduct={this.showProduct}/>}
         {this.state.productListVisible && <FloatingButton navigate={this.showAddProduct}/>}
         {/*<Idb></Idb>*/}
