@@ -45,7 +45,7 @@ const styles = theme => ({
     } 
 });
 
-class AddProduct extends React.Component {
+class ShowProduct extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -55,12 +55,12 @@ class AddProduct extends React.Component {
             name: "",
             amount: "",
             purchase_date: "",
-            vailid_unitil: ""
+            vailid_until: ""
         }
     }
 
     addProduct(event){
-        this.props.add(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
+        this.props.add(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_until);
         this.props.navigate();
     }
 
@@ -88,6 +88,10 @@ class AddProduct extends React.Component {
                             className={classes.arrowIcon}
                             onClick={this.handleClick}
                         />
+                        <DeleteIcon 
+                            edge="end"
+                            className={classes.deleteIcon}
+                        />
                     </div>
                 </div>
                 <form className={classes.form}>
@@ -96,6 +100,7 @@ class AddProduct extends React.Component {
                         label="Titel"
                         margin="dense"
                         variant="outlined"
+                        value={this.props.product.name}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
@@ -105,6 +110,7 @@ class AddProduct extends React.Component {
                         label="Anzahl"
                         margin="dense"
                         variant="outlined"
+                        value={this.props.product.amount}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />                           
@@ -114,15 +120,17 @@ class AddProduct extends React.Component {
                         label="Eingekauft am"
                         margin="dense"
                         variant="outlined"
+                        value={this.props.product.purchase_date}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
                     <br />
                     <TextField
-                        id="vailid_unitil"
+                        id="vailid_until"
                         label="Gültig bis"
                         margin="dense"
                         variant="outlined"
+                        value={this.props.product.vailid_until}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
@@ -133,6 +141,7 @@ class AddProduct extends React.Component {
                         variant="contained"
                         color="primary"
                         className={classes.submitButton}
+                        // todo here we need to update
                         onClick={this.addProduct}>
                         Speichern
                     </Button>
@@ -142,4 +151,4 @@ class AddProduct extends React.Component {
     }
 }
 
-export default withStyles(styles)(AddProduct);
+export default withStyles(styles)(ShowProduct);
