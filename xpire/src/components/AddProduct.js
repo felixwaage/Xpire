@@ -7,7 +7,9 @@ import ArrowIcon from '@material-ui/icons/KeyboardBackspace';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
-    toolbar: theme.mixins.toolbar,
+    root: {
+        marginTop: "56px"
+    },
     img: {
         height: '15rem',
         backgroundImage: "url(" + flower + ")",
@@ -78,7 +80,7 @@ class AddProduct extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div className={classes.toolbar}>
+            <div className={classes.root}>
                 <div className={classes.img}>
                     <div className={classes.imgOverlay}>
                         <ArrowIcon 
