@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Idb from './Idb'
+import Idb, { addProduct, deleteProduct } from './Idb'
 import AppHeader from './components/AppHeader'
 import ProductsList from './components/ProductsList';
 import AddProduct from './components/AddProduct';
