@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import flower from '../Mehl.jpg';
 import ArrowIcon from '@material-ui/icons/KeyboardBackspace';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { addProduct } from '../Idb';
 
 const styles = theme => ({
     root: {
@@ -62,6 +63,8 @@ class AddProduct extends React.Component {
     addProduct(event){
         this.props.add(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
         this.props.navigate();
+
+        addProduct(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
     }
 
     handleClick(event) {

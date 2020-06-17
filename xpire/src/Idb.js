@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import Dexie from 'dexie'
 
 
-export const addProduct = async (name, expireDate) => {
+export const addProduct = async (name, amount, purchaseDate, expireDate) => {
     const db = new Dexie("Xpire");
     db.version(1).stores({
-        products: "++id,name,expireDate"
+        products: "++id,name,amount,purchaseDate,expireDate"
     });
     db.open().catch(function (err) {
         console.error (err.stack || err);
     });
     await db.products.add({
         name: name,
+        amount: amount,
+        purchaseDate: purchaseDate,
         expireDate: expireDate
     });
     await db.products.toArray().then(function (arr) {
@@ -22,7 +24,7 @@ export const addProduct = async (name, expireDate) => {
 export const clearTable = async (tableName) => {
     const db = new Dexie("Xpire");
     db.version(1).stores({
-        products: "++id,name,expireDate"
+        products: "++id,name,amount,purchaseDate,expireDate"
     });
     await db.open().catch(function (err) {
         console.error (err.stack || err);
@@ -33,7 +35,7 @@ export const clearTable = async (tableName) => {
 export const deleteProduct = async (id) => {
     const db = new Dexie("Xpire");
     db.version(1).stores({
-        products: "++id,name,expireDate"
+        products: "++id,name,amount,purchaseDate,expireDate"
     });
     await db.products.where('id').equals(id).delete();
 }
