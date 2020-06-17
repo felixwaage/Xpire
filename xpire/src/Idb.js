@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Dexie from 'dexie'
 
+
 export const addProduct = async (name, expireDate) => {
     const db = new Dexie("Xpire");
     db.version(1).stores({
@@ -61,10 +62,6 @@ function Idb() {
     const addProduct = (productArray) => {
         setProducts(allProducts.concat(productArray));
     }
-
-    const deleteAProduct = () => {
-        db.products.where('id').equals(1);
-    }
     const clearTable = async () => {
         await db.open().catch(function (err) {
             console.error (err.stack || err);
@@ -81,6 +78,7 @@ function Idb() {
                 {allProducts.map((product) =>
                     <li>{product.name}</li>
                 ) }
+
             </ul>
         </div>
     )
