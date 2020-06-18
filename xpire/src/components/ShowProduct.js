@@ -53,10 +53,10 @@ class ShowProduct extends React.Component {
         this.handleInput = this.handleInput.bind(this);
         this.handleClickDelete = this.handleClickDelete.bind(this);
         this.state = {
-            name: "",
-            amount: "",
-            purchase_date: "",
-            vailid_until: ""
+            name: this.props.product.name,
+            amount: this.props.product.amount,
+            purchase_date: this.props.product.purchase_date,
+            vailid_until: this.props.product.vailid_until
         }
     }
 
@@ -107,7 +107,7 @@ class ShowProduct extends React.Component {
                         label="Titel"
                         margin="dense"
                         variant="outlined"
-                        value={this.props.product.name}
+                        value={this.state.name}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
@@ -117,7 +117,7 @@ class ShowProduct extends React.Component {
                         label="Anzahl"
                         margin="dense"
                         variant="outlined"
-                        value={this.props.product.amount}
+                        value={this.state.amount}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />                           
@@ -127,7 +127,7 @@ class ShowProduct extends React.Component {
                         label="Eingekauft am"
                         margin="dense"
                         variant="outlined"
-                        value={this.props.product.purchase_date}
+                        value={this.state.purchase_date}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
@@ -137,7 +137,7 @@ class ShowProduct extends React.Component {
                         label="Gültig bis"
                         margin="dense"
                         variant="outlined"
-                        value={this.props.product.vailid_until}
+                        value={this.state.vailid_until}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
