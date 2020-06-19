@@ -6,6 +6,7 @@ import flower from '../Mehl.jpg';
 import ArrowIcon from '@material-ui/icons/KeyboardBackspace';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { addProduct } from '../Idb';
+import { Redirect } from 'react-router';
 
 const styles = theme => ({
     root: {
@@ -62,13 +63,13 @@ class AddProduct extends React.Component {
 
     addProduct(event){
         this.props.add(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
-        this.props.navigate();
+        this.setState({redirect: true});
 
         addProduct(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
     }
 
     handleClick(event) {
-        this.props.navigate();
+        this.setState({redirect: true});
     }
 
     handleInput(event) {
@@ -81,6 +82,10 @@ class AddProduct extends React.Component {
 
     render() {
         const { classes } = this.props;
+
+        if (this.state.redirect) {
+            return <Redirect push to="/" />;
+        }
 
         return (
             <div className={classes.root}>
@@ -130,7 +135,7 @@ class AddProduct extends React.Component {
                         onChange={this.handleInput}
                     />
                     <br />
-                    
+           
                     <Button
                         id="SaveButton"
                         variant="contained"

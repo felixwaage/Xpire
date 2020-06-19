@@ -2,6 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     fab: {
@@ -12,22 +13,16 @@ const styles = theme => ({
 });
 
 class FloatingButton extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(event) {
-        this.props.navigate();
-      }
 
     render() {
         const { classes } = this.props;
 
         return (
-            <Fab color="primary" aria-label="add" className={classes.fab} onClick={this.handleClick}>
-                <AddIcon />
-            </Fab>
+            <Link to="/addProduct">
+                <Fab color="primary" aria-label="add" className={classes.fab} >
+                    <AddIcon />
+                </Fab>
+            </Link>
         );
     }
 }
