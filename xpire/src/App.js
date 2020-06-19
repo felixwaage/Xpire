@@ -6,7 +6,8 @@ import AppHeader from './components/AppHeader'
 import ProductsList from './components/ProductsList';
 import AddProduct from './components/AddProduct';
 import FloatingButton from './components/FloatingButton';
-import ShowProduct from './components/ShowProduct' 
+import ShowProduct from './components/ShowProduct'
+import { Route, BrowserRouter as Router } from 'react-router-dom'; 
 
 var products = [{
     id: 1,
