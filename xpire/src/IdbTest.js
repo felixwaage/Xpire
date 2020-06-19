@@ -21,7 +21,7 @@ function IdbTest() {
     }
 
     const handleDelete = async (id) => {
-        await deleteProductById(id);
+        await deleteProductById(id)
     }
 
     const handleClear = async () => {
