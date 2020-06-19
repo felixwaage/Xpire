@@ -35,7 +35,7 @@ class ProductsList extends React.Component {
         super(props);
         this.handleListItemClick = this.handleListItemClick.bind(this);
         this.state = {
-            redirect: this.props.redirect,
+            redirect: false,
         }    
     }
 
@@ -48,9 +48,8 @@ class ProductsList extends React.Component {
         const { classes } = this.props;
 
         if (this.state.redirect) {
-            return <Redirect push to="/showProduct" />;
+            return <Redirect push to="/Product" />;
         }
-    
 
         return (
             <List dense className={classes.root}>

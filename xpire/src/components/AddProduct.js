@@ -50,26 +50,32 @@ const styles = theme => ({
 class AddProduct extends React.Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
-        this.addProduct = this.addProduct.bind(this);
+        this.handleClickArrow = this.handleClickArrow.bind(this);
+        this.handleClickDelete = this.handleClickDelete.bind(this);
+        this.handleClickSave = this.handleClickSave.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.state = {
-            name: "",
-            amount: "",
-            purchase_date: "",
-            vailid_unitil: ""
+            redirect: false
         }
     }
 
-    addProduct(event){
-        this.props.add(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
+    handleClickArrow(event) {
         this.setState({redirect: true});
-
-        addProduct(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
+        this.props.reset();
     }
 
-    handleClick(event) {
+    handleClickDelete(event) {
+        this.props.delete(this.props.product.id);
         this.setState({redirect: true});
+        this.props.reset();
+    }
+
+    handleClickSave(event){
+        if (Object.keys(this.props.product).length == 0){
+            this.props.add(this.state.name, this.state.amount, this.state.purchase_date, this.state.vailid_unitil);
+        }
+        this.setState({redirect: true});
+        this.props.reset();
     }
 
     handleInput(event) {
@@ -94,8 +100,13 @@ class AddProduct extends React.Component {
                         <ArrowIcon 
                             edge="end"
                             className={classes.arrowIcon}
-                            onClick={this.handleClick}
+                            onClick={this.handleClickArrow}
                         />
+                        { !Object.keys(this.props.product).length == 0 && <DeleteIcon 
+                            edge="end"
+                            className={classes.deleteIcon}
+                            onClick={this.handleClickDelete}
+                        />}
                     </div>
                 </div>
                 <form className={classes.form}>
@@ -104,6 +115,7 @@ class AddProduct extends React.Component {
                         label="Titel"
                         margin="dense"
                         variant="outlined"
+                        value={this.props.product.name}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
@@ -113,6 +125,7 @@ class AddProduct extends React.Component {
                         label="Anzahl"
                         margin="dense"
                         variant="outlined"
+                        value={this.props.product.amount}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />                           
@@ -122,6 +135,7 @@ class AddProduct extends React.Component {
                         label="Eingekauft am"
                         margin="dense"
                         variant="outlined"
+                        value={this.props.product.purchase_date}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
@@ -131,6 +145,7 @@ class AddProduct extends React.Component {
                         label="Gültig bis"
                         margin="dense"
                         variant="outlined"
+                        value={this.props.product.vailid_until}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />
@@ -141,7 +156,7 @@ class AddProduct extends React.Component {
                         variant="contained"
                         color="primary"
                         className={classes.submitButton}
-                        onClick={this.addProduct}>
+                        onClick={this.handleClickSave}>
                         Speichern
                     </Button>
                 </form>                           

@@ -6,7 +6,6 @@ import AppHeader from './components/AppHeader'
 import ProductsList from './components/ProductsList';
 import AddProduct from './components/AddProduct';
 import FloatingButton from './components/FloatingButton';
-import ShowProduct from './components/ShowProduct'
 import { Route, BrowserRouter as Router } from 'react-router-dom'; 
 
 var products = [{
@@ -36,11 +35,18 @@ class App extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state = {
-      showProductObj: {}
-    };
+    this.state = this.getInitialState();
     this.showProduct = this.showProduct.bind(this);
     this.deleteProduct = this.deleteProduct.bind(this);
+    this.resetState = this.resetState.bind(this);
+  }
+
+  getInitialState = () => ({
+    showProductObj: {}
+  })
+
+  resetState = () => {
+     this.setState(this.getInitialState());
   }
 
   showProduct(id){
@@ -73,8 +79,7 @@ class App extends React.Component {
           <Route path="/" component={AppHeader} />
           <Route exact path="/" render={(props) => <ProductsList products={products} showProduct={this.showProduct}/>} />
           <Route exact path="/" render={(props) => <FloatingButton />} />
-          <Route exact path="/addProduct" render={(props) => <AddProduct add={this.addProductToList}/>} />
-          <Route exact path="/showProduct" render={(props) => <ShowProduct product={this.state.showProductObj} delete={this.deleteProduct}/>} />
+          <Route exact path="/Product" render={(props) => <AddProduct add={this.addProductToList} product={this.state.showProductObj} delete={this.deleteProduct} reset={this.resetState}/>} />
         </div>
       </Router>
     );
