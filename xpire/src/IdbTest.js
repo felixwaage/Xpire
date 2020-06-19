@@ -43,9 +43,9 @@ function IdbTest() {
             <button onClick={handleClear}>Delete all Products</button>
             <button onClick={handleGetAll}>Refresh Data</button>
             <ul>
-                {allProducts.map((product) =>
+                {allProducts ? allProducts.map((product) =>
                     <li key={product.id}><span>Name: {product.name}</span><span> ID: {product.id} </span><button onClick={() => handleDelete(product.id)}>Delete</button></li>
-                )}
+                ) : null}
             </ul>
         </div>
     )

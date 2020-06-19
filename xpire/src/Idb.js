@@ -39,3 +39,10 @@ export const getAllProducts = async () => {
         return console.log(err)
     })
 }
+
+export const createDatabase = async () => {
+    const db = new Dexie('Xpire');
+    db.version(1).stores({
+        products: "++id,name,amount,purchaseDate,expireDate"
+    });
+}
