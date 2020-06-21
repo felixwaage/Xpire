@@ -6,7 +6,7 @@ import AppHeader from './components/AppHeader'
 import ProductsList from './components/ProductsList';
 import AddProduct from './components/AddProduct';
 import FloatingButton from './components/FloatingButton';
-import ShowProduct from './components/ShowProduct' 
+import { Route, BrowserRouter as Router } from 'react-router-dom'; 
 
 var products = [{
     id: 1,
@@ -35,35 +35,21 @@ class App extends React.Component {
   
   constructor(props) {
     super(props);
-    this.state = {
-      productListVisible: true,
-      addProductVisible: false,
-      showProductVisible: false,
-      showProductObj: {}
-    };
-    this.showAddProduct = this.showAddProduct.bind(this);
-    this.showProductList = this.showProductList.bind(this);
+    this.state = this.getInitialState();
     this.showProduct = this.showProduct.bind(this);
     this.deleteProduct = this.deleteProduct.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
 
-  showAddProduct() {
-    this.setState({ addProductVisible: true });
-    this.setState({ productListVisible: false});
-    this.setState({ showProductVisible: false });
-  }
+  getInitialState = () => ({
+    showProductObj: {}
+  })
 
-  showProductList() {
-    this.setState({ addProductVisible: false });
-    this.setState({ productListVisible: true });
-    this.setState({ showProductVisible: false });
+  resetState = () => {
+     this.setState(this.getInitialState());
   }
 
   showProduct(id){
-    this.setState({ showProductVisible: true });
-    this.setState({ addProductVisible: false });
-    this.setState({ productListVisible: false });
-
     var product = products.find(e => e.id === id);
     this.setState({ showProductObj: product });
   }
@@ -88,14 +74,14 @@ class App extends React.Component {
   render() {
 
     return (
-      <div className="App"> 
-        <AppHeader /> 
-        {this.state.addProductVisible && <AddProduct navigate={this.showProductList} add={this.addProductToList}/> }
-        {this.state.showProductVisible && <ShowProduct navigate={this.showProductList} product={this.state.showProductObj} delete={this.deleteProduct}/>}
-        {this.state.productListVisible && <ProductsList products={products} showProduct={this.showProduct}/>}
-        {this.state.productListVisible && <FloatingButton navigate={this.showAddProduct}/>}
-        {/*<Idb></Idb>*/}
-      </div>
+      <Router>
+        <div className="App"> 
+          <Route path="/" component={AppHeader} />
+          <Route exact path="/" render={(props) => <ProductsList products={products} showProduct={this.showProduct}/>} />
+          <Route exact path="/" render={(props) => <FloatingButton />} />
+          <Route exact path="/Product" render={(props) => <AddProduct add={this.addProductToList} product={this.state.showProductObj} delete={this.deleteProduct} reset={this.resetState}/>} />
+        </div>
+      </Router>
     );
     
   }
