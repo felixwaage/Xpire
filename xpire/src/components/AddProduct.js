@@ -164,7 +164,7 @@ class AddProduct extends React.Component {
         const { classes } = this.props;
 
         if (this.state.redirect) {
-            return <Redirect push to="/" />;
+            return <Redirect push to="/Xpire" />;
         }
 
         return (

@@ -48,7 +48,7 @@ class ProductsList extends React.Component {
         const { classes } = this.props;
 
         if (this.state.redirect) {
-            return <Redirect push to="/Product" />;
+            return <Redirect push to="/Xpire/Product" />;
         }
 
         return (

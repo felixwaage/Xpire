@@ -76,10 +76,10 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App"> 
-          <Route path="/" component={AppHeader} />
-          <Route exact path="/" render={(props) => <ProductsList products={products} showProduct={this.showProduct}/>} />
-          <Route exact path="/" render={(props) => <FloatingButton />} />
-          <Route exact path="/Product" render={(props) => <AddProduct add={this.addProductToList} product={this.state.showProductObj} delete={this.deleteProduct} reset={this.resetState}/>} />
+          <Route path="/Xpire" component={AppHeader} />
+          <Route exact path="/Xpire" render={(props) => <ProductsList products={products} showProduct={this.showProduct}/>} />
+          <Route exact path="/Xpire" render={(props) => <FloatingButton />} />
+          <Route exact path="/Xpire/Product" render={(props) => <AddProduct add={this.addProductToList} product={this.state.showProductObj} delete={this.deleteProduct} reset={this.resetState}/>} />
         </div>
       </Router>
     );

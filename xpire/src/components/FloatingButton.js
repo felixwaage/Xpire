@@ -18,7 +18,7 @@ class FloatingButton extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Link to="/Product">
+            <Link to="/Xpire/Product">
                 <Fab color="primary" aria-label="add" className={classes.fab} >
                     <AddIcon />
                 </Fab>
