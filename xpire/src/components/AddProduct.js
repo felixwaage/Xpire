@@ -176,7 +176,7 @@ class AddProduct extends React.Component {
                             className={classes.arrowIcon}
                             onClick={this.handleClickArrow}
                         />
-                        { !Object.keys(this.props.product).length == 0 && <DeleteIcon 
+                        { !Object.keys(this.props.product).length === 0 && <DeleteIcon 
                             edge="end"
                             className={classes.deleteIcon}
                             onClick={this.handleClickDelete}
@@ -205,25 +205,28 @@ class AddProduct extends React.Component {
 
 
                 <form className={classes.form}>
-                    <TextField
-                        id="barcode"
-                        label="Barcode"
-                        margin="dense"
-                        variant="outlined"
-                        value={this.state.barcode}
-                        className={classes.textField}
-                        onChange={this.handleInput}
-                    />
-                    <br />
-                    <Button
-                        id="SearchButton"
-                        variant="contained"
-                        color="primary"
-                        className={classes.submitButton}
-                        onClick={this.getProductInformationByBarcode}>
-                        Suchen
-                    </Button>
-                    <br />
+                    { Object.keys(this.props.product).length === 0 && <div>
+                        <TextField
+                            id="barcode"
+                            label="Barcode"
+                            margin="dense"
+                            variant="outlined"
+                            value={this.state.barcode}
+                            className={classes.textField}
+                            onChange={this.handleInput}
+                        />
+                        <br />
+                        <Button
+                            id="SearchButton"
+                            variant="contained"
+                            color="primary"
+                            className={classes.submitButton}
+                            onClick={this.getProductInformationByBarcode}>
+                            Suchen
+                        </Button>
+                        <br />
+                    </div>}
+                    
                     <TextField
                         id="product_name"
                         label="Titel"
