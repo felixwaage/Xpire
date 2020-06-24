@@ -23,12 +23,40 @@ var products = [{
   vailid_until: "2022-03-15"
 },
 {
+  id: 4,
+  name: "Wurst",
+  amount: 1,
+  purchase_date: "2020-06-14",
+  vailid_until: "2020-06-22"
+},
+{
+  id: 5,
+  name: "Erdbeerkäse",
+  amount: 1,
+  purchase_date: "2020-06-14",
+  vailid_until: "2020-06-27"
+},
+{
+  id: 6,
+  name: "Käse",
+  amount: 1,
+  purchase_date: "2020-06-14",
+  vailid_until: "2020-06-29"
+},
+{
+  id: 6,
+  name: "Kaviar",
+  amount: 1,
+  purchase_date: "2020-06-14",
+  vailid_until: "2020-06-26"
+},
+{
   id: 3,
   name: "Fisch",
   amount: 1,
   purchase_date: "2020-06-14",
   vailid_until: "2021-09-12"
-}
+},
 ];
 
 class App extends React.Component {

@@ -44,6 +44,19 @@ class ProductsList extends React.Component {
         this.props.showProduct(id);
     }
 
+    statusColor = (validDate) => {
+        var bestBeforeMilliSec = new Date(validDate) - new Date();
+        var bestBeforeDayCount = bestBeforeMilliSec/(1000*60*60*24); 
+        
+        if (bestBeforeDayCount > 3) {
+            return '#C9DEBC';
+        } else if (bestBeforeDayCount > 0) {
+            return '#E8DD10';
+        } else {
+            return '#CE081f';
+        }
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -68,7 +81,12 @@ class ProductsList extends React.Component {
                                 <ListItemText primary={`${value.name}`} secondary={
                                     <div>
                                         <div>Gültig bis: {value.vailid_until}</div>
-                                        <div className={classes.bar}></div>
+                                        <div style={{
+                                            height: '0.5rem',
+                                            width: '100%',
+                                            marginTop: '0.3rem',
+                                            backgroundColor: this.statusColor(value.vailid_until),
+                                        }}></div>
                                 </div>
                                 }/>
                                 {/*<ListItemSecondaryAction>
