@@ -13,49 +13,56 @@ var products = [{
   name: "Pizza",
   amount: 1,
   purchase_date: "2020-06-14",
-  vailid_until: "2020-09-12"
+  vailid_until: "2020-09-12",
+  img_url: "https://static.openfoodfacts.org/images/products/400/172/481/9806/front_de.30.full.jpg"
 },
 {
   id: 2,
   name: "Döner",
   amount: 1,
   purchase_date: "2020-06-14",
-  vailid_until: "2022-03-15"
+  vailid_until: "2022-03-15",
+  img_url: "https://static.openfoodfacts.org/images/products/426/038/066/1260/front_de.32.full.jpg"
 },
 {
   id: 4,
   name: "Wurst",
   amount: 1,
   purchase_date: "2020-06-14",
-  vailid_until: "2020-06-22"
+  vailid_until: "2020-06-22",
+  img_url: "https://static.openfoodfacts.org/images/products/401/237/166/1809/front_de.4.400.jpg"
 },
 {
   id: 5,
   name: "Erdbeerkäse",
   amount: 1,
   purchase_date: "2020-06-14",
-  vailid_until: "2020-06-27"
+  vailid_until: "2020-06-27",
+  img_url: "https://static.openfoodfacts.org/images/products/20082857/front_de.11.400.jpg"
 },
 {
   id: 6,
   name: "Käse",
   amount: 1,
   purchase_date: "2020-06-14",
-  vailid_until: "2020-06-29"
+  vailid_until: "2020-06-29",
+  img_url: "https://static.openfoodfacts.org/images/products/20082703/front_de.18.400.jpg"
 },
 {
-  id: 6,
+  id: 7,
   name: "Kaviar",
   amount: 1,
   purchase_date: "2020-06-14",
-  vailid_until: "2020-06-26"
+  vailid_until: "2020-06-26",
+  img_url: "https://static.openfoodfacts.org/images/products/426/005/107/5778/front_de.7.400.jpg"
 },
 {
   id: 3,
   name: "Fisch",
   amount: 1,
   purchase_date: "2020-06-14",
-  vailid_until: "2021-09-12"
+  vailid_until: "2021-09-12",
+  img_url: "https://static.openfoodfacts.org/images/products/20375942/front_de.23.400.jpg"
 },
 ];
 
@@ -88,13 +95,14 @@ class App extends React.Component {
     products.splice(index, 1);
   }
 
-  addProductToList(name, amount, purchase_date, vailid_until) {
+  addProductToList(name, amount, purchase_date, vailid_until,img_url) {
     var newProduct = {
       id: Math.random() * 100,
       name,
       amount,
       purchase_date,
-      vailid_until
+      vailid_until,
+      img_url
     }
 
     products.push(newProduct);

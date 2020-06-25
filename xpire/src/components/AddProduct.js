@@ -14,13 +14,6 @@ const styles = theme => ({
     root: {
         marginTop: "56px"
     },
-    img: {
-        height: '15rem',
-        backgroundImage: "url(" + flower + ")",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize: "auto 80%"
-    },
     imgOverlay: {
         height: '15rem',
         backgroundColor: "hsla(0, 0%, 0%, 0.23)"
@@ -62,6 +55,7 @@ class AddProduct extends React.Component {
         this.getProductInformationByBarcode = this.getProductInformationByBarcode.bind(this);
         this.showErrorPopOver = this.showErrorPopOver.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.setBackgroundImg = this.setBackgroundImg.bind(this);
         this.state = {
             redirect: false,
             barcode: "",
@@ -69,11 +63,29 @@ class AddProduct extends React.Component {
             amount: this.props.product.amount,
             purchase_date: this.props.product.purchase_date,
             vailid_until: this.props.product.vailid_until,
+            img_url: this.props.product.img_url,
             anchorEl: {},
             open: false,
             id: 'simple-popover',
-            simple_popover_message: ""
+            simple_popover_message: "",
+            imgStyle: {
+                height: '15rem',
+                backgroundImage: "url(" + this.props.product.img_url + ")",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                backgroundSize: "auto 100%"
+            }
         }
+    }
+
+    setBackgroundImg(img_url){
+        this.setState({
+            imgStyle: {
+                ...this.state.imgStyle,
+                backgroundImage: "url(" + img_url + ")",
+            },
+            img_url: img_url
+        })
     }
 
     showErrorPopOver(message,target){
@@ -102,14 +114,14 @@ class AddProduct extends React.Component {
                 fetch("https://world.openfoodfacts.org/api/v0/product/"+barcode+".json")
                 .then(res => res.json())
                 .then((result) => {
-                    console.log(result)
                     var product = result.product;
                     //check if product found
                     if(result.status === 1){
                         if(product.product_name) {
                             this.setState({
-                                product_name: product.product_name
+                                product_name: product.product_name,
                             })
+                            this.setBackgroundImg(product.image_url);
                         } else {
                             // throw error
                             this.showErrorPopOver("Produktname nicht gefunden!",event.currentTarget);
@@ -145,7 +157,7 @@ class AddProduct extends React.Component {
 
     handleClickSave(event){
         if (Object.keys(this.props.product).length == 0){
-            this.props.add(this.state.product_name, this.state.amount, this.state.purchase_date, this.state.vailid_until);
+            this.props.add(this.state.product_name, this.state.amount, this.state.purchase_date, this.state.vailid_until, this.state.img_url);
         }
         this.setState({redirect: true});
         this.props.reset();
@@ -169,7 +181,7 @@ class AddProduct extends React.Component {
 
         return (
             <div className={classes.root}>
-                <div className={classes.img}>
+                <div className={classes.img} style={this.state.imgStyle}>
                     <div className={classes.imgOverlay}>
                         <ArrowIcon 
                             edge="end"

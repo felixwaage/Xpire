@@ -21,12 +21,6 @@ const styles = theme => ({
         borderStyle: 'solid',
         borderRadius: '0.5rem',
         borderColor: theme.palette.primary.main
-    },
-    bar: {
-        height: '0.5rem',
-        width: '100%',
-        marginTop: '0.3rem',
-        backgroundColor: theme.palette.primary.main,
     }
 });
 
@@ -75,7 +69,7 @@ class ProductsList extends React.Component {
                                 <ListItemAvatar>
                                     <Avatar
                                         alt={`Avatar n°${value + 1}`}
-                                        src={`/static/images/avatar/${value + 1}.jpg`}
+                                        src={value.img_url}
                                     />
                                 </ListItemAvatar>
                                 <ListItemText primary={`${value.name}`} secondary={
