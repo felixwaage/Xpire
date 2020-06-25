@@ -9,6 +9,9 @@ import { addProduct } from '../Idb';
 import { Redirect } from 'react-router';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
 
 const styles = theme => ({
     root: {
@@ -24,6 +27,9 @@ const styles = theme => ({
         marginTop: "10px",
         color: "white"
     }, 
+    datePicker: {
+        width: '100%'
+    },
     deleteIcon: {
         float: 'right',
         marginRight: "28px",
@@ -51,6 +57,7 @@ class AddProduct extends React.Component {
         this.handleClickArrow = this.handleClickArrow.bind(this);
         this.handleClickDelete = this.handleClickDelete.bind(this);
         this.handleClickSave = this.handleClickSave.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.getProductInformationByBarcode = this.getProductInformationByBarcode.bind(this);
         this.showErrorPopOver = this.showErrorPopOver.bind(this);
@@ -107,7 +114,7 @@ class AddProduct extends React.Component {
     getProductInformationByBarcode(event){
         var barcode = this.state.barcode;
         if(barcode){
-           //check for vailid barcode
+           //check for valid barcode
 
            var searchResult = {};
            if(barcode.length === 13 || barcode.length === 8) {
@@ -161,6 +168,16 @@ class AddProduct extends React.Component {
         }
         this.setState({redirect: true});
         this.props.reset();
+    }
+
+    handleDateChange(event, id) {
+        console.log(id);
+        const date = event.toISOString().split('T')[0];       
+        this.setState({
+            ...this.state,
+            [id]: date
+        })
+        console.log(date);       
     }
 
     handleInput(event) {
@@ -259,25 +276,31 @@ class AddProduct extends React.Component {
                         onChange={this.handleInput}
                     />                           
                     <br />
-                    <TextField
-                        id="purchase_date"
-                        label="Eingekauft am"
-                        margin="dense"
-                        variant="outlined"
-                        value={this.state.purchase_date}
-                        className={classes.textField}
-                        onChange={this.handleInput}
-                    />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <DatePicker
+                            id="purchase_date"
+                            label="Eingekauft am"
+                            margin="dense"
+                            inputVariant="outlined"
+                            format="dd.MM.yyyy"
+                            value={this.state.purchase_date} 
+                            className={classes.datePicker}
+                            onChange={(event) => this.handleDateChange(event, "purchase_date")}     
+                        />                      
+                    </MuiPickersUtilsProvider>                                        
                     <br />
-                    <TextField
-                        id="vailid_until"
-                        label="Gültig bis"
-                        margin="dense"
-                        variant="outlined"
-                        value={this.state.vailid_until}
-                        className={classes.textField}
-                        onChange={this.handleInput}
-                    />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <DatePicker
+                            id="vailid_until"
+                            label="Gültig bis"
+                            margin="dense"
+                            inputVariant="outlined"
+                            format="dd.MM.yyyy"
+                            value={this.state.vailid_until} 
+                            className={classes.datePicker}
+                            onChange={(event) => this.handleDateChange(event, "vailid_until")}
+                        />                      
+                    </MuiPickersUtilsProvider>
                     <br />
            
                     <Button
