@@ -22,11 +22,14 @@
 ## 26.06.2020
 
 ### ToDo's
-- Datenbank-Anbindung beginnen (Jonas, Fabio, Felix)
+- Datenbank-Anbindung beginnen (Jonas, Fabio, Verena)
 - Appbar nur mit Logo (Milena)
-- Bild, wenn man keinen Barcode eingibt --> informieren, wenn nicht dann auf bestehende Bilder zurückgreifen (Verena)
+- Bild, wenn man keinen Barcode eingibt --> informieren, wenn nicht dann auf bestehende Bilder zurückgreifen (Felix)
 - Barcode mit Handy-Kamera scannen (Felix)
 - Bugs fixen (Delete Button, komische Titelanzeige, Scrollen auf Produkt-Seite) (Verena)
 - Bugs fixen (Appbar-Breite berücksichtigen) (Yvonne)
 - Anzahl der Produkte auf Produktliste-Seite angeben (Yvonne)
 - Seminararbeit (Andrea + Milena)
+
+# Meetings
+## 03.07.2020 14:30
