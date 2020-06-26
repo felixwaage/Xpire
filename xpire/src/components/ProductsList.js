@@ -7,6 +7,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import CloseIcon from '@material-ui/icons/Close';
 import { Redirect } from 'react-router';
+import format from 'date-fns/format';
 
 const styles = theme => ({
     root: {
@@ -72,9 +73,9 @@ class ProductsList extends React.Component {
                                         src={value.img_url}
                                     />
                                 </ListItemAvatar>
-                                <ListItemText primary={`${value.name}`} secondary={
+                                <ListItemText primary={`${value.name} (${value.amount})`} secondary={
                                     <div>
-                                        <div>Gültig bis: {value.vailid_until}</div>
+                                        <div>Gültig bis: {format(new Date(value.vailid_until),"dd.MM.yyyy")}</div>
                                         <div style={{
                                             height: '0.5rem',
                                             width: '100%',
