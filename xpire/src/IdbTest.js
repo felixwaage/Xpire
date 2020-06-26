@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { addProduct, deleteProductById, clearTable, getAllProducts } from './Idb'
+import { addProduct, deleteProductById, clearTable, getAllProducts, updateProductById } from './Idb'
 
 function IdbTest() {
     //component for testing the IDB
@@ -36,6 +36,14 @@ function IdbTest() {
             setProducts(arr)
         })
     }
+    const handleUpdate = async (id, newName) => {
+        await updateProductById(id, {name: newName}).then(function (updated) {
+            if (updated)
+              console.log ("update success");
+            else
+              console.log ("Nothing was updated - error");
+          });
+    }
 
     return (
         <div>
@@ -44,7 +52,9 @@ function IdbTest() {
             <button onClick={handleGetAll}>Refresh Data</button>
             <ul>
                 {allProducts ? allProducts.map((product) =>
-                    <li key={product.id}><span>Name: {product.name}</span><span> ID: {product.id} </span><button onClick={() => handleDelete(product.id)}>Delete</button></li>
+                    <li key={product.id}><span>Name: {product.name}</span><span> ID: {product.id} </span>
+                    <button onClick={() => handleDelete(product.id)}>Delete</button>
+                    <button onClick={() => handleUpdate(product.id, "UpdateTest")}></button></li>
                 ) : null}
             </ul>
         </div>

@@ -16,6 +16,13 @@ export const addProduct = async (name, amount, purchaseDate, expireDate) => {
         return arr;
     });
 }
+export const updateProductById = async (id, product) => {
+    console.log(product)
+    await db.products.update({
+        key: id,
+        changes: product
+    });
+}
 
 export const clearTable = async (tableName) => {
     await db.table(tableName).clear().catch(() => {
@@ -40,7 +47,7 @@ export const getAllProducts = async () => {
     })
 }
 
-export const createDatabase = async () => {
+export const createDatabase = async () => { //use for debugging 
     const db = new Dexie('Xpire');
     db.version(1).stores({
         products: "++id,name,amount,purchaseDate,expireDate"

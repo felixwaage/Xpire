@@ -117,8 +117,10 @@ class App extends React.Component {
           <Route exact path="/Xpire" render={(props) => <ProductsList products={products} showProduct={this.showProduct}/>} />
           <Route exact path="/Xpire" render={(props) => <FloatingButton />} />
           <Route exact path="/Xpire/Product" render={(props) => <AddProduct add={this.addProductToList} product={this.state.showProductObj} delete={this.deleteProduct} reset={this.resetState}/>} />
+          <Route path="/Xpire" component={IdbTest} />
         </div>
       </Router>
+      
     );
 
   }
