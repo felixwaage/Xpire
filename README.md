@@ -33,7 +33,7 @@ Verfügbar unter: https://felixwaage.github.io/Xpire/
 - Grundlagen PWA-Entwicklung mit React (alle) - done
 - Logo (Andrea) - done
 - [Mockups für die App](https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A19&scaling=min-zoom) (Verena und Andrea) - done
-- Push-Benachrichtigungen (Yvonne) - in progress
+- Push-Benachrichtigungen (Yvonne) - done (auf Branch notification)
 - Http-Requests (Felix) - done
 - App-Icon (Milena) - done
 - IndexedDB (Fabio & Jonas) - done
