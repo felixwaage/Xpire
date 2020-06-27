@@ -15,7 +15,7 @@ function IdbTest() {
     })
 
     const handleAdd = async () => {
-        await addProduct('Test', 'Test', 'Test', 'Test').then((arr) => {
+        await addProduct('Test', 'Test', 'Test', '22.02.2022').then((arr) => {
             setProducts(arr);
         })
     }
@@ -37,12 +37,19 @@ function IdbTest() {
         })
     }
     const handleUpdate = async (id, newName) => {
-        await updateProductById(id, {name: newName}).then(function (updated) {
+        await updateProductById(id, 
+            {
+                name: newName,
+                expireDate: "27.06.2020"
+            }
+        ).then(function (updated) {
             if (updated)
               console.log ("update success");
             else
               console.log ("Nothing was updated - error");
-          });
+        }).catch(function (e) {
+              console.log(e)
+        });
     }
 
     return (

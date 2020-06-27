@@ -17,11 +17,8 @@ export const addProduct = async (name, amount, purchaseDate, expireDate) => {
     });
 }
 export const updateProductById = async (id, product) => {
-    console.log(product)
-    await db.products.update({
-        key: id,
-        changes: product
-    });
+    console.log(product) //has to be one or multiple key(s) + value(s) according to database table attributes
+    await db.products.update(id, product);
 }
 
 export const clearTable = async (tableName) => {
