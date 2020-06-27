@@ -2,10 +2,8 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
-import flower from '../Mehl.jpg';
 import ArrowIcon from '@material-ui/icons/KeyboardBackspace';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { addProduct } from '../Idb';
 import { Redirect } from 'react-router';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
@@ -125,6 +123,7 @@ class AddProduct extends React.Component {
                     //check if product found
                     if(result.status === 1){
                         if(product.product_name) {
+                            //this.props.update(product.product_name);
                             this.setState({
                                 product_name: product.product_name,
                             })
@@ -136,7 +135,6 @@ class AddProduct extends React.Component {
                         
                     } else {
                         // throw error
-                        // Product existiert nicht!
                         this.showErrorPopOver("Das Produkt existiert nicht!",event.currentTarget);
                     }
                 },
@@ -205,7 +203,7 @@ class AddProduct extends React.Component {
                             className={classes.arrowIcon}
                             onClick={this.handleClickArrow}
                         />
-                        { !Object.keys(this.props.product).length === 0 && <DeleteIcon 
+                        { !Object.keys(this.props.product).length == 0 && <DeleteIcon 
                             edge="end"
                             className={classes.deleteIcon}
                             onClick={this.handleClickDelete}

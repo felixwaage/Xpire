@@ -5,7 +5,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import CloseIcon from '@material-ui/icons/Close';
 import { Redirect } from 'react-router';
 import format from 'date-fns/format';
 
@@ -46,9 +45,9 @@ class ProductsList extends React.Component {
         if (bestBeforeDayCount > 3) {
             return '#C9DEBC';
         } else if (bestBeforeDayCount > 0) {
-            return '#E8DD10';
+            return '#F4E132';
         } else {
-            return '#CE081f';
+            return '#F96523';
         }
     }
 
@@ -61,41 +60,29 @@ class ProductsList extends React.Component {
 
         return (
             <List dense className={classes.root}>
-                {this.props.products.map((value) => {
-                    const labelId = `checkbox-list-secondary-label-${value.name}`;
-                    const productId = value.id;
-                    return (
-                        <div className={classes.listitemframe}>
-                            <ListItem className={classes.listitem} button onClick={() => this.handleListItemClick(value.id)}>
-                                <ListItemAvatar>
-                                    <Avatar
-                                        alt={`Avatar n°${value + 1}`}
-                                        src={value.img_url}
-                                    />
-                                </ListItemAvatar>
-                                <ListItemText primary={`${value.name} (${value.amount})`} secondary={
-                                    <div>
-                                        <div>Gültig bis: {format(new Date(value.vailid_until),"dd.MM.yyyy")}</div>
-                                        <div style={{
-                                            height: '0.5rem',
-                                            width: '100%',
-                                            marginTop: '0.3rem',
-                                            backgroundColor: this.statusColor(value.vailid_until),
-                                        }}></div>
-                                </div>
-                                }/>
-                                {/*<ListItemSecondaryAction>
-                                    <CloseIcon 
-                                        edge="end"
-                                        color="primary"
-                                        //onClick={this.handleClick}
-                                    />
-                                </ListItemSecondaryAction>*/}
-                            </ListItem>
-                            
-                        </div>
-                    );
-                })}
+                {this.props.products ? this.props.products.map((product) =>
+                    <div className={classes.listitemframe}>
+                        <ListItem className={classes.listitem} button onClick={() => this.handleListItemClick(product.id)}>
+                            <ListItemAvatar>
+                                <Avatar
+                                    alt={`Avatar n°${product + 1}`}
+                                    src={product.img_url}
+                                />
+                            </ListItemAvatar>
+                            <ListItemText primary={`${product.name} (${product.amount})`} secondary={
+                                <div>
+                                    <div>Gültig bis: {format(new Date(product.expireDate),"dd.MM.yyyy")}</div>
+                                    <div style={{
+                                        height: '0.5rem',
+                                        width: '100%',
+                                        marginTop: '0.3rem',
+                                        backgroundColor: this.statusColor(product.expireDate),
+                                    }}></div>
+                            </div>
+                            }/>
+                        </ListItem>
+                    </div>
+                ) : null}
             </List>
         );
     }
