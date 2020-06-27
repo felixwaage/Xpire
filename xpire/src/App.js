@@ -54,7 +54,7 @@ class App extends React.Component {
   }
 
   addProductToList = async (name, amount, purchaseDate, expireDate, img_url) => {
-    await addProduct(name, amount, purchaseDate, expireDate).then((arr) => {
+    await addProduct(name, amount, purchaseDate, expireDate, img_url).then((arr) => {
       this.setState({ products: arr});
     })
   }
