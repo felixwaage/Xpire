@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { addProduct, deleteProductById, clearTable, getAllProducts } from './Idb'
+import { addProduct, deleteProductById, clearTable, getAllProducts, updateProductById } from './Idb'
 
 function IdbTest() {
     //component for testing the IDB
@@ -15,7 +15,7 @@ function IdbTest() {
     })
 
     const handleAdd = async () => {
-        await addProduct('Test', 'Test', 'Test', 'Test').then((arr) => {
+        await addProduct('Test', 'Test', 'Test', '22.02.2022').then((arr) => {
             setProducts(arr);
         })
     }
@@ -36,6 +36,21 @@ function IdbTest() {
             setProducts(arr)
         })
     }
+    const handleUpdate = async (id, newName) => {
+        await updateProductById(id, 
+            {
+                name: newName,
+                expireDate: "27.06.2020"
+            }
+        ).then(function (updated) {
+            if (updated)
+              console.log ("update success");
+            else
+              console.log ("Nothing was updated - error");
+        }).catch(function (e) {
+              console.log(e)
+        });
+    }
 
     return (
         <div>
@@ -44,7 +59,9 @@ function IdbTest() {
             <button onClick={handleGetAll}>Refresh Data</button>
             <ul>
                 {allProducts ? allProducts.map((product) =>
-                    <li key={product.id}><span>Name: {product.name}</span><span> ID: {product.id} </span><button onClick={() => handleDelete(product.id)}>Delete</button></li>
+                    <li key={product.id}><span>Name: {product.name}</span><span> ID: {product.id} </span>
+                    <button onClick={() => handleDelete(product.id)}>Delete</button>
+                    <button onClick={() => handleUpdate(product.id, "UpdateTest")}></button></li>
                 ) : null}
             </ul>
         </div>
