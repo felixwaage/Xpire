@@ -28,7 +28,11 @@ export const deleteProductById = async (theId) => {
 }
 
 export const getProductById = async (id) => {
-    return await db.products.where('id').equals(id);
+    return await db.products.get(id).then(function (prod) {
+        return prod
+    }).catch((err) => {
+        return console.log(err)
+    })
 }
 
 export const getAllProducts = async () => {
