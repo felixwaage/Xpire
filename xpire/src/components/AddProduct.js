@@ -61,9 +61,11 @@ class AddProduct extends React.Component {
         this.showErrorPopOver = this.showErrorPopOver.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.setBackgroundImg = this.setBackgroundImg.bind(this);
+        this.handleClickUpdate = this.handleClickUpdate.bind(this);
         this.state = {
             redirect: false,
             barcode: "",
+            product_id: this.props.product.id,
             product_name: this.props.product.name,
             amount: this.props.product.amount,
             purchaseDate: this.props.product.purchaseDate,
@@ -185,6 +187,18 @@ class AddProduct extends React.Component {
         
     }
 
+    handleClickUpdate(event) {
+        var product = {
+            name: this.state.product_name,
+            amount: this.state.amount,
+            purchaseDate: this.state.purchaseDate,
+            expireDate: this.state.expireDate
+        }
+        this.props.productUpdate(this.state.product_id, product);
+
+        console.log("clicked")
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -201,7 +215,7 @@ class AddProduct extends React.Component {
                             className={classes.arrowIcon}
                             onClick={this.handleClickArrow}
                         />
-                        { !Object.keys(this.props.product).length === 0 && <DeleteIcon 
+                        { Object.keys(this.props.product).length !== 0 && <DeleteIcon 
                             edge="end"
                             className={classes.deleteIcon}
                             onClick={this.handleClickDelete}
@@ -299,14 +313,23 @@ class AddProduct extends React.Component {
                     </MuiPickersUtilsProvider>
                     <br />
            
-                    <Button
+                    {Object.keys(this.props.product).length === 0 && <Button
                         id="SaveButton"
                         variant="contained"
                         color="primary"
                         className={classes.submitButton}
                         onClick={this.handleClickSave}>
                         Speichern
-                    </Button>
+                    </Button>}
+
+                    {Object.keys(this.props.product).length !== 0 && <Button
+                        id="UpdateButton"
+                        variant="contained"
+                        color="primary"
+                        className={classes.submitButton}
+                        onClick={this.handleClickUpdate}>
+                        Ändern
+                    </Button>}
                 </form>                           
             </div>
         );

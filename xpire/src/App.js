@@ -6,7 +6,7 @@ import ProductsList from './components/ProductsList';
 import AddProduct from './components/AddProduct';
 import FloatingButton from './components/FloatingButton';
 import { Route, BrowserRouter as Router } from 'react-router-dom'; 
-import { addProduct, deleteProductById, getAllProducts } from './Idb'
+import { addProduct, deleteProductById, getAllProducts, updateProductById } from './Idb'
 
 class App extends React.Component {
 
@@ -54,7 +54,13 @@ class App extends React.Component {
 
   addProductToList = async (name, amount, purchaseDate, expireDate, img_url) => {
     await addProduct(name, amount, purchaseDate, expireDate, img_url).then((arr) => {
-      this.setState({ products: arr});
+      this.setState({ products: arr });
+    })
+  }
+
+  updateProduct = async (id,product) => {
+    await updateProductById(id, product).then((arr) => {
+      this.setState({ products: arr });
     })
   }
 
@@ -70,11 +76,11 @@ class App extends React.Component {
                                                                             product={this.state.showProductObj} 
                                                                             delete={this.deleteProduct} 
                                                                             update={this.updateState}
-                                                                            reset={this.resetState}/>} 
+                                                                            reset={this.resetState}
+                                                                            productUpdate={this.updateProduct}/>} 
                                                                 />
         </div>
       </Router>
-      
     );
 
   }
