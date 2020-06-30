@@ -66,8 +66,8 @@ class AddProduct extends React.Component {
             barcode: "",
             product_name: this.props.product.name,
             amount: this.props.product.amount,
-            purchase_date: this.props.product.purchase_date,
-            vailid_until: this.props.product.vailid_until,
+            purchaseDate: this.props.product.purchaseDate,
+            expireDate: this.props.product.expireDate,
             img_url: this.props.product.img_url,
             anchorEl: {},
             open: false,
@@ -114,7 +114,7 @@ class AddProduct extends React.Component {
         if(barcode){
            //check for valid barcode
 
-           var searchResult = {};
+           //var searchResult = {};
            if(barcode.length === 13 || barcode.length === 8) {
                 fetch("https://world.openfoodfacts.org/api/v0/product/"+barcode+".json")
                 .then(res => res.json())
@@ -161,21 +161,19 @@ class AddProduct extends React.Component {
     }
 
     handleClickSave(event){
-        if (Object.keys(this.props.product).length == 0){
-            this.props.add(this.state.product_name, this.state.amount, this.state.purchase_date, this.state.vailid_until, this.state.img_url);
+        if (Object.keys(this.props.product).length === 0){
+            this.props.add(this.state.product_name, this.state.amount, this.state.purchaseDate, this.state.expireDate, this.state.img_url);
         }
         this.setState({redirect: true});
         this.props.reset();
     }
 
     handleDateChange(event, id) {
-        console.log(id);
         const date = event.toISOString().split('T')[0];       
         this.setState({
             ...this.state,
             [id]: date
-        })
-        console.log(date);       
+        })    
     }
 
     handleInput(event) {
@@ -203,7 +201,7 @@ class AddProduct extends React.Component {
                             className={classes.arrowIcon}
                             onClick={this.handleClickArrow}
                         />
-                        { !Object.keys(this.props.product).length == 0 && <DeleteIcon 
+                        { !Object.keys(this.props.product).length === 0 && <DeleteIcon 
                             edge="end"
                             className={classes.deleteIcon}
                             onClick={this.handleClickDelete}
@@ -276,27 +274,27 @@ class AddProduct extends React.Component {
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
-                            id="purchase_date"
+                            id="purchaseDate"
                             label="Eingekauft am"
                             margin="dense"
                             inputVariant="outlined"
                             format="dd.MM.yyyy"
-                            value={this.state.purchase_date} 
+                            value={this.state.purchaseDate} 
                             className={classes.datePicker}
-                            onChange={(event) => this.handleDateChange(event, "purchase_date")}     
+                            onChange={(event) => this.handleDateChange(event, "purchaseDate")}     
                         />                      
                     </MuiPickersUtilsProvider>                                        
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
-                            id="vailid_until"
+                            id="expireDate"
                             label="Gültig bis"
                             margin="dense"
                             inputVariant="outlined"
                             format="dd.MM.yyyy"
-                            value={this.state.vailid_until} 
+                            value={this.state.expireDate} 
                             className={classes.datePicker}
-                            onChange={(event) => this.handleDateChange(event, "vailid_until")}
+                            onChange={(event) => this.handleDateChange(event, "expireDate")}
                         />                      
                     </MuiPickersUtilsProvider>
                     <br />

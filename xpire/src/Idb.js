@@ -2,16 +2,16 @@ import Dexie from 'dexie'
 
 const db = new Dexie('Xpire');
 db.version(1).stores({
-    products: "++id,name,amount,purchaseDate,expireDate, imgUrl"
+    products: "++id,name,amount,purchaseDate,expireDate, img_url"
 });
 
-export const addProduct = async (name, amount, purchaseDate, expireDate, imgUrl=undefined) => {
+export const addProduct = async (name, amount, purchaseDate, expireDate, img_url=undefined) => {
     await db.products.add({
         name: name,
         amount: amount,
         purchaseDate: purchaseDate,
         expireDate: expireDate,
-        imgUrl: imgUrl
+        img_url: img_url
     });
     return await db.products.toArray().then(function (arr) {
         return arr;
@@ -52,6 +52,6 @@ export const getAllProducts = async () => {
 export const createDatabase = async () => { //use for debugging 
     const db = new Dexie('Xpire');
     db.version(1).stores({
-        products: "++id,name,amount,purchaseDate,expireDate, imgUrl"
+        products: "++id,name,amount,purchaseDate,expireDate, img_rl"
     });
 }
