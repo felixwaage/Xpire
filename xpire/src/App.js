@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import IdbTest from './IdbTest'
 import AppHeader from './components/AppHeader'
