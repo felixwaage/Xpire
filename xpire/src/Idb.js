@@ -19,7 +19,13 @@ export const addProduct = async (name, amount, purchaseDate, expireDate, img_url
 }
 export const updateProductById = async (id, product) => {
     console.log(product) //has to be one or multiple key(s) + value(s) according to database table attributes
-    await db.products.update(id, product);
+    await db.products.update(id, product).then(function (updated) {
+        if (updated)
+          return getAllProducts();
+        else
+          console.log ("Nothing was updated");
+          return getAllProducts();
+      });
 }
 
 export const clearTable = async (tableName) => {
