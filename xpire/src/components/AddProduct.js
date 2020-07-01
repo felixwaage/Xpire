@@ -62,6 +62,7 @@ class AddProduct extends React.Component {
         this.showErrorPopOver = this.showErrorPopOver.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.setBackgroundImg = this.setBackgroundImg.bind(this);
+        this.setDate = this.setDate.bind(this);
         this.handleClickUpdate = this.handleClickUpdate.bind(this);
         this.onDetected = this.onDetected.bind(this);
         this.onStartScan = this.onStartScan.bind(this);
@@ -168,6 +169,12 @@ class AddProduct extends React.Component {
     }
 
     handleClickSave(event){
+        if(!this.state.purchaseDate){
+            this.setDate(new Date(), "purchaseDate");
+        }
+        if(!this.state.expireDate){
+            this.setDate(new Date(), "expireDate");
+        }
         if (Object.keys(this.props.product).length === 0){
             this.props.add(this.state.product_name, this.state.amount, this.state.purchaseDate, this.state.expireDate, this.state.img_url);
         }
@@ -176,11 +183,12 @@ class AddProduct extends React.Component {
     }
 
     handleDateChange(event, id) {
-        const date = event.toISOString().split('T')[0];       
-        this.setState({
-            ...this.state,
-            [id]: date
-        })    
+        this.setDate(event, id);   
+    }
+
+    async setDate(date, id){
+        const isoDate = date.toISOString().split('T')[0];
+        await this.setState({[id]: isoDate});  
     }
 
     handleInput(event) {
