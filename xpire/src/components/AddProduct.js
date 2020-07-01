@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import Scanner from "./Scanner";
 
 const styles = theme => ({
     root: {
@@ -62,6 +63,8 @@ class AddProduct extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.setBackgroundImg = this.setBackgroundImg.bind(this);
         this.handleClickUpdate = this.handleClickUpdate.bind(this);
+        this.onDetected = this.onDetected.bind(this);
+        this.onStartScan = this.onStartScan.bind(this);
         this.state = {
             redirect: false,
             barcode: "",
@@ -81,7 +84,9 @@ class AddProduct extends React.Component {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 backgroundSize: "auto 100%"
-            }
+            },
+            result: null,
+            camera: false
         }
     }
 
@@ -198,6 +203,17 @@ class AddProduct extends React.Component {
 
         console.log("clicked")
     }
+    onDetected(result) {
+        this.setState({ barcode: result,
+                        camera: false })
+    }
+
+    onStartScan(event) {
+        this.setState({
+            camera: !this.state.camera
+        })
+    }
+    
 
     render() {
         const { classes } = this.props;
@@ -222,8 +238,7 @@ class AddProduct extends React.Component {
                         />}
                     </div>
                 </div>
-
-
+        
                 <Popover
                     id={this.state.id}
                     open={this.state.open}
@@ -241,8 +256,6 @@ class AddProduct extends React.Component {
                     <Typography className={classes.typography}>{this.state.simple_popover_message}</Typography>
                 </Popover>  
 
-
-
                 <form className={classes.form}>
                     { Object.keys(this.props.product).length === 0 && <div>
                         <TextField
@@ -254,7 +267,11 @@ class AddProduct extends React.Component {
                             className={classes.textField}
                             onChange={this.handleInput}
                         />
-                        <br />
+
+                        <div className="container">
+                            {this.state.camera && <Scanner onDetected={this.onDetected} />}
+                        </div>
+
                         <Button
                             id="SearchButton"
                             variant="contained"
@@ -263,7 +280,15 @@ class AddProduct extends React.Component {
                             onClick={this.getProductInformationByBarcode}>
                             Suchen
                         </Button>
-                        <br />
+
+                        <Button
+                            id="ScanButton"
+                            variant="contained"
+                            color="primary"
+                            className={classes.submitButton}
+                            onClick={this.onStartScan}>
+                            Scannen
+                        </Button>
                     </div>}
                     
                     <TextField
