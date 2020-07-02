@@ -1,42 +1,34 @@
 % !TEX root =  master.tex
 \section{Eingesetzte Technologien}
-% welche Technologien und warum?
-- React als UI-Technologie: arum?
-	- meiste Erfahrung in der Gruppe -> Ziel: Schnelligkeit
-	- Alternativen: Vue,js oder Angular
-	- keine Anforderung, die etwas krasses benötigt
-	- jeder Technologie enthält eine Vor- und Nachteile
-	- Aufbau auf Erfahrungswerten mit React in Verbindung mit pwa aufbauen
-	
-	
-- Index.db: Jonas \ Fabio
-	- Warum index.db? -> Schnittstelle vom Browser für primitive Datenbak um lokal Daten zu speichern
-	- Voreitel: Daten werden nicht serverseitig gespeichert
-	- Persistierung?
-	
-	
-	
-- Plattform: githut pages
-	- kostenlos, einfach deployment, erfüllt seinen Zweck
-	- zentral mit dem github repository
-	- github akutell für die entwicklung gut aber später auf anderen Plattform umsteigen zB:
-	- SAP Cloud Plattform, Google Cloud Plattform. Amazon AWS oder einfach nur einen Server anmieten (zB IONOS, Strato) -> kein komplexes Backend -> wird entschieden zu einem späterren Zeitpunkt je nachdem wie sich App entiwckelt -> auf fremdgehosteten eigenen Server (wahrscheinlich IONOS) 
+\subsection{React}
+React ist eine JavaScript-Bibliothek zur Erstellung von Benutzeroberflächen, die 2013 von Facebook unter BSD-Lizenz veröffentlicht wurde. Zentrales Konzept von React ist die Komponenten-bezogene Architektur, die als Basis für leicht nachvollziehbaren und wartbaren Frontend-Code dient. Komponenten erlauben es, die Benutzeroberfläche in autarke, wiederverwendbare Einheiten aufzuteilen. Dabei kapseln sie Struktur (HTML), Aussehen (CSS) und Logik (JavaScript).\autocite[vgl.][]{?}\\
+Neben React stellen Angular oder vue.js vergleichbare Alternativen dar. Wir haben uns als Team jedoch bewusst für die Nutzung von React entschieden aus folgenden Gründen:
+\begin{itemize}[noitemsep]
+	\item ein Großteil des Teams hat bereits mehr Erfahrungen mit React als mit Angular oder vue.js gesammelt $\rightarrow$ dieser Erfahrungsschatz ermöglicht einen schnellen Einstieg ins Projekt
+	\item Es gibt bereits viele Projekte, die React in Verbindung mit einer PWA verwenden $\rightarrow$ liefert Orientierung und hilft beim Verständnis	\item die Anforderungen an Xpire beinhalten keine außergewöhnlichen Ansprüche, welche nicht mit React erfüllt werden könnten
+\end{itemize}
 
-- Architektur: Felix?
-
-
-
-
-- Authentifizierung? 
-	- aktuell keine
-	- später -> je nach Entwicklung der Funktionalitäten und Bedarf Authentifizierung notwendig -> optimal: möglichst ohne -> wir wollen keine Daten erheben -> aktuell werden Daten nur lokal auf dem Endgerät hinterlegt (über index.db)
+\subsection{Datenbank}	
+Die Prämisse, die gesamte Anwendung light-weight und dezentral zu gestalten, wirkt sich vor allem auch auf die Datenhaltung aus. In der Regel werden bei Web-basierten Anwendungen die Daten, die für spätere Verwendungen zur Verfügung stehen sollen, in einer Datenbank auf einem zentralen Rechner gespeichert. Für die Xpire-App wollten wir aber auf eine solche Zentralisierung verzichten, um zum einen die laufenden Kosten minimal zu halten und zum anderen den höchsten Datenschutz zu gewährleisten, indem die Daten nur auf dem Gerät des Benutzers gespeichert werden. Bei nativen Apps wird hierfür ein Verzeichnis auf dem Gerätespeicher angelegt, in dem sämtliche Dateien und Datenbanken dauerhaft abgelegt werden können. Bei einer \ac{PWA} ist es allerdings nicht vorgesehen, auf dem Dateisystem des jeweiligen Geräts zu operieren, da es sich letztendlich um eine Webseite handelt.\\
+Hier bieten moderne Browser einige Möglichkeiten an, Daten lokal zu speichern. Die üblichen Möglichkeiten hierfür sind Cookies, SessionStorage und LocalStorage. Teilweise sind diese aber zeitlich aber vor allem strukturell begrenzt und können so nicht als Ersatz für eine Datenbank herhalten. Abhilfe schaffen kann da die sogenannte IndexedDB, eine Schnittstelle des Browsers für eine primitive Datenbank. So ist es einer Webseite möglich, Daten lokal und nicht serverseitig in einer Datenbank zu speichern. Eine solche Datenbank erlaubt auch Hochleistungssuchen der Daten durch die Verwendung von Indizes.\footnote{\url{https://developer.mozilla.org/de/docs/Web/API/IndexedDB_API}}\\
+Um den Zugriff auf die IndexedDB zu vereinfachen nutzen wir die Wrapper-Bibliothek Dexie.\footnote{\url{https://dexie.org}} 
+Dexie löst drei Hauptprobleme mit der nativen IndexedDB-API:
+Mehrdeutige Fehlerbehandlung, schwache Anfragen und
+Code-Komplexität und bietet so eine saubere Datenbank-API, die für unseren Einsatz bestens performt. Angelegte Produkte können hiermit persistiert, abgefragt und geändert werden. Neugierige Nutzer der Xpire-App können über die Entwicklerwerkzeuge ihres Browsers den Inhalt der indizierten Datenbank und somit die gespeicherten Produkte einsehen. 
 	
-	
-	
-	
-- Präsentations- und Feedbackmöglichkeiten für User
-	- Feedback-Button -> feedback-Formular -> kein willkürlich afpoppendes Popup -> weil super fance smoothe USer Experience
-	- Chatbot
+\subsection{Platform}
+Für Xpire haben wir ein Repository auf GitHub angelegt, sodass wir die Web App kostenlos über GitHub Pages hosten können. GitHub Pages sind öffentliche Webseiten, die kostenlos über GitHub gehostet werden. GitHub-Benutzer können sowohl persönliche Webseiten als auch Webseiten, die sich auf bestimmte GitHub-Projekte beziehen, erstellen und hosten. Mit Pages lassen sich die gleichen Dinge wie mit GitHub tun, aber wenn das Repository auf eine bestimmte Weise benannt ist und die Dateien darin HTML oder Markdown sind, lässt sich die Datei wie jede andere Website anzeigen.\autocite[vgl.][]{?} Wir haben für GitHub Pages aus folgenden gründen für unser Projekt gewählt:
+\begin{itemize}[noitemsep]
+	\item Es ist kostenlos und ermöglicht ein einfaches Deployment.
+	\item Es ist zentral mit dem GitHub Repository verbunden.
+	\item Es Unterstützt die gemeinsame Entwicklung.
+\end{itemize}
+Da sich die Xpire-App aktuell in der Entwicklungsphase befindet, ist GitHub Pages eine sehr zufriedenstellend Technologie. Im späteren Verlauf, wenn die app live gehen soll und für Endanwender verfügbar gemacht werden soll, ist GitHub Pages jedoch nicht mehr die geeignetste Wahl für das Hosting. Zu einem späteren Zeitpunkt werden wir ausweichen auf entweder die SAP Cloud Plattform, Amazon AWS oder einen gemieteten Server, beispielsweise von IONOS oder Strato.
+
+\subsection{Sonstiges}
+\textbf{Authentifizierung}: Eine Authentifizierung ist derzeit nicht vorhanden und wird, je nach Entwicklung der Funktionalitäten und Bedarf, zu einem späteren Zeitpunkt ergänzt. Falls die technischen Möglichkeiten es zulassen, wollen wir die Web App jedoch ohne Authentifizierung anbieten, da wir keine Daten unser Endnutzer erheben möchte. Für uns stellt der Datenschutz eine höhere Priorität dar.
+
+\textbf{Präsentations- und Feedbackmöglichkeiten:} Präsentations- und Feedbackmöglichkeiten sind in der aktuellen Version der App nicht vorhanden, da sie nicht zu den definierten Anforderungen eines MVP's gehören. Im zukünftigen Live-Betrieb soll die App jedoch Feedbackmöglichkeiten von den Nutzer zur Verfügung stellen, um eine kontinuierlichen, benutzerorientierten Service anbieten zu können. Die Möglichkeiten zur Einholung des Feedbacks sollen den Nutzer in der Anwendung der App jedoch nicht einschränken. Daher sollen es keine willkürlich aufploppende Bewertuns-Popups geben, sondern lediglich einen Feedback-Button, welcher den Nutzer zu einem Feedback-Formular navigiert. Die Abgabe von Feedback erfolgt auf freiwilliger Basis.
 	
 
 
