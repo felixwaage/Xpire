@@ -68,36 +68,52 @@ class AddProduct extends React.Component {
         this.onStartScan = this.onStartScan.bind(this);
         this.state = {
             redirect: false,
-            barcode: "",
-            product_id: this.props.product.id,
-            product_name: this.props.product.name,
-            amount: this.props.product.amount,
-            purchaseDate: this.props.product.purchaseDate,
-            expireDate: this.props.product.expireDate,
-            img_url: this.props.product.img_url,
-            anchorEl: {},
-            open: false,
-            id: 'simple-popover',
-            simple_popover_message: "",
+            product_name: "",
+            product_amount: "",
+            product_purchaseDate: "",
+            product_expireDate: "",
+            product_img_url: "",
             imgStyle: {
                 height: '15rem',
-                backgroundImage: "url(" + this.props.product.img_url + ")",
+                backgroundImage: "url(" + this.props.products.img_url + ")",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 backgroundSize: "auto 100%"
             },
+            barcode: "",
+            anchorEl: {},
+            open: false,
+            id: 'simple-popover',
+            simple_popover_message: "",
             result: null,
             camera: false
         }
     }
 
-    setBackgroundImg(img_url){
+    componentDidMount = () => {
+        if (this.props.productID !== 0){
+            var product = this.props.products.find(e => e.id === this.props.productID);
+            this.setState({
+                product_name: product.name,
+                product_amount: product.amount,
+                product_purchaseDate: product.purchaseDate,
+                product_expireDate: product.expireDate,
+                product_img_url: product.img_url,
+                imgStyle: {
+                    ...this.state.imgStyle,
+                    backgroundImage: "url(" + product.img_url + ")",
+                }
+            }) 
+        }
+    }
+
+    setBackgroundImg(product_img_url){
         this.setState({
             imgStyle: {
                 ...this.state.imgStyle,
-                backgroundImage: "url(" + img_url + ")",
+                backgroundImage: "url(" + product_img_url + ")",
             },
-            img_url: img_url
+            product_img_url: product_img_url
         })
     }
 
@@ -159,27 +175,27 @@ class AddProduct extends React.Component {
 
     handleClickArrow(event) {
         this.setState({redirect: true});
-        this.props.reset();
+        this.props.refreshPage();
     }
 
     handleClickDelete(event) {
-        this.props.delete(this.props.product.id);
+        this.props.delete(this.props.productID);
         this.setState({redirect: true});
-        this.props.reset();
+        this.props.refreshPage();
     }
 
     handleClickSave(event){
-        if(!this.state.purchaseDate){
+        if(!this.state.product_purchaseDate){
             this.setDate(new Date(), "purchaseDate");
         }
-        if(!this.state.expireDate){
+        if(!this.state.product_expireDate){
             this.setDate(new Date(), "expireDate");
         }
-        if (Object.keys(this.props.product).length === 0){
-            this.props.add(this.state.product_name, this.state.amount, this.state.purchaseDate, this.state.expireDate, this.state.img_url);
+        if (this.props.productID === 0 ){
+            this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
         }
         this.setState({redirect: true});
-        this.props.reset();
+        this.props.refreshPage();
     }
 
     handleDateChange(event, id) {
@@ -203,14 +219,15 @@ class AddProduct extends React.Component {
     handleClickUpdate(event) {
         var product = {
             name: this.state.product_name,
-            amount: this.state.amount,
-            purchaseDate: this.state.purchaseDate,
-            expireDate: this.state.expireDate
+            amount: this.state.product_amount,
+            purchaseDate: this.state.product_purchaseDate,
+            expireDate: this.state.product_expireDate
         }
-        this.props.productUpdate(this.state.product_id, product);
-
-        console.log("clicked")
+        this.props.productUpdate(this.props.productID, product);
+        this.setState({redirect: true});
+        this.props.refreshPage();
     }
+
     onDetected(result) {
         this.setState({ barcode: result,
                         camera: false })
@@ -239,7 +256,7 @@ class AddProduct extends React.Component {
                             className={classes.arrowIcon}
                             onClick={this.handleClickArrow}
                         />
-                        { Object.keys(this.props.product).length !== 0 && <DeleteIcon 
+                        { this.props.productID !== 0 && <DeleteIcon 
                             edge="end"
                             className={classes.deleteIcon}
                             onClick={this.handleClickDelete}
@@ -265,7 +282,7 @@ class AddProduct extends React.Component {
                 </Popover>  
 
                 <form className={classes.form}>
-                    { Object.keys(this.props.product).length === 0 && <div>
+                    { this.props.productID === 0 && <div>
                         <TextField
                             id="barcode"
                             label="Barcode"
@@ -310,43 +327,43 @@ class AddProduct extends React.Component {
                     />
                     <br />
                     <TextField
-                        id="amount"
+                        id="product_amount"
                         label="Anzahl"
                         margin="dense"
                         variant="outlined"
-                        value={this.state.amount}
+                        value={this.state.product_amount}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />                           
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
-                            id="purchaseDate"
+                            id="product_purchaseDate"
                             label="Eingekauft am"
                             margin="dense"
                             inputVariant="outlined"
                             format="dd.MM.yyyy"
-                            value={this.state.purchaseDate} 
+                            value={this.state.product_purchaseDate} 
                             className={classes.datePicker}
-                            onChange={(event) => this.handleDateChange(event, "purchaseDate")}     
+                            onChange={(event) => this.handleDateChange(event, "product_purchaseDate")}     
                         />                      
                     </MuiPickersUtilsProvider>                                        
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
-                            id="expireDate"
+                            id="product_expireDate"
                             label="Gültig bis"
                             margin="dense"
                             inputVariant="outlined"
                             format="dd.MM.yyyy"
-                            value={this.state.expireDate} 
+                            value={this.state.product_expireDate} 
                             className={classes.datePicker}
-                            onChange={(event) => this.handleDateChange(event, "expireDate")}
+                            onChange={(event) => this.handleDateChange(event, "product_expireDate")}
                         />                      
                     </MuiPickersUtilsProvider>
                     <br />
            
-                    {Object.keys(this.props.product).length === 0 && <Button
+                    { this.props.productID === 0 && <Button
                         id="SaveButton"
                         variant="contained"
                         color="primary"
@@ -355,7 +372,7 @@ class AddProduct extends React.Component {
                         Speichern
                     </Button>}
 
-                    {Object.keys(this.props.product).length !== 0 && <Button
+                    { this.props.productID !== 0 && <Button
                         id="UpdateButton"
                         variant="contained"
                         color="primary"

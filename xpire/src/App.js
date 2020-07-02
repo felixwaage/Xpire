@@ -12,11 +12,16 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = this.getInitialState();
+    this.state = {
+      products: [],
+      productID: 0,
+    }
     this.showProduct = this.showProduct.bind(this);
     this.deleteProduct = this.deleteProduct.bind(this);
-    this.resetState = this.resetState.bind(this);
-    this.updateState = this.updateState.bind(this);
+    this.addProductToList = this.addProductToList.bind(this);
+    this.updateProduct = this.updateProduct.bind(this);
+    this.refreshPage = this.refreshPage.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount = () => {
@@ -28,24 +33,13 @@ class App extends React.Component {
   fetch();
   }
 
-  getInitialState = () => ({
-    products: [],
-    showProductObj: {}
-  })
-
-  // Check function if necessary!!
-  updateState = (value) => {
-    this.setState({ showProductObj : value}); 
-  }
-
-  resetState = () => {
-     this.setState(this.getInitialState());
-     this.componentDidMount();
+  refreshPage() {
+    this.setState({ productID: 0 });
+    this.componentDidMount();
   }
 
   showProduct(id) {
-    var product = this.state.products.find(e => e.id === id);
-    this.setState({ showProductObj: product });
+    this.setState({ productID: id });
   }
 
   deleteProduct = async (id) => {
@@ -72,11 +66,11 @@ class App extends React.Component {
           <Route path="/Xpire" component={AppHeader} />
           <Route exact path="/Xpire" render={(props) => <ProductsList products={this.state.products} showProduct={this.showProduct}/>} />
           <Route exact path="/Xpire" render={(props) => <FloatingButton />} />
-          <Route exact path="/Xpire/Product" render={(props) => <AddProduct add={this.addProductToList} 
-                                                                            product={this.state.showProductObj} 
+          <Route exact path="/Xpire/Product" render={(props) => <AddProduct productID={this.state.productID}
+                                                                            products={this.state.products} 
+                                                                            refreshPage={this.refreshPage} 
+                                                                            add={this.addProductToList} 
                                                                             delete={this.deleteProduct} 
-                                                                            update={this.updateState}
-                                                                            reset={this.resetState}
                                                                             productUpdate={this.updateProduct}/>} 
                                                                 />
         </div>
