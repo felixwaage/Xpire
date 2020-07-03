@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import BarcodeIcon from '@material-ui/icons/CropFree';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -305,20 +307,22 @@ class AddProduct extends React.Component {
                             className={classes.textField}
                             onChange={this.handleInput}
                             onKeyDown={this.getProductInformationByBarcode} 
+
+                            InputProps={{
+                                endAdornment: (
+                                <InputAdornment position="end">
+                                    <BarcodeIcon 
+                                        onClick={this.onStartScan}
+                                    />
+                                </InputAdornment>
+                                ),
+                            }}
                         />
 
                         <div className="container">
                             {this.state.camera && <Scanner onDetected={this.onDetected} />}
                         </div>
-
-                        <Button
-                            id="ScanButton"
-                            variant="contained"
-                            color="primary"
-                            className={classes.submitButton}
-                            onClick={this.onStartScan}>
-                            Scannen
-                        </Button>
+                        
                     </div>}
                     
                     <TextField
