@@ -146,42 +146,44 @@ class AddProduct extends React.Component {
     };
 
     getProductInformationByBarcode(event){
-        var barcode = this.state.barcode;
-        if(barcode){
-           //check for valid barcode
+        if(event.keyCode == 13){
+            var barcode = this.state.barcode;
+            if(barcode){
+            //check for valid barcode
 
-           //var searchResult = {};
-           if(barcode.length === 13 || barcode.length === 8) {
-                fetch("https://world.openfoodfacts.org/api/v0/product/"+barcode+".json")
-                .then(res => res.json())
-                .then((result) => {
-                    var product = result.product;
-                    //check if product found
-                    if(result.status === 1){
-                        if(product.product_name) {
-                            //this.props.update(product.product_name);
-                            this.setState({
-                                product_name: product.product_name,
-                            })
-                            this.setBackgroundImg(product.image_url);
+            //var searchResult = {};
+            if(barcode.length === 13 || barcode.length === 8) {
+                    fetch("https://world.openfoodfacts.org/api/v0/product/"+barcode+".json")
+                    .then(res => res.json())
+                    .then((result) => {
+                        var product = result.product;
+                        //check if product found
+                        if(result.status === 1){
+                            if(product.product_name) {
+                                //this.props.update(product.product_name);
+                                this.setState({
+                                    product_name: product.product_name,
+                                })
+                                this.setBackgroundImg(product.image_url);
+                            } else {
+                                // throw error
+                                this.showErrorPopOver("Produktname nicht gefunden!",event.currentTarget);
+                            }
+                            
                         } else {
                             // throw error
-                            this.showErrorPopOver("Produktname nicht gefunden!",event.currentTarget);
+                            this.showErrorPopOver("Das Produkt existiert nicht!",event.currentTarget);
                         }
-                        
-                    } else {
-                        // throw error
-                        this.showErrorPopOver("Das Produkt existiert nicht!",event.currentTarget);
-                    }
-                },
-                (error) => {
-                    this.showErrorPopOver("Prüfe deine Internetverbindung!",event.currentTarget);
-                })
-           } else {
-            this.showErrorPopOver("Barcode nicht korrekt!",event.currentTarget);
-           }
-        } else {
-            this.showErrorPopOver("Bitte Barcode eingeben!",event.currentTarget);
+                    },
+                    (error) => {
+                        this.showErrorPopOver("Prüfe deine Internetverbindung!",event.currentTarget);
+                    })
+            } else {
+                this.showErrorPopOver("Barcode nicht korrekt!",event.currentTarget);
+            }
+            } else {
+                this.showErrorPopOver("Bitte Barcode eingeben!",event.currentTarget);
+            }
         }
     }
 
@@ -302,20 +304,12 @@ class AddProduct extends React.Component {
                             value={this.state.barcode}
                             className={classes.textField}
                             onChange={this.handleInput}
+                            onKeyDown={this.getProductInformationByBarcode} 
                         />
 
                         <div className="container">
                             {this.state.camera && <Scanner onDetected={this.onDetected} />}
                         </div>
-
-                        <Button
-                            id="SearchButton"
-                            variant="contained"
-                            color="primary"
-                            className={classes.submitButton}
-                            onClick={this.getProductInformationByBarcode}>
-                            Suchen
-                        </Button>
 
                         <Button
                             id="ScanButton"
