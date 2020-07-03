@@ -18,25 +18,26 @@ import DateFnsUtils from '@date-io/date-fns';
 import Scanner from "./Scanner";
 
 const styles = theme => ({
-    toolbar: theme.mixins.toolbar,
+    toolbar: theme.mixins.toolbar, 
     imgOverlay: {
         height: '15rem',
         backgroundColor: "hsla(0, 0%, 0%, 0.23)"
     }, 
     arrowIcon: {
-        float: 'left',
         marginLeft: "16px",
         marginTop: "10px",
-        color: "white"
+        color: "white",
+        position: "fixed"
     }, 
+    deleteIcon: {
+        marginRight: "16px",
+        marginTop: "10px",
+        color: "white",
+        position: "fixed",
+        right: "0"
+    },
     datePicker: {
         width: '100%'
-    },
-    deleteIcon: {
-        float: 'right',
-        marginRight: "28px",
-        marginTop: "10px",
-        color: "white"
     },
     form: {
         margin: '1.6rem'
