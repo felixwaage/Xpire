@@ -7,6 +7,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Redirect } from 'react-router';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -61,6 +64,7 @@ class AddProduct extends React.Component {
         this.getProductInformationByBarcode = this.getProductInformationByBarcode.bind(this);
         this.showErrorPopOver = this.showErrorPopOver.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this);
         this.setBackgroundImg = this.setBackgroundImg.bind(this);
         this.setDate = this.setDate.bind(this);
         this.handleClickUpdate = this.handleClickUpdate.bind(this);
@@ -83,6 +87,7 @@ class AddProduct extends React.Component {
             barcode: "",
             anchorEl: {},
             open: false,
+            openSnackbar: false,
             id: 'simple-popover',
             simple_popover_message: "",
             result: null,
@@ -131,6 +136,13 @@ class AddProduct extends React.Component {
             anchorEl: null,
             open: false
         })
+    };
+
+    handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        this.setState({openSnackbar: false})
     };
 
     getProductInformationByBarcode(event){
@@ -224,6 +236,7 @@ class AddProduct extends React.Component {
             expireDate: this.state.product_expireDate
         }
         this.props.productUpdate(this.props.productID, product);
+        this.setState({openSnackbar: true})
     }
 
     onDetected(result) {
@@ -378,7 +391,23 @@ class AddProduct extends React.Component {
                         onClick={this.handleClickUpdate}>
                         Ändern
                     </Button>}
-                </form>                           
+                </form> 
+                
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.openSnackbar}
+                    autoHideDuration={6000}
+                    onClose={this.handleCloseSnackbar}
+                    message="Daten wurden geändert!"
+                    action={
+                          <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleCloseSnackbar}>
+                            <CloseIcon fontSize="small" />
+                          </IconButton>
+                      }
+                />                        
             </div>
         );
     }
