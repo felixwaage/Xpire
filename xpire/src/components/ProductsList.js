@@ -61,7 +61,7 @@ class ProductsList extends React.Component {
         return (
             <List dense className={classes.root}>
                 {this.props.products ? this.props.products.map((product) =>
-                    <div className={classes.listitemframe}>
+                    <div className={classes.listitemframe} key={product.id}>
                         <ListItem className={classes.listitem} button onClick={() => this.handleListItemClick(product.id)}>
                             <ListItemAvatar>
                                 <Avatar

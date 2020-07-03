@@ -7,6 +7,11 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Redirect } from 'react-router';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import BarcodeIcon from '@material-ui/icons/CropFree';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -61,6 +66,7 @@ class AddProduct extends React.Component {
         this.getProductInformationByBarcode = this.getProductInformationByBarcode.bind(this);
         this.showErrorPopOver = this.showErrorPopOver.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this);
         this.setBackgroundImg = this.setBackgroundImg.bind(this);
         this.setDate = this.setDate.bind(this);
         this.handleClickUpdate = this.handleClickUpdate.bind(this);
@@ -68,36 +74,53 @@ class AddProduct extends React.Component {
         this.onStartScan = this.onStartScan.bind(this);
         this.state = {
             redirect: false,
-            barcode: "",
-            product_id: this.props.product.id,
-            product_name: this.props.product.name,
-            amount: this.props.product.amount,
-            purchaseDate: this.props.product.purchaseDate,
-            expireDate: this.props.product.expireDate,
-            img_url: this.props.product.img_url,
-            anchorEl: {},
-            open: false,
-            id: 'simple-popover',
-            simple_popover_message: "",
+            product_name: "",
+            product_amount: "",
+            product_purchaseDate: "",
+            product_expireDate: "",
+            product_img_url: "",
             imgStyle: {
                 height: '15rem',
-                backgroundImage: "url(" + this.props.product.img_url + ")",
+                backgroundImage: "url(" + this.props.products.img_url + ")",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 backgroundSize: "auto 100%"
             },
+            barcode: "",
+            anchorEl: {},
+            open: false,
+            openSnackbar: false,
+            id: 'simple-popover',
+            simple_popover_message: "",
             result: null,
             camera: false
         }
     }
 
-    setBackgroundImg(img_url){
+    componentDidMount = () => {
+        if (this.props.productID !== 0){
+            var product = this.props.products.find(e => e.id === this.props.productID);
+            this.setState({
+                product_name: product.name,
+                product_amount: product.amount,
+                product_purchaseDate: product.purchaseDate,
+                product_expireDate: product.expireDate,
+                product_img_url: product.img_url,
+                imgStyle: {
+                    ...this.state.imgStyle,
+                    backgroundImage: "url(" + product.img_url + ")",
+                }
+            }) 
+        }
+    }
+
+    setBackgroundImg(product_img_url){
         this.setState({
             imgStyle: {
                 ...this.state.imgStyle,
-                backgroundImage: "url(" + img_url + ")",
+                backgroundImage: "url(" + product_img_url + ")",
             },
-            img_url: img_url
+            product_img_url: product_img_url
         })
     }
 
@@ -117,69 +140,78 @@ class AddProduct extends React.Component {
         })
     };
 
-    getProductInformationByBarcode(event){
-        var barcode = this.state.barcode;
-        if(barcode){
-           //check for valid barcode
+    handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        this.setState({openSnackbar: false})
+    };
 
-           //var searchResult = {};
-           if(barcode.length === 13 || barcode.length === 8) {
-                fetch("https://world.openfoodfacts.org/api/v0/product/"+barcode+".json")
-                .then(res => res.json())
-                .then((result) => {
-                    var product = result.product;
-                    //check if product found
-                    if(result.status === 1){
-                        if(product.product_name) {
-                            //this.props.update(product.product_name);
-                            this.setState({
-                                product_name: product.product_name,
-                            })
-                            this.setBackgroundImg(product.image_url);
+    getProductInformationByBarcode(event){
+        if(event.keyCode == 13){
+            var barcode = this.state.barcode;
+            if(barcode){
+            //check for valid barcode
+
+            //var searchResult = {};
+            if(barcode.length === 13 || barcode.length === 8) {
+                    fetch("https://world.openfoodfacts.org/api/v0/product/"+barcode+".json")
+                    .then(res => res.json())
+                    .then((result) => {
+                        var product = result.product;
+                        //check if product found
+                        if(result.status === 1){
+                            if(product.product_name) {
+                                //this.props.update(product.product_name);
+                                this.setState({
+                                    product_name: product.product_name,
+                                })
+                                this.setBackgroundImg(product.image_url);
+                            } else {
+                                // throw error
+                                this.showErrorPopOver("Produktname nicht gefunden!",event.currentTarget);
+                            }
+                            
                         } else {
                             // throw error
-                            this.showErrorPopOver("Produktname nicht gefunden!",event.currentTarget);
+                            this.showErrorPopOver("Das Produkt existiert nicht!",event.currentTarget);
                         }
-                        
-                    } else {
-                        // throw error
-                        this.showErrorPopOver("Das Produkt existiert nicht!",event.currentTarget);
-                    }
-                },
-                (error) => {
-                    this.showErrorPopOver("Prüfe deine Internetverbindung!",event.currentTarget);
-                })
-           } else {
-            this.showErrorPopOver("Barcode nicht korrekt!",event.currentTarget);
-           }
-        } else {
-            this.showErrorPopOver("Bitte Barcode eingeben!",event.currentTarget);
+                    },
+                    (error) => {
+                        this.showErrorPopOver("Prüfe deine Internetverbindung!",event.currentTarget);
+                    })
+            } else {
+                this.showErrorPopOver("Barcode nicht korrekt!",event.currentTarget);
+            }
+            } else {
+                this.showErrorPopOver("Bitte Barcode eingeben!",event.currentTarget);
+            }
         }
     }
 
     handleClickArrow(event) {
         this.setState({redirect: true});
-        this.props.reset();
+        this.props.refreshPage();
     }
 
     handleClickDelete(event) {
-        this.props.delete(this.props.product.id);
+        this.props.delete(this.props.productID);
         this.setState({redirect: true});
-        this.props.reset();
+        this.props.refreshPage();
     }
 
     handleClickSave(event){
-        if(!this.state.purchaseDate){
+        if(!this.state.product_purchaseDate){
             this.setDate(new Date(), "purchaseDate");
         }
-        if(!this.state.expireDate){
+        if(!this.state.product_expireDate){
             this.setDate(new Date(), "expireDate");
         }
-        if (Object.keys(this.props.product).length === 0){
-            this.props.add(this.state.product_name, this.state.amount, this.state.purchaseDate, this.state.expireDate, this.state.img_url);
+        if (this.props.productID === 0 ){
+            this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
         }
         this.setState({redirect: true});
-        this.props.reset();
+        this.props.refreshPage();
     }
 
     handleDateChange(event, id) {
@@ -203,14 +235,14 @@ class AddProduct extends React.Component {
     handleClickUpdate(event) {
         var product = {
             name: this.state.product_name,
-            amount: this.state.amount,
-            purchaseDate: this.state.purchaseDate,
-            expireDate: this.state.expireDate
+            amount: this.state.product_amount,
+            purchaseDate: this.state.product_purchaseDate,
+            expireDate: this.state.product_expireDate
         }
-        this.props.productUpdate(this.state.product_id, product);
-
-        console.log("clicked")
+        this.props.productUpdate(this.props.productID, product);
+        this.setState({openSnackbar: true})
     }
+
     onDetected(result) {
         this.setState({ barcode: result,
                         camera: false })
@@ -239,7 +271,7 @@ class AddProduct extends React.Component {
                             className={classes.arrowIcon}
                             onClick={this.handleClickArrow}
                         />
-                        { Object.keys(this.props.product).length !== 0 && <DeleteIcon 
+                        { this.props.productID !== 0 && <DeleteIcon 
                             edge="end"
                             className={classes.deleteIcon}
                             onClick={this.handleClickDelete}
@@ -265,7 +297,7 @@ class AddProduct extends React.Component {
                 </Popover>  
 
                 <form className={classes.form}>
-                    { Object.keys(this.props.product).length === 0 && <div>
+                    { this.props.productID === 0 && <div>
                         <TextField
                             id="barcode"
                             label="Barcode"
@@ -274,32 +306,27 @@ class AddProduct extends React.Component {
                             value={this.state.barcode}
                             className={classes.textField}
                             onChange={this.handleInput}
+                            onKeyDown={this.getProductInformationByBarcode} 
+
+                            InputProps={{
+                                endAdornment: (
+                                <InputAdornment position="end">
+                                    <BarcodeIcon 
+                                        onClick={this.onStartScan}
+                                    />
+                                </InputAdornment>
+                                ),
+                            }}
                         />
 
                         <div className="container">
                             {this.state.camera && <Scanner onDetected={this.onDetected} />}
                         </div>
 
-                        <Button
-                            id="SearchButton"
-                            variant="contained"
-                            color="primary"
-                            className={classes.submitButton}
-                            onClick={this.getProductInformationByBarcode}>
-                            Suchen
-                        </Button>
-
-                        <Button
-                            id="ScanButton"
-                            variant="contained"
-                            color="primary"
-                            className={classes.submitButton}
-                            onClick={this.onStartScan}>
-                            Scannen
-                        </Button>
                     </div>}
                     
                     <TextField
+                        required
                         id="product_name"
                         label="Titel"
                         margin="dense"
@@ -310,43 +337,46 @@ class AddProduct extends React.Component {
                     />
                     <br />
                     <TextField
-                        id="amount"
+                        required
+                        id="product_amount"
                         label="Anzahl"
                         margin="dense"
                         variant="outlined"
-                        value={this.state.amount}
+                        value={this.state.product_amount}
                         className={classes.textField}
                         onChange={this.handleInput}
                     />                           
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
-                            id="purchaseDate"
+                            required
+                            id="product_purchaseDate"
                             label="Eingekauft am"
                             margin="dense"
                             inputVariant="outlined"
                             format="dd.MM.yyyy"
-                            value={this.state.purchaseDate} 
+                            value={this.state.product_purchaseDate} 
                             className={classes.datePicker}
-                            onChange={(event) => this.handleDateChange(event, "purchaseDate")}     
+                            onChange={(event) => this.handleDateChange(event, "product_purchaseDate")}     
                         />                      
                     </MuiPickersUtilsProvider>                                        
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
-                            id="expireDate"
+                            required
+                            id="product_expireDate"
                             label="Gültig bis"
                             margin="dense"
                             inputVariant="outlined"
                             format="dd.MM.yyyy"
-                            value={this.state.expireDate} 
+                            value={this.state.product_expireDate} 
                             className={classes.datePicker}
-                            onChange={(event) => this.handleDateChange(event, "expireDate")}
+                            onChange={(event) => this.handleDateChange(event, "product_expireDate")}
                         />                      
                     </MuiPickersUtilsProvider>
                     <br />
            
-                    {Object.keys(this.props.product).length === 0 && <Button
+                    { this.props.productID === 0 && <Button
                         id="SaveButton"
                         variant="contained"
                         color="primary"
@@ -355,7 +385,7 @@ class AddProduct extends React.Component {
                         Speichern
                     </Button>}
 
-                    {Object.keys(this.props.product).length !== 0 && <Button
+                    { this.props.productID !== 0 && <Button
                         id="UpdateButton"
                         variant="contained"
                         color="primary"
@@ -363,7 +393,23 @@ class AddProduct extends React.Component {
                         onClick={this.handleClickUpdate}>
                         Ändern
                     </Button>}
-                </form>                           
+                </form> 
+                
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open={this.state.openSnackbar}
+                    autoHideDuration={6000}
+                    onClose={this.handleCloseSnackbar}
+                    message="Daten wurden geändert!"
+                    action={
+                          <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleCloseSnackbar}>
+                            <CloseIcon fontSize="small" />
+                          </IconButton>
+                      }
+                />                        
             </div>
         );
     }
