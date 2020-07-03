@@ -224,8 +224,6 @@ class AddProduct extends React.Component {
             expireDate: this.state.product_expireDate
         }
         this.props.productUpdate(this.props.productID, product);
-        this.setState({redirect: true});
-        this.props.refreshPage();
     }
 
     onDetected(result) {
