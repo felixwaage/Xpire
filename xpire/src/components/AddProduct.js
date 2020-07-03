@@ -322,10 +322,11 @@ class AddProduct extends React.Component {
                         <div className="container">
                             {this.state.camera && <Scanner onDetected={this.onDetected} />}
                         </div>
-                        
+
                     </div>}
                     
                     <TextField
+                        required
                         id="product_name"
                         label="Titel"
                         margin="dense"
@@ -336,6 +337,7 @@ class AddProduct extends React.Component {
                     />
                     <br />
                     <TextField
+                        required
                         id="product_amount"
                         label="Anzahl"
                         margin="dense"
@@ -347,6 +349,7 @@ class AddProduct extends React.Component {
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
+                            required
                             id="product_purchaseDate"
                             label="Eingekauft am"
                             margin="dense"
@@ -360,6 +363,7 @@ class AddProduct extends React.Component {
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
+                            required
                             id="product_expireDate"
                             label="Gültig bis"
                             margin="dense"
