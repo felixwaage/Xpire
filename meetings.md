@@ -22,14 +22,20 @@
 ## 26.06.2020
 
 ### ToDo's
-- Datenbank-Anbindung beginnen (Jonas, Fabio, Verena)
-- Appbar nur mit Logo (Milena)
-- Bild, wenn man keinen Barcode eingibt --> informieren, wenn nicht dann auf bestehende Bilder zurückgreifen (Felix)
-- Barcode mit Handy-Kamera scannen (Felix)
-- Bugs fixen (komische Titelanzeige, Scrollen auf Produkt-Seite) (Verena)
-- Bugs fixen (Appbar-Breite berücksichtigen, Delete Button) (Yvonne)
+- Datenbank-Anbindung beginnen (Jonas, Fabio, Verena) - done
+- Appbar nur mit Logo (Milena) - done
+- Bugs fixen (Appbar-Breite berücksichtigen, Delete Button (done)) (Yvonne) - in progress
 - Anzahl der Produkte auf Produktliste-Seite angeben und Datumsformat anpassen (Yvonne) - done
-- Seminararbeit (Andrea + Milena)
+- Seminararbeit (Andrea + Milena) - in progress
 
 # Meetings
 ## 03.07.2020 14:30
+- Bild, wenn man keinen Barcode eingibt --> informieren, wenn nicht dann auf bestehende Bilder zurückgreifen (Felix) - in progress
+- Barcode mit Handy-Kamera scannen (Felix) - in progress
+- Bugs fixen (Toolbarbreite, Scrollen auf Produkt-Seite) (Verena) - in progress
+- Validierung der Eingaben beim drücken auf den Speichern-Button (Jonas & Yvonne)
+- Snackbar für sämtliche Benachrichtungen (z.B. für Fehler) (Felix)
+- Push-Benachrichtung jeden morgen (Fabio & Milena)
+- Funktion löschen der gesamten DB im UI hinzufügen (Jonas)
+- Logo für den Homescreen (iOS) (Milena)
+- Date Picker anpassen (Yvonne)
