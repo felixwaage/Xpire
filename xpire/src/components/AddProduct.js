@@ -76,8 +76,8 @@ class AddProduct extends React.Component {
             redirect: false,
             product_name: "",
             product_amount: "",
-            product_purchaseDate: "",
-            product_expireDate: "",
+            product_purchaseDate: [new Date()],
+            product_expireDate: null,
             product_img_url: "",
             imgStyle: {
                 height: '15rem',
