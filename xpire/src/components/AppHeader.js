@@ -13,14 +13,13 @@ import headerLogo from '../logo.svg';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        marginBottom: theme.spacing(7)
     },
     menuButton: {
         marginRight: theme.spacing(2),
     },
     title: {
         flexGrow: 1,
-        alignContent: 'center'
+        textAlign: 'center'
     },
     logo: {
         maxWidth: '2.5rem',
@@ -46,8 +45,6 @@ export default function AppHeader() {
     // };
 
     return (
-        <div className={classes.root}>
-
             <AppBar position="fixed"> 
                 <Toolbar>
                     {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -91,6 +88,5 @@ export default function AppHeader() {
                     )} */}
                 </Toolbar>
             </AppBar>
-        </div>
     );
 }

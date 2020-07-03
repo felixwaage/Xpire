@@ -18,9 +18,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import Scanner from "./Scanner";
 
 const styles = theme => ({
-    root: {
-        marginTop: "56px"
-    },
+    toolbar: theme.mixins.toolbar,
     imgOverlay: {
         height: '15rem',
         backgroundColor: "hsla(0, 0%, 0%, 0.23)"
@@ -264,6 +262,7 @@ class AddProduct extends React.Component {
 
         return (
             <div className={classes.root}>
+                <div className={classes.toolbar}/>
                 <div className={classes.img} style={this.state.imgStyle}>
                     <div className={classes.imgOverlay}>
                         <ArrowIcon 
