@@ -58,6 +58,7 @@ const styles = theme => ({
 class AddProduct extends React.Component {
     constructor(props) {
         super(props);
+        this.formatPurchaseDate = this.formatPurchaseDate.bind(this);
         this.handleClickArrow = this.handleClickArrow.bind(this);
         this.handleClickDelete = this.handleClickDelete.bind(this);
         this.handleClickSave = this.handleClickSave.bind(this);
@@ -208,10 +209,17 @@ class AddProduct extends React.Component {
             this.setDate(new Date(), "expireDate");
         }
         if (this.props.productID === 0 ){
+            this.state.product_purchaseDate = this.formatPurchaseDate(this.state.product_purchaseDate);
             this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
         }
         this.setState({redirect: true});
         this.props.refreshPage();
+    }
+
+        formatPurchaseDate(string) {
+        var date = new Date (string);
+        var isoDate = date.toISOString().split('T')[0];
+        return isoDate;
     }
 
     handleDateChange(event, id) {
