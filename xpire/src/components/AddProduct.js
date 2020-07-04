@@ -202,19 +202,18 @@ class AddProduct extends React.Component {
     }
 
     handleClickSave(event){
-        if(!this.state.product_purchaseDate){
-            this.setDate(new Date(), "purchaseDate");
-        }
-        if(!this.state.product_expireDate){
-            this.setDate(new Date(), "expireDate");
-        }
-        if (this.props.productID === 0 ){
-            this.state.product_purchaseDate = this.formatPurchaseDate(this.state.product_purchaseDate);
-            this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
-        }
-        this.setState({redirect: true});
-        this.props.refreshPage();
-    }
+       if(!this.state.product_expireDate){
+            this.showErrorPopOver("Bitte das Haltbarkeitsdatum angeben.",event.currentTarget);
+        }else{
+            if (this.props.productID === 0 ){
+                this.state.product_purchaseDate = this.formatPurchaseDate(this.state.product_purchaseDate);
+                this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
+            }
+            this.setState({redirect: true});
+            this.props.refreshPage();
+        }       
+    }
+
 
         formatPurchaseDate(string) {
         var date = new Date (string);
