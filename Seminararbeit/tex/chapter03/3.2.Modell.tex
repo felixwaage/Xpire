@@ -5,3 +5,6 @@
 % Welche Persistierung?
 % Welche Tests und warum?
 
+In den vorherigen Abschnitten wurden bereits einige Merkmale der Xpire-App beschrieben, allerdings wurden die Zusammenhänger der verschiedenen Bestandteile nicht näher erläutert, weshalb in diesem Abschnitt das konzeptionelle Modell näher erklärt wird. 
+
+Kern der Xpire-App ist das Frontend, welches mit Hilfe von React als PWA konzipiert ist. Wie den Abbildungen \ref{fig:prot1} und \ref{fig:prot2} entnommen werden kann, besteht die Xpire-App aus 3 Ansichten: \textit{Home-Screen}, \textit{Product-Screen} und dem \textit{Create-Screen}. Diese Ansichten werden in React durch Komponenten realisiert, welche in unterschiedlichen Kontexten wiederverwendet werden können. Der Home-Screen besitzt so die AppBar und eine Komponente zur Listendarstellung der Produkte. Die Ansichten \textit{Product-Screen} und \textit{Create-Screen} werden durch die selbe Komponente realisiert, da zum Erstellen und Anzeigen der Produktinformation ähnliche UI-Bestandteile benötigt werden. Die Darstellung passt sich hierbei automatisch anhand der Übergebenen Parameter an. Hierdurch können Code-Duplikate vermieden werden und Raum für Fehler wird reduziert. 
