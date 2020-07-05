@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 //import IdbTest from './IdbTest'
 import AppHeader from './components/AppHeader'
 import ProductsList from './components/ProductsList';

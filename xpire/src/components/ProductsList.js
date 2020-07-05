@@ -9,9 +9,9 @@ import { Redirect } from 'react-router';
 import format from 'date-fns/format';
 
 const styles = theme => ({
-    root: {
+    toolbar: theme.mixins.toolbar,
+    list: {
         padding: '1rem',
-        marginTop: "56px"
     },
     listitemframe: {
         margin: '0.6rem'
@@ -59,31 +59,34 @@ class ProductsList extends React.Component {
         }
 
         return (
-            <List dense className={classes.root}>
-                {this.props.products ? this.props.products.map((product) =>
-                    <div className={classes.listitemframe} key={product.id}>
-                        <ListItem className={classes.listitem} button onClick={() => this.handleListItemClick(product.id)}>
-                            <ListItemAvatar>
-                                <Avatar
-                                    alt={`Avatar n°${product + 1}`}
-                                    src={product.img_url}
-                                />
-                            </ListItemAvatar>
-                            <ListItemText primary={`${product.name} (${product.amount})`} secondary={
-                                <div>
-                                    <div>Gültig bis: {format(new Date(product.expireDate),"dd.MM.yyyy")}</div>
-                                    <div style={{
-                                        height: '0.5rem',
-                                        width: '100%',
-                                        marginTop: '0.3rem',
-                                        backgroundColor: this.statusColor(product.expireDate),
-                                    }}></div>
-                            </div>
-                            }/>
-                        </ListItem>
-                    </div>
-                ) : null}
-            </List>
+            <div className={classes.root}>
+                <div className={classes.toolbar}/>
+                <List dense className={classes.list}>
+                    {this.props.products ? this.props.products.map((product) =>
+                        <div className={classes.listitemframe} key={product.id}>
+                            <ListItem className={classes.listitem} button onClick={() => this.handleListItemClick(product.id)}>
+                                <ListItemAvatar>
+                                    <Avatar
+                                        alt={`Avatar n°${product + 1}`}
+                                        src={product.img_url}
+                                    />
+                                </ListItemAvatar>
+                                <ListItemText primary={`${product.name} (${product.amount})`} secondary={
+                                    <div>
+                                        <div>Gültig bis: {format(new Date(product.expireDate),"dd.MM.yyyy")}</div>
+                                        <div style={{
+                                            height: '0.5rem',
+                                            width: '100%',
+                                            marginTop: '0.3rem',
+                                            backgroundColor: this.statusColor(product.expireDate),
+                                        }}></div>
+                                </div>
+                                }/>
+                            </ListItem>
+                        </div>
+                    ) : null}
+                </List>
+            </div>
         );
     }
 }
