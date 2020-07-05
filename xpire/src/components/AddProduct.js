@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import BarcodeIcon from '@material-ui/icons/CropFree';
 import InputAdornment from '@material-ui/core/InputAdornment';
+//import Paper from '@material-ui/core/Paper';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -20,7 +21,7 @@ import Scanner from "./Scanner";
 const styles = theme => ({
     toolbar: theme.mixins.toolbar, 
     imgOverlay: {
-        height: '15rem',
+        height: '100%',
         backgroundColor: "hsla(0, 0%, 0%, 0.23)"
     }, 
     arrowIcon: {
@@ -39,8 +40,12 @@ const styles = theme => ({
     datePicker: {
         width: '100%'
     },
+    formContainer: {
+        //marginTop: "208px",
+        //backgroundColor: "white"
+    },
     form: {
-        margin: '1.6rem'
+        padding: '1.6rem'
     },
     textField: {
         width: '100%'
@@ -79,7 +84,10 @@ class AddProduct extends React.Component {
             product_expireDate: "",
             product_img_url: "",
             imgStyle: {
-                height: '15rem',
+                //zIndex: "-1",
+                //width: "100%",
+                //position: "fixed",
+                height: '13rem',
                 backgroundImage: "url(" + this.props.products.img_url + ")",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
@@ -295,7 +303,8 @@ class AddProduct extends React.Component {
                 >
                     <Typography className={classes.typography}>{this.state.simple_popover_message}</Typography>
                 </Popover>  
-
+                
+                <div className={classes.formContainer}>
                 <form className={classes.form}>
                     { this.props.productID === 0 && <div>
                         <TextField
@@ -394,7 +403,8 @@ class AddProduct extends React.Component {
                         Ändern
                     </Button>}
                 </form> 
-                
+                </div>
+
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
