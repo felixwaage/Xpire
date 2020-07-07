@@ -35,7 +35,7 @@
 - Bugs fixen (Toolbarbreite, Scrollen auf Produkt-Seite) (Verena) - in progress
 - Validierung der Eingaben beim drücken auf den Speichern-Button (Jonas & Yvonne)
 - Snackbar für sämtliche Benachrichtungen (z.B. für Fehler) (Felix)
-- Push-Benachrichtung jeden morgen (Fabio & Milena)
+- Push-Benachrichtung jeden Morgen (Fabio & Milena) https://developers.google.com/web/updates/2020/02/nic80#notification_triggers
 - Funktion löschen der gesamten DB im UI hinzufügen (Jonas)
 - Logo für den Homescreen (iOS) (Milena)
 - Date Picker anpassen (Yvonne)
