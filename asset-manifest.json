@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Xpire/static/css/main.7e167a1f.chunk.css",
-    "main.js": "/Xpire/static/js/main.cdbbbfbe.chunk.js",
-    "main.js.map": "/Xpire/static/js/main.cdbbbfbe.chunk.js.map",
+    "main.js": "/Xpire/static/js/main.93a610ad.chunk.js",
+    "main.js.map": "/Xpire/static/js/main.93a610ad.chunk.js.map",
     "runtime-main.js": "/Xpire/static/js/runtime-main.ee034db2.js",
     "runtime-main.js.map": "/Xpire/static/js/runtime-main.ee034db2.js.map",
     "static/js/2.286cd3c2.chunk.js": "/Xpire/static/js/2.286cd3c2.chunk.js",
     "static/js/2.286cd3c2.chunk.js.map": "/Xpire/static/js/2.286cd3c2.chunk.js.map",
     "index.html": "/Xpire/index.html",
-    "precache-manifest.62da92fb9cf71a7948cb34d6fea5c1c4.js": "/Xpire/precache-manifest.62da92fb9cf71a7948cb34d6fea5c1c4.js",
+    "precache-manifest.fa0a035cdfcfd790622fcbefa5d33141.js": "/Xpire/precache-manifest.fa0a035cdfcfd790622fcbefa5d33141.js",
     "service-worker.js": "/Xpire/service-worker.js",
     "static/css/main.7e167a1f.chunk.css.map": "/Xpire/static/css/main.7e167a1f.chunk.css.map",
     "static/js/2.286cd3c2.chunk.js.LICENSE.txt": "/Xpire/static/js/2.286cd3c2.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.ee034db2.js",
     "static/js/2.286cd3c2.chunk.js",
     "static/css/main.7e167a1f.chunk.css",
-    "static/js/main.cdbbbfbe.chunk.js"
+    "static/js/main.93a610ad.chunk.js"
   ]
 }
