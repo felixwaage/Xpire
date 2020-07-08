@@ -7,6 +7,9 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { Redirect } from 'react-router';
 import format from 'date-fns/format';
+import { Collapse, IconButton } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import CloseIcon from '@material-ui/icons/Close';
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
@@ -30,6 +33,8 @@ class ProductsList extends React.Component {
         this.handleListItemClick = this.handleListItemClick.bind(this);
         this.state = {
             redirect: false,
+            alertOpen: false,
+            alertText: ""
         }    
     }
 
@@ -61,6 +66,20 @@ class ProductsList extends React.Component {
         return (
             <div className={classes.root}>
                 <div className={classes.toolbar}/>
+
+                <Collapse in={this.state.alertOpen}>
+                    <Alert
+                        severity="error"
+                        action={
+                        <IconButton aria-label="close" color="inherit" size="small" onClick={() => {this.setState({ alertOpen: false });}} >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                        }
+                    >
+                        {this.state.alertText}
+                    </Alert>
+                </Collapse>
+
                 <List dense className={classes.list}>
                     {this.props.products ? this.props.products.map((product) =>
                         <div className={classes.listitemframe} key={product.id}>
@@ -86,6 +105,7 @@ class ProductsList extends React.Component {
                         </div>
                     ) : null}
                 </List>
+                <button onClick={this.props.notification}>Notify me!</button>
             </div>
         );
     }
