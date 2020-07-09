@@ -62,6 +62,7 @@ const styles = theme => ({
 class AddProduct extends React.Component {
     constructor(props) {
         super(props);
+        this.formatPurchaseDate = this.formatPurchaseDate.bind(this);
         this.handleClickArrow = this.handleClickArrow.bind(this);
         this.handleClickDelete = this.handleClickDelete.bind(this);
         this.handleClickSave = this.handleClickSave.bind(this);
@@ -80,8 +81,8 @@ class AddProduct extends React.Component {
             redirect: false,
             product_name: "",
             product_amount: "",
-            product_purchaseDate: "",
-            product_expireDate: "",
+            product_purchaseDate: [new Date()],
+            product_expireDate: null,
             product_img_url: "",
             imgStyle: {
                 //zIndex: "-1",
@@ -100,7 +101,8 @@ class AddProduct extends React.Component {
             id: 'simple-popover',
             simple_popover_message: "",
             result: null,
-            camera: false
+            camera: false,
+            message: ""
         }
     }
 
@@ -208,17 +210,22 @@ class AddProduct extends React.Component {
     }
 
     handleClickSave(event){
-        if(!this.state.product_purchaseDate){
-            this.setDate(new Date(), "purchaseDate");
-        }
-        if(!this.state.product_expireDate){
-            this.setDate(new Date(), "expireDate");
-        }
-        if (this.props.productID === 0 ){
-            this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
-        }
-        this.setState({redirect: true});
-        this.props.refreshPage();
+        if(!this.state.product_name || !this.state.product_amount || !this.state.product_expireDate || !this.state.product_purchaseDate){
+            this.setState({openSnackbar: true, message: "Bitte die Pflichtfelder ausfüllen."})
+        }else{
+            if (this.props.productID === 0 ){
+                this.state.product_purchaseDate = this.formatPurchaseDate(this.state.product_purchaseDate);
+                this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
+            }
+            this.setState({redirect: true});
+            this.props.refreshPage();
+         }       
+    }
+
+    formatPurchaseDate(string) {
+        var date = new Date (string);
+        var isoDate = date.toISOString().split('T')[0];
+        return isoDate;
     }
 
     handleDateChange(event, id) {
@@ -247,7 +254,7 @@ class AddProduct extends React.Component {
             expireDate: this.state.product_expireDate
         }
         this.props.productUpdate(this.props.productID, product);
-        this.setState({openSnackbar: true})
+        this.setState({openSnackbar: true, message: "Daten wurden geändert!"})
     }
 
     onDetected(result) {
@@ -413,7 +420,7 @@ class AddProduct extends React.Component {
                     open={this.state.openSnackbar}
                     autoHideDuration={6000}
                     onClose={this.handleCloseSnackbar}
-                    message="Daten wurden geändert!"
+                    message={this.state.message}    
                     action={
                           <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleCloseSnackbar}>
                             <CloseIcon fontSize="small" />
