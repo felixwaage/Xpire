@@ -5,7 +5,7 @@ db.version(1).stores({
     products: "++id,name,amount,purchaseDate,expireDate, img_url"
 });
 
-export const addProduct = async (name, amount, purchaseDate, expireDate, img_url=undefined) => {
+export const addProduct = async (name, amount, purchaseDate, expireDate, img_url = undefined) => {
     await db.products.add({
         name: name,
         amount: amount,
@@ -21,16 +21,16 @@ export const updateProductById = async (id, product) => {
     console.log(product) //has to be one or multiple key(s) + value(s) according to database table attributes
     await db.products.update(id, product).then(function (updated) {
         if (updated)
-          return getAllProducts();
+            return getAllProducts();
         else
-          console.log ("Nothing was updated");
-          return getAllProducts();
-      });
+            console.log("Nothing was updated");
+        return getAllProducts();
+    });
 }
 
 export const clearTable = async (tableName) => {
     await db.table(tableName).clear().catch(() => {
-        console.log('scheise')
+        console.log('Error occured on table clear')
     })
 }
 
@@ -58,6 +58,6 @@ export const getAllProducts = async () => {
 export const createDatabase = async () => { //use for debugging 
     const db = new Dexie('Xpire');
     db.version(1).stores({
-        products: "++id,name,amount,purchaseDate,expireDate, img_rl"
+        products: "++id,name,amount,purchaseDate,expireDate, img_url"
     });
 }
