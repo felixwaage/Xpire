@@ -36,6 +36,6 @@
 - Validierung der Eingaben beim drücken auf den Speichern-Button (Jonas & Yvonne)
 - Snackbar für sämtliche Benachrichtungen (z.B. für Fehler) (Felix)
 - Push-Benachrichtung jeden Morgen (Fabio & Milena) https://developers.google.com/web/updates/2020/02/nic80#notification_triggers https://web.dev/notification-triggers/ https://www.chromestatus.com/feature/5133150283890688
-- Funktion löschen der gesamten DB im UI hinzufügen (Jonas)
+- Funktion löschen der gesamten DB im UI hinzufügen (Jonas) - done
 - Logo für den Homescreen (iOS) (Milena)
 - Date Picker anpassen (Yvonne)
