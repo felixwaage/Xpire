@@ -17,6 +17,9 @@ import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Scanner from "./Scanner";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar, 
@@ -46,6 +49,9 @@ const styles = theme => ({
     },
     form: {
         padding: '1.6rem'
+    },
+    formControl: {
+        width: '100%'
     },
     textField: {
         width: '100%'
@@ -352,16 +358,27 @@ class AddProduct extends React.Component {
                         onChange={this.handleInput}
                     />
                     <br />
-                    <TextField
-                        required
-                        id="product_amount"
-                        label="Anzahl"
-                        margin="dense"
-                        variant="outlined"
-                        value={this.state.product_amount}
-                        className={classes.textField}
-                        onChange={this.handleInput}
-                    />                           
+                    <FormControl variant="outlined" margin="dense" required className={classes.formControl}>
+                        <InputLabel htmlFor="product_amount">Anzahl</InputLabel> 
+                        <Select
+                            native
+                            value={this.state.product_amount}
+                            onChange={this.handleInput}          
+                            label="Anzahl"
+                            inputProps={{
+                                name: 'Anzahl',
+                                id: 'product_amount',
+                            }}
+                            >
+                            <option aria-label="None" value="1">1</option>  
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                            <option value={6}>6</option>
+                            <option value={7}>7</option>
+                        </Select>
+                    </FormControl>                          
                     <br />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker
