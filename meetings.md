@@ -32,10 +32,26 @@
 ## 03.07.2020 14:30
 - Bild, wenn man keinen Barcode eingibt --> informieren, wenn nicht dann auf bestehende Bilder zurückgreifen (Felix) - in progress
 - Barcode mit Handy-Kamera scannen (Felix) - in progress
-- Bugs fixen (Toolbarbreite, Scrollen auf Produkt-Seite) (Verena) - in progress
-- Validierung der Eingaben beim drücken auf den Speichern-Button (Jonas & Yvonne)
-- Snackbar für sämtliche Benachrichtungen (z.B. für Fehler) (Felix)
-- Push-Benachrichtung jeden Morgen (Fabio & Milena) https://developers.google.com/web/updates/2020/02/nic80#notification_triggers https://web.dev/notification-triggers/ https://www.chromestatus.com/feature/5133150283890688
+- Bugs fixen (Toolbarbreite, Scrollen auf Produkt-Seite) (Verena) - done
+- Validierung der Eingaben beim drücken auf den Speichern-Button (Jonas & Yvonne) - done 
+- Snackbar für sämtliche Benachrichtungen (z.B. für Fehler) (Felix) - done
+- Push-Benachrichtung jeden Morgen (Fabio & Milena) https://developers.google.com/web/updates/2020/02/nic80#notification_triggers https://web.dev/notification-triggers/ https://www.chromestatus.com/feature/5133150283890688 - done
 - Funktion löschen der gesamten DB im UI hinzufügen (Jonas) - done
-- Logo für den Homescreen (iOS) (Milena)
-- Date Picker anpassen (Yvonne)
+- Logo für den Homescreen (iOS) (Milena) - blocked
+- Date Picker anpassen (Yvonne) - done
+
+## 10.07.2020
+- Bild, wenn man keinen Barcode eingibt --> informieren, wenn nicht dann auf bestehende Bilder zurückgreifen (Felix) - in progress
+- Barcode mit Handy-Kamera scannen (Felix) - in progress
+- Default-Kühlschrank (Jonas) 
+- Doku Mitteilungen (Fabio)
+- Doku Deployment (Milena) 
+- Logo für den Homescreen (iOS) (Milena, Verena)
+- Bug Anzahl (Yvonne)
+- Learnings sammeln bis Fr. 17.07. (alle)
+- eigene Branches aufräumen (alle)
+
+## 17.07.2020 14:00
+- TODO: Code Clean up 
+- TODO: Readme aufräumen
+
