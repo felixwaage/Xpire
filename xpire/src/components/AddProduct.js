@@ -142,7 +142,7 @@ class AddProduct extends React.Component {
     };
 
     getProductInformationByBarcode(event) {
-        if (event.keyCode == 13) {
+        if (event.keyCode === 13 || event.keyCode === 9) {
             var barcode = this.state.barcode;
             if (barcode) {
                 //check for valid barcode
