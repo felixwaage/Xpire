@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import ArrowIcon from '@material-ui/icons/KeyboardBackspace';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Redirect } from 'react-router';
-import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -278,24 +277,7 @@ class AddProduct extends React.Component {
                             onClick={this.handleClickDelete}
                         />}
                     </div>
-                </div>
-        
-                <Popover
-                    id={this.state.id}
-                    open={this.state.open}
-                    anchorEl={this.state.anchorEl}
-                    onClose={this.handleClose}
-                    anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                    }}
-                    transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                    }}
-                >
-                    <Typography className={classes.typography}>{this.state.simple_popover_message}</Typography>
-                </Popover>  
+                </div> 
                 
                 <div className={classes.formContainer}>
                 <form className={classes.form}>
