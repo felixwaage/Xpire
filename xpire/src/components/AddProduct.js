@@ -75,8 +75,6 @@ class AddProduct extends React.Component {
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.getProductInformationByBarcode = this.getProductInformationByBarcode.bind(this);
-        this.showErrorPopOver = this.showErrorPopOver.bind(this);
-        this.handleClose = this.handleClose.bind(this);
         this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this);
         this.setBackgroundImg = this.setBackgroundImg.bind(this);
         this.setDate = this.setDate.bind(this);
@@ -101,8 +99,6 @@ class AddProduct extends React.Component {
                 backgroundSize: "auto 100%"
             },
             barcode: "",
-            anchorEl: {},
-            open: false,
             openSnackbar: false,
             id: 'simple-popover',
             simple_popover_message: "",
@@ -139,22 +135,6 @@ class AddProduct extends React.Component {
         })
     }
 
-    showErrorPopOver(message,target){
-        this.setState({
-            open: true,
-            anchorEl: target,
-            simple_popover_message: message
-        })
-
-    }
-
-    handleClose() {
-        this.setState({
-            anchorEl: null,
-            open: false
-        })
-    };
-
     handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
           return;
@@ -184,22 +164,22 @@ class AddProduct extends React.Component {
                                 this.setBackgroundImg(product.image_url);
                             } else {
                                 // throw error
-                                this.showErrorPopOver("Produktname nicht gefunden!",event.currentTarget);
+                                this.setState({openSnackbar: true, message: "Produktname nicht gefunden!"})
                             }
                             
                         } else {
                             // throw error
-                            this.showErrorPopOver("Das Produkt existiert nicht!",event.currentTarget);
+                            this.setState({openSnackbar: true, message: "Das Produkt exitiert nicht!"})
                         }
                     },
                     (error) => {
-                        this.showErrorPopOver("Prüfe deine Internetverbindung!",event.currentTarget);
+                        this.setState({openSnackbar: true, message: "Prüfe deine Internetverbindung!"})
                     })
             } else {
-                this.showErrorPopOver("Barcode nicht korrekt!",event.currentTarget);
+                this.setState({openSnackbar: true, message: "Barcode nicht korrekt!"})
             }
             } else {
-                this.showErrorPopOver("Bitte Barcode eingeben!",event.currentTarget);
+                this.setState({openSnackbar: true, message: "Bitte Barcode eingeben!"})
             }
         }
     }
