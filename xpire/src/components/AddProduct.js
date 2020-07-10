@@ -22,17 +22,17 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
 const styles = theme => ({
-    toolbar: theme.mixins.toolbar, 
+    toolbar: theme.mixins.toolbar,
     imgOverlay: {
         height: '100%',
         backgroundColor: "hsla(0, 0%, 0%, 0.23)"
-    }, 
+    },
     arrowIcon: {
         marginLeft: "16px",
         marginTop: "10px",
         color: "white",
         position: "fixed"
-    }, 
+    },
     deleteIcon: {
         marginRight: "16px",
         marginTop: "10px",
@@ -113,7 +113,7 @@ class AddProduct extends React.Component {
     }
 
     componentDidMount = () => {
-        if (this.props.productID !== 0){
+        if (this.props.productID !== 0) {
             var product = this.props.products.find(e => e.id === this.props.productID);
             this.setState({
                 product_name: product.name,
@@ -125,11 +125,11 @@ class AddProduct extends React.Component {
                     ...this.state.imgStyle,
                     backgroundImage: "url(" + product.img_url + ")",
                 }
-            }) 
+            })
         }
     }
 
-    setBackgroundImg(product_img_url){
+    setBackgroundImg(product_img_url) {
         this.setState({
             imgStyle: {
                 ...this.state.imgStyle,
@@ -139,7 +139,7 @@ class AddProduct extends React.Component {
         })
     }
 
-    showErrorPopOver(message,target){
+    showErrorPopOver(message, target) {
         this.setState({
             open: true,
             anchorEl: target,
@@ -157,90 +157,90 @@ class AddProduct extends React.Component {
 
     handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
-          return;
+            return;
         }
-        this.setState({openSnackbar: false})
+        this.setState({ openSnackbar: false })
     };
 
-    getProductInformationByBarcode(event){
-        if(event.keyCode == 13){
+    getProductInformationByBarcode(event) {
+        if (event.keyCode === 13 || event.keyCode === 9) {
             var barcode = this.state.barcode;
-            if(barcode){
-            //check for valid barcode
+            if (barcode) {
+                //check for valid barcode
 
-            //var searchResult = {};
-            if(barcode.length === 13 || barcode.length === 8) {
-                    fetch("https://world.openfoodfacts.org/api/v0/product/"+barcode+".json")
-                    .then(res => res.json())
-                    .then((result) => {
-                        var product = result.product;
-                        //check if product found
-                        if(result.status === 1){
-                            if(product.product_name) {
-                                //this.props.update(product.product_name);
-                                this.setState({
-                                    product_name: product.product_name,
-                                })
-                                this.setBackgroundImg(product.image_url);
+                //var searchResult = {};
+                if (barcode.length === 13 || barcode.length === 8) {
+                    fetch("https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json")
+                        .then(res => res.json())
+                        .then((result) => {
+                            var product = result.product;
+                            //check if product found
+                            if (result.status === 1) {
+                                if (product.product_name) {
+                                    //this.props.update(product.product_name);
+                                    this.setState({
+                                        product_name: product.product_name,
+                                    })
+                                    this.setBackgroundImg(product.image_url);
+                                } else {
+                                    // throw error
+                                    this.showErrorPopOver("Produktname nicht gefunden!", event.currentTarget);
+                                }
+
                             } else {
                                 // throw error
-                                this.showErrorPopOver("Produktname nicht gefunden!",event.currentTarget);
+                                this.showErrorPopOver("Das Produkt existiert nicht!", event.currentTarget);
                             }
-                            
-                        } else {
-                            // throw error
-                            this.showErrorPopOver("Das Produkt existiert nicht!",event.currentTarget);
-                        }
-                    },
-                    (error) => {
-                        this.showErrorPopOver("Prüfe deine Internetverbindung!",event.currentTarget);
-                    })
+                        },
+                            (error) => {
+                                this.showErrorPopOver("Prüfe deine Internetverbindung!", event.currentTarget);
+                            })
+                } else {
+                    this.showErrorPopOver("Barcode nicht korrekt!", event.currentTarget);
+                }
             } else {
-                this.showErrorPopOver("Barcode nicht korrekt!",event.currentTarget);
-            }
-            } else {
-                this.showErrorPopOver("Bitte Barcode eingeben!",event.currentTarget);
+                this.showErrorPopOver("Bitte Barcode eingeben!", event.currentTarget);
             }
         }
     }
 
     handleClickArrow(event) {
-        this.setState({redirect: true});
+        this.setState({ redirect: true });
         this.props.refreshPage();
     }
 
     handleClickDelete(event) {
         this.props.delete(this.props.productID);
-        this.setState({redirect: true});
+        this.setState({ redirect: true });
         this.props.refreshPage();
     }
 
-    handleClickSave(event){
-        if(!this.state.product_name || !this.state.product_amount || !this.state.product_expireDate || !this.state.product_purchaseDate){
-            this.setState({openSnackbar: true, message: "Bitte die Pflichtfelder ausfüllen."})
-        }else{
-            if (this.props.productID === 0 ){
-                this.state.product_purchaseDate = this.formatPurchaseDate(this.state.product_purchaseDate);
-                this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
+    handleClickSave(event) {
+        if (!this.state.product_name || !this.state.product_amount || !this.state.product_expireDate || !this.state.product_purchaseDate) {
+            this.setState({ openSnackbar: true, message: "Bitte die Pflichtfelder ausfüllen." })
+        } else {
+            if (this.props.productID === 0) {
+                this.state.product_purchaseDate = this.formatPurchaseDate(this.state.product_purchaseDate);
+                this.props.add(this.state.product_name, this.state.product_amount, this.state.product_purchaseDate, this.state.product_expireDate, this.state.product_img_url);
             }
-            this.setState({redirect: true});
+            this.setState({ redirect: true });
             this.props.refreshPage();
-         }       
+        }
     }
 
     formatPurchaseDate(string) {
-        var date = new Date (string);
+        var date = new Date(string);
         var isoDate = date.toISOString().split('T')[0];
         return isoDate;
     }
 
     handleDateChange(event, id) {
-        this.setDate(event, id);   
+        this.setDate(event, id);
     }
 
-    async setDate(date, id){
+    async setDate(date, id) {
         const isoDate = date.toISOString().split('T')[0];
-        await this.setState({[id]: isoDate});  
+        await this.setState({ [id]: isoDate });
     }
 
     handleInput(event) {
@@ -249,7 +249,7 @@ class AddProduct extends React.Component {
             ...this.state,
             [event.target.id]: value
         })
-        
+
     }
 
     handleClickUpdate(event) {
@@ -260,12 +260,14 @@ class AddProduct extends React.Component {
             expireDate: this.state.product_expireDate
         }
         this.props.productUpdate(this.props.productID, product);
-        this.setState({openSnackbar: true, message: "Daten wurden geändert!"})
+        this.setState({ openSnackbar: true, message: "Daten wurden geändert!" })
     }
 
     onDetected(result) {
-        this.setState({ barcode: result,
-                        camera: false })
+        this.setState({
+            barcode: result,
+            camera: false
+        })
     }
 
     onStartScan(event) {
@@ -273,7 +275,7 @@ class AddProduct extends React.Component {
             camera: !this.state.camera
         })
     }
-    
+
 
     render() {
         const { classes } = this.props;
@@ -284,149 +286,149 @@ class AddProduct extends React.Component {
 
         return (
             <div className={classes.root}>
-                <div className={classes.toolbar}/>
+                <div className={classes.toolbar} />
                 <div className={classes.img} style={this.state.imgStyle}>
                     <div className={classes.imgOverlay}>
-                        <ArrowIcon 
+                        <ArrowIcon
                             edge="end"
                             className={classes.arrowIcon}
                             onClick={this.handleClickArrow}
                         />
-                        { this.props.productID !== 0 && <DeleteIcon 
+                        {this.props.productID !== 0 && <DeleteIcon
                             edge="end"
                             className={classes.deleteIcon}
                             onClick={this.handleClickDelete}
                         />}
                     </div>
                 </div>
-        
+
                 <Popover
                     id={this.state.id}
                     open={this.state.open}
                     anchorEl={this.state.anchorEl}
                     onClose={this.handleClose}
                     anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
+                        vertical: 'bottom',
+                        horizontal: 'center',
                     }}
                     transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
+                        vertical: 'top',
+                        horizontal: 'center',
                     }}
                 >
                     <Typography className={classes.typography}>{this.state.simple_popover_message}</Typography>
-                </Popover>  
-                
+                </Popover>
+
                 <div className={classes.formContainer}>
-                <form className={classes.form}>
-                    { this.props.productID === 0 && <div>
+                    <form className={classes.form}>
+                        {this.props.productID === 0 && <div>
+                            <TextField
+                                id="barcode"
+                                label="Barcode"
+                                margin="dense"
+                                variant="outlined"
+                                value={this.state.barcode}
+                                className={classes.textField}
+                                onChange={this.handleInput}
+                                onKeyDown={this.getProductInformationByBarcode}
+
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <BarcodeIcon
+                                                onClick={this.onStartScan}
+                                            />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+
+                            <div className="container">
+                                {this.state.camera && <Scanner onDetected={this.onDetected} />}
+                            </div>
+
+                        </div>}
+
                         <TextField
-                            id="barcode"
-                            label="Barcode"
+                            required
+                            id="product_name"
+                            label="Titel"
                             margin="dense"
                             variant="outlined"
-                            value={this.state.barcode}
+                            value={this.state.product_name}
                             className={classes.textField}
                             onChange={this.handleInput}
-                            onKeyDown={this.getProductInformationByBarcode} 
-
-                            InputProps={{
-                                endAdornment: (
-                                <InputAdornment position="end">
-                                    <BarcodeIcon 
-                                        onClick={this.onStartScan}
-                                    />
-                                </InputAdornment>
-                                ),
-                            }}
                         />
-
-                        <div className="container">
-                            {this.state.camera && <Scanner onDetected={this.onDetected} />}
-                        </div>
-
-                    </div>}
-                    
-                    <TextField
-                        required
-                        id="product_name"
-                        label="Titel"
-                        margin="dense"
-                        variant="outlined"
-                        value={this.state.product_name}
-                        className={classes.textField}
-                        onChange={this.handleInput}
-                    />
-                    <br />
-                    <FormControl variant="outlined" margin="dense" required className={classes.formControl}>
-                        <InputLabel htmlFor="product_amount">Anzahl</InputLabel> 
-                        <Select
-                            native
-                            value={this.state.product_amount}
-                            onChange={this.handleInput}          
-                            label="Anzahl"
-                            inputProps={{
-                                name: 'Anzahl',
-                                id: 'product_amount',
-                            }}
+                        <br />
+                        <FormControl variant="outlined" margin="dense" required className={classes.formControl}>
+                            <InputLabel htmlFor="product_amount">Anzahl</InputLabel>
+                            <Select
+                                native
+                                value={this.state.product_amount}
+                                onChange={this.handleInput}
+                                label="Anzahl"
+                                inputProps={{
+                                    name: 'Anzahl',
+                                    id: 'product_amount',
+                                }}
                             >
-                            <option aria-label="None" value="1">1</option>  
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                            <option value={7}>7</option>
-                        </Select>
-                    </FormControl>                          
-                    <br />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DatePicker
-                            required
-                            id="product_purchaseDate"
-                            label="Eingekauft am"
-                            margin="dense"
-                            inputVariant="outlined"
-                            format="dd.MM.yyyy"
-                            value={this.state.product_purchaseDate} 
-                            className={classes.datePicker}
-                            onChange={(event) => this.handleDateChange(event, "product_purchaseDate")}     
-                        />                      
-                    </MuiPickersUtilsProvider>                                        
-                    <br />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DatePicker
-                            required
-                            id="product_expireDate"
-                            label="Gültig bis"
-                            margin="dense"
-                            inputVariant="outlined"
-                            format="dd.MM.yyyy"
-                            value={this.state.product_expireDate} 
-                            className={classes.datePicker}
-                            onChange={(event) => this.handleDateChange(event, "product_expireDate")}
-                        />                      
-                    </MuiPickersUtilsProvider>
-                    <br />
-           
-                    { this.props.productID === 0 && <Button
-                        id="SaveButton"
-                        variant="contained"
-                        color="primary"
-                        className={classes.submitButton}
-                        onClick={this.handleClickSave}>
-                        Speichern
+                                <option aria-label="None" value="1">1</option>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={4}>4</option>
+                                <option value={5}>5</option>
+                                <option value={6}>6</option>
+                                <option value={7}>7</option>
+                            </Select>
+                        </FormControl>
+                        <br />
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <DatePicker
+                                required
+                                id="product_purchaseDate"
+                                label="Eingekauft am"
+                                margin="dense"
+                                inputVariant="outlined"
+                                format="dd.MM.yyyy"
+                                value={this.state.product_purchaseDate}
+                                className={classes.datePicker}
+                                onChange={(event) => this.handleDateChange(event, "product_purchaseDate")}
+                            />
+                        </MuiPickersUtilsProvider>
+                        <br />
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <DatePicker
+                                required
+                                id="product_expireDate"
+                                label="Gültig bis"
+                                margin="dense"
+                                inputVariant="outlined"
+                                format="dd.MM.yyyy"
+                                value={this.state.product_expireDate}
+                                className={classes.datePicker}
+                                onChange={(event) => this.handleDateChange(event, "product_expireDate")}
+                            />
+                        </MuiPickersUtilsProvider>
+                        <br />
+
+                        {this.props.productID === 0 && <Button
+                            id="SaveButton"
+                            variant="contained"
+                            color="primary"
+                            className={classes.submitButton}
+                            onClick={this.handleClickSave}>
+                            Speichern
                     </Button>}
 
-                    { this.props.productID !== 0 && <Button
-                        id="UpdateButton"
-                        variant="contained"
-                        color="primary"
-                        className={classes.submitButton}
-                        onClick={this.handleClickUpdate}>
-                        Ändern
+                        {this.props.productID !== 0 && <Button
+                            id="UpdateButton"
+                            variant="contained"
+                            color="primary"
+                            className={classes.submitButton}
+                            onClick={this.handleClickUpdate}>
+                            Ändern
                     </Button>}
-                </form> 
+                    </form>
                 </div>
 
                 <Snackbar
@@ -437,13 +439,13 @@ class AddProduct extends React.Component {
                     open={this.state.openSnackbar}
                     autoHideDuration={6000}
                     onClose={this.handleCloseSnackbar}
-                    message={this.state.message}    
+                    message={this.state.message}
                     action={
-                          <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleCloseSnackbar}>
+                        <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleCloseSnackbar}>
                             <CloseIcon fontSize="small" />
-                          </IconButton>
-                      }
-                />                        
+                        </IconButton>
+                    }
+                />
             </div>
         );
     }
