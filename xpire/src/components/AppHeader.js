@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     },
     logo: {
         maxWidth: '2.5rem',
+    },
+    deleteIcon: {
+        color: 'white'
     }
 }));
 
@@ -51,15 +54,13 @@ export default function AppHeader(props) {
     return (
         <AppBar position="fixed">
             <Toolbar>
-                {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton> */}
                 <img src={headerLogo} alt="logo" className={classes.logo} />
                 <Typography variant="h6" className={classes.title}>
                     Xpire
                     </Typography>
                 <div>
                     <DeleteForeverIcon
+                        className={classes.deleteIcon}
                         fontSize='large'
                         onClick={handleIconClick}
                     />
@@ -72,18 +73,18 @@ export default function AppHeader(props) {
                     aria-labelledby="alert-dialog-slide-title"
                     aria-describedby="alert-dialog-slide-description"
                 >
-                    <DialogTitle id="alert-dialog-slide-title">Delete all Products?</DialogTitle>
+                    <DialogTitle id="alert-dialog-slide-title">Alle Produkte löschen?</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            Are you sure you want to delete all of your products in Xpire? There's no turning back after that.
+                            Möchten Sie wirklich alle Produkte in Xpire löschen?
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => setOpenDialog(false)} color="primary">
-                            Cancel
+                            Abbrechen
                         </Button>
                         <Button onClick={handleDelete} color="secondary">
-                            Delete all Products
+                            Alle Produkte löschen
                         </Button>
                     </DialogActions>
                 </Dialog>
