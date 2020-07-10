@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import headerLogo from '../logo.svg';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DeleteForeverIcon from '@material-ui/icons/DeleteOutlined';
 import { clearTable } from '../Idb';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: '2.5rem',
     },
     deleteIcon: {
-        color: 'white'
+        color: theme.palette.primary.dark
     }
 }));
 
