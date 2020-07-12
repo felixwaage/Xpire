@@ -40,6 +40,7 @@ Beispiel: https://world.openfoodfacts.org/api/v0/product/4316268552370.json
 ## Indexed-DB
 
 Dexie - Library zum Zugriff auf IndexedDB
+
 https://dexie.org/
 
 ## Push-Benachrichtigungen aus der PWA
