@@ -25,8 +25,8 @@ und die Navigation als auch auf die Funktionalität der PWA eingegangen.
 %	\label{fig:graph_edeka}
 %\end{wrapfigure}
 
-Die Abbildung \ref{fig:app} zeigt, wie sich die Xpire-App verschiedenen Bildschirmgrößen problemlos anpasst. Zu sehen ist der \textit{Home-Screen} mit eine Auswahl an Beispiel-Produkten sowohl auf dem Laptop als auch auf dem Smartphone.\\
-Um Xpire auf dem Laptop zu installieren, muss man folgenden Link in die Adresszeile seines Browsers eingeben: https://felixwaage.github.io/Xpire/. Es erscheint die App,  wie zu sehen in Abbildung \ref{fig:install} im Browser und lässt sich über ein "+" ganz rechts in der Adresszeile als App dem Desktop hinzufügen. Nach einem Klick auf den Plus-Button öffnet sich ein Pop-Up, welches welches es dem Nutzer ermöglicht, die Installation durchzuführen. Klick man den Installations-Button, wird im dritten Schritt die Xpire-App auf dem Desktop hinterlegt, siehe \ref{fig:install}.
+Die Abbildung \ref{fig:app} zeigt, wie sich die Xpire-App verschiedenen Bildschirmgrößen problemlos anpasst. Zu sehen ist der \textit{Home-Screen} mit einer Auswahl an Beispiel-Produkten sowohl auf dem Laptop als auch auf dem Smartphone.\\
+Um Xpire auf dem Laptop zu installieren, muss man folgenden Link in die Adresszeile seines Browsers eingeben: https://felixwaage.github.io/Xpire/. Es erscheint die App,  wie zu sehen in Abbildung \ref{fig:install} im Browser und lässt sich über ein "+" ganz rechts in der Adresszeile als App dem Desktop hinzufügen. Nach einem Klick auf den Plus-Button öffnet sich ein Pop-Up, welches es dem Nutzer ermöglicht, die Installation durchzuführen. Klick man den Installations-Button, wird im dritten Schritt die Xpire-App auf dem Desktop hinterlegt, siehe \ref{fig:install}.
 
 \begin{figure}[h!]
 	\centering
@@ -36,6 +36,20 @@ Um Xpire auf dem Laptop zu installieren, muss man folgenden Link in die Adressze
 \end{figure}
 
 Die Installation auf dem Smartphone erfolgt äquivalent zu der auf dem Desktop. Nach dem Öffnen des Links wid über ein Pop-Up die Möglichkeit zur Installation bereit gestellt. Xpire wird dann auf dem Smartphone angezeigt wie eine native mobile App und weist auch nach dem Öffnen keine Unterschiede zu einer nativen App auf. Dennoch läuft die App als PWA komplett im Browser. 
+
+Damit die Verwendung auf dem Smartphone ähnlich zu einer nativen Applikation ist, wird ein sogenannter Splash-Screen implementiert. Dieser erscheint nachdem der Benutzer auf den Smartphone die gespeicherte PWA öffnet. Für Endnutzer mit iOS-Betriebssystem erscheint das Logo in weiß, wie in Abbildung \vref{fig:splashScreenIos}, und für Android-Geräte erscheint das Logo in Grün, siehe Abbildung \vref{fig:splashScreenAndroid}. 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=8cm]{img/splashScreenIos.pdf}
+	\caption{Splash Screen für iOS}
+	\label{fig:splashScreenIos}
+\end{figure}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=8cm]{img/splashScreenAndroid.pdf}
+	\caption{Splash Screen für Andorid}
+	\label{fig:splashScreenAndroid}
+\end{figure}
 
 % was ist unterschiedlich im Vergleich zu den Mockups?
 Die Gestaltung als auch der User-Flow der entwickelten PWA entsprechen fast eins zu eins dem der Mockups. Geringe Unterschiede lassen sich an folgenden Punkten feststellen:
