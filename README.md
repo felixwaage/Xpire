@@ -2,6 +2,7 @@
 Xpire - Manage your fridge and get rich!
 
 Verfügbar unter: https://felixwaage.github.io/Xpire/
+
 Download Bildschirm-Video von Xpire in iOS: https://github.com/felixwaage/Xpire/raw/master/iOS-Bildschirmaufnahme.mov
 
 # Version 1
