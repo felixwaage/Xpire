@@ -39,13 +39,8 @@ Beispiel: https://world.openfoodfacts.org/api/v0/product/4316268552370.json
 
 ## Indexed-DB
 
-LokiJS - Library zum Zugriff auf IndexedDB
-https://github.com/techfort/LokiJS
-
-- LokiJS hat nichts mit der nativen IndexedDB im Browser zu tun
-- LokiJS ist einfach :)!
-- Insert --> done
-- Die Daten der werden zum aktuellen stand nicht dauerhaft gespeichert
+Dexie - Library zum Zugriff auf IndexedDB
+https://dexie.org/
 
 ## Push-Benachrichtigungen aus der PWA
 
