@@ -37,18 +37,17 @@ Um Xpire auf dem Laptop zu installieren, muss man folgenden Link in die Adressze
 
 Die Installation auf dem Smartphone erfolgt äquivalent zu der auf dem Desktop. Nach dem Öffnen des Links wid über ein Pop-Up die Möglichkeit zur Installation bereit gestellt. Xpire wird dann auf dem Smartphone angezeigt wie eine native mobile App und weist auch nach dem Öffnen keine Unterschiede zu einer nativen App auf. Dennoch läuft die App als PWA komplett im Browser. 
 
-Damit die Verwendung auf dem Smartphone ähnlich zu einer nativen Applikation ist, wird ein sogenannter Splash-Screen implementiert. Dieser erscheint nachdem der Benutzer auf den Smartphone die gespeicherte PWA öffnet. Für Endnutzer mit iOS-Betriebssystem erscheint das Logo in weiß, wie in Abbildung \vref{fig:splashScreenIos}, und für Android-Geräte erscheint das Logo in Grün, siehe Abbildung \vref{fig:splashScreenAndroid}. 
-\begin{figure}[h!]
+Damit die User Experience der PWA-Applikation auf dem Smartphone ähnlich zu einer nativen Applikation ist, wird ein sogenannter Splash Screen implementiert. Dieser erscheint nachdem der Benutzer die auf dem Smartphone gespeicherte Xprie-PWA öffnet. In Abbildung \vref{fig:splashScreen} werden die Splash Screens abgebildet, wobei dieser bei einem iOS-Betriebssysteme in weiß und für Android-Geräte in grün erscheint.  
+
+Der Splash Screen sowie weitere Funktionalität der Xpire-Applikation sind in einer Bildschirmaufnahme mit dem Betriebssystem iOS zu sehen, welche unter folgendem Link verfügbar ist:\\
+\url{https://github.com/felixwaage/Xpire/blob/master/iOS-Bildschirmaufnahme.mov} 
+
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=8cm]{img/splashScreenIos.pdf}
-	\caption{Splash Screen für iOS}
-	\label{fig:splashScreenIos}
-\end{figure}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=8cm]{img/splashScreenAndroid.pdf}
-	\caption{Splash Screen für Andorid}
-	\label{fig:splashScreenAndroid}
+	\subfigure[iOS]{\includegraphics[width=0.30\textwidth]{img/splashScreenIos.png}} 
+	\subfigure[Android]{\includegraphics[width=0.30\textwidth]{img/splashScreenAndroid.jpg}} 
+	\caption{Splash Screen für iOS und Android}
+	\label{fig:splashScreen}
 \end{figure}
 
 % was ist unterschiedlich im Vergleich zu den Mockups?
@@ -74,4 +73,3 @@ Die Standard-Anzahl der Produkte beträgt 1, lässt sich aber über ein Dropdown
 
 % Tests --> feingarnulare Unit Tests, acceptance tests?
 
-% Deployment
