@@ -1,14 +1,16 @@
 # Xpire
 Xpire - Manage your fridge and get rich!
 
-Verfügbar unter: https://felixwaage.github.io/Xpire/ 
+Verfügbar unter: https://felixwaage.github.io/Xpire/
+
+Download Bildschirm-Video von Xpire in iOS: https://github.com/felixwaage/Xpire/raw/master/iOS-Bildschirmaufnahme.mov
 
 # Version 1
 
 - Manuelles Eingeben des Mindesthaltbarkeitsdatum
-  - Obst und Gemüse Erfahrungswerte
+  - Erfahrungswerte für Obst und Gemüse
   - Produktsuche
-- Erinnerung an verfallende Lebensmittel
+- Erinnerung an verfallende Lebensmittel per Benachrichtigung
 
 # Version 2
 
@@ -20,33 +22,16 @@ Verfügbar unter: https://felixwaage.github.io/Xpire/
 
 # Technologien
 
-- PWA 
-- Frontend: React; Backend: NestJS
+- PWA
+- Frontend: React; Backend: nicht benötigt
 - Lokale Entwicklung
-- lokale Datenspeicherung: JSON-File
+- Lokale Datenspeicherung: IndexedDB
 
-# ToDo's - bis 29.05.
+# Mockups für die Version 1
 
-- Produktdatenbank (Felix) - done
-- JSON-File aus der PWA offline speichern (Fabio & Jonas) - done
-- Push-Benachrichtigungen aus der PWA möglich? (Milena & Yvonne) - done
-- Grundlagen PWA-Entwicklung mit React (alle) - done
-- Logo (Andrea) - done
-- [Mockups für die App](https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A19&scaling=min-zoom) (Verena und Andrea) - done
-- Push-Benachrichtigungen (Yvonne) - done (auf Branch notification)
-- Http-Requests (Felix) - done
-- App-Icon (Milena) - done
-- IndexedDB (Fabio & Jonas) - done
-- Deployment des Projekts als GitHub-Page (Milena) - done
+Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&scaling=min-zoom
 
-- hinzufügen eines Produktes bis 19.06. 
-  - Verena macht das Frontend
-  - Milena & Yvonne & Felix sprechen sich ab
- 
- - anlegen der Datenbank bis 19.06. (Jonas & Fabio)
-  - "DB-Model" und Implementierung
-
-# Ergebnisse
+# Erkenntnisse
 ## Produkt-API
 
 Es gibt den Service Openfoodfacts: https://world.openfoodfacts.org/
@@ -56,13 +41,9 @@ Beispiel: https://world.openfoodfacts.org/api/v0/product/4316268552370.json
 
 ## Indexed-DB
 
-LokiJS - Library zum Zugriff auf IndexedDB
-https://github.com/techfort/LokiJS
+Dexie - Library zum Zugriff auf IndexedDB
 
-- LokiJS hat nichts mit der nativen IndexedDB im Browser zu tun
-- LokiJS ist einfach :)!
-- Insert --> done
-- Die Daten der werden zum aktuellen stand nicht dauerhaft gespeichert
+https://dexie.org/
 
 ## Push-Benachrichtigungen aus der PWA
 
@@ -78,11 +59,7 @@ Folgende Bestandteile sind notwendig:
 
 ## Grundlagen PWA mit React
 
-Link: 
-
-## Mockups für die Version 1
-
-Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&scaling=min-zoom
+Link:
 
 ## App-Icon
 
@@ -90,34 +67,13 @@ Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&sca
 - Testen ist notwendig --> Deployment auf Github-Pages abwarten
 
 ## Deployment auf GitHub-Pages
-- github-pg branch 
+- github-pg branch
 - es muss ein neuer productiv build erzeugt werden, damit dies deployed wird
 - npm run deploy
 
-# Implementierung
-## ListView
-- Liste (MaterialUI)
-
-## nächste Schritte
-- delete product 
-- show product
-- update product
-## Add-Product-Page (Verena)
-- Produkte hinzufügen
-
-## Datenbank und Datenspeicherung (Jonas & Fabio)
-- Datenbankmodel
-- Datenzugriffe
-
-## Konzept (Milena, Yvonne, Verena und Felix)
-
-## Seminararbeit (Andrea)
-
-
-# Compatibility
+## Compatibility
 
 | Feature | Android | iOS |
 | ------ | ------ | ------ |
 | Icons on Homescreen | Yes | Yes |
 | Push-Notifications | Yes | ? |
-

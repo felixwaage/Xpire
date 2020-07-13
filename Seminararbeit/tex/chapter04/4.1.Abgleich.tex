@@ -1,0 +1,29 @@
+% !TEX root =  master.tex
+\newpage
+\section{Anforderungsabgleich}
+In diesem Abschnitt wird betrachtet, welche Vorgaben der Spezifikation aus Kapitel 2.3 realisiert werden konnten. Die Bewertung des Erfüllungsgrads sowie die Beschreibung beziehen sich hierbei lediglich auf den aktuellen Stand der Implementierung.
+
+\subsection{Abgleich der funktionalen Anforderungen}
+
+\begin{tabular}{lcp{12.3cm}}
+	\textbf{Nr.} & \textbf{Erfüllt} & \textbf{Beschreibung}\\
+	\hline
+	F1 & Ja & Auf der Ansicht \textit{Product-Screen} hat der Nutzer die Möglichkeit, gekaufte Produkte per Barcodenummer einzugeben. Daraufhin wird automatisch das dazugehörige Produktbild angezeigt.\\
+	F2 & Ja &  Der App-User kann im \textit{Product-Screen} nicht nur das Bild hochladen und ändern, er hat auch die Möglichkeit alle hinterlegten Produktinformationen (Name, Anzahl, Einkaufsdatum, Verfallsdatum) zu ändern.\\
+	F3 & Ja &  Auf dem \textit{Home-Screen} werden dem Benutzer alle hinterlegen Produkte übersichtlich angezeigt und er hat die Möglichkeit diese zu verwalten, also Produkte zu löschen oder Produktinformationen zu verändern.\\
+	F4 & Teils &  Der Benutzer kann manuell kein Bild hochladen. Jedoch wird ihm ein Bild seine Produktes angezeigt, sobald er den Barcode einscannt oder den Code manuell in das dafür vorgesehene Eingabefeld auf dem \textit{Product-Screen} eingibt.\\
+	F5 & Ja &  Ist ein Produkt nur noch 3 Tage haltbar, erhält der User eine Push-Notification, um an das zeitnahe Verbrauchen dieses Produktes erinnert zu werden.\\
+	\hline
+\end{tabular}
+
+\subsection{Abgleich der nicht-funktionalen Anforderungen}
+
+\begin{tabular}{lcp{12.3cm}}
+	\textbf{Nr.} & \textbf{Erfüllt} & \textbf{Beschreibung}\\
+	\hline
+	NF1.1 & Ja & Informationen wurden möglichst sinnvoll strukturiert, bezeichnet und dargeboten.\\
+	NF1.2 & Ja & Die Navigation wurde so konzipiert, dass sie dem Benutzer Orientierung auf jeder Ansicht innerhalb der App bietet. Durch unterschiedliche Farbgebungen werden auf visuelle Art und Weise zusätzlich Informationen zum Status der Haltbarkeit eines Lebensmittels vermittelt.\\
+	NF2.1 & Ja & Zur Erhöhung der Lesbarkeit wurde auf eine kontrastreiche Darstellung geachtet und eine gut leserliche und Browser-kompatible Schriftart gewählt.\\
+	NF2.2 & Ja & Die PWA passt sich an die geforderten Bildschirmgrößen an. Durch den Mobile-First-Ansatz wirkt sie optische wie eine native mobile Applikation, passt sich aber auch problemlos der Bildschirmgröße eines Tablets oder Desktops an.\\
+	\hline
+\end{tabular}
