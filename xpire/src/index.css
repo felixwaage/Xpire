@@ -3,4 +3,18 @@ body {
   margin-bottom: 50px;
 }
 
+#interactive {
+  margin: 0 auto;
+  position: relative;
+  height: 480px;
+}
+
+#interactive canvas, #interactive video {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
