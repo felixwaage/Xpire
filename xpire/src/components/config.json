@@ -2,8 +2,8 @@
   "inputStream": {
     "type": "LiveStream",
     "constraints": {
-      "width": { "max": 350 },
-      "height": { "max": 233 },
+      "width": { "max": 1920 },
+      "height": { "max": 1080 },
       "facingMode": "environment",
       "aspectRatio": { "min": 1, "max": 2 }
     }
