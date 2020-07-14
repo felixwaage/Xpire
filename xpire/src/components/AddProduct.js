@@ -19,6 +19,8 @@ import Scanner from "./Scanner";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Popover from '@material-ui/core/Popover';
+
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
@@ -74,6 +76,7 @@ class AddProduct extends React.Component {
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.getProductInformationByBarcode = this.getProductInformationByBarcode.bind(this);
+        this.onSearchKeyDown = this.onSearchKeyDown.bind(this);
         this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this);
         this.setBackgroundImg = this.setBackgroundImg.bind(this);
         this.setDate = this.setDate.bind(this);
@@ -99,11 +102,11 @@ class AddProduct extends React.Component {
             },
             barcode: "",
             openSnackbar: false,
-            id: 'simple-popover',
             simple_popover_message: "",
             result: null,
             camera: false,
-            message: ""
+            message: "",
+            open: false
         }
     }
 
@@ -141,17 +144,21 @@ class AddProduct extends React.Component {
         this.setState({ openSnackbar: false })
     };
 
-    getProductInformationByBarcode(event) {
-        if (event.keyCode === 13 || event.keyCode === 9) {
-            var barcode = this.state.barcode;
-            if (barcode) {
-                //check for valid barcode
+    onSearchKeyDown(event){
+        if(event.keyCode === 13 || event.keyCode === 9){
+            this.getProductInformationByBarcode(this.state.barcode)
+        }
+    }
 
-                //var searchResult = {};
-                if (barcode.length === 13 || barcode.length === 8) {
-                    fetch("https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json")
-                        .then(res => res.json())
-                        .then((result) => {
+    getProductInformationByBarcode(barcode) {
+        if (barcode) {
+            //check for valid barcode
+
+            //var searchResult = {};
+            if (barcode.length === 13 || barcode.length === 8) {
+                fetch("https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json")
+                    .then(res => res.json())
+                    .then((result) => {
                             var product = result.product;
                             //check if product found
                             if (result.status === 1) {
@@ -163,23 +170,37 @@ class AddProduct extends React.Component {
                                     this.setBackgroundImg(product.image_url);
                                 } else {
                                     // throw error
-                                    this.setState({ openSnackbar: true, message: "Produktname nicht gefunden!" })
+                                    this.setState({
+                                        openSnackbar: true,
+                                        message: "Produktname nicht gefunden!"
+                                    })
                                 }
 
                             } else {
                                 // throw error
-                                this.setState({ openSnackbar: true, message: "Das Produkt exitiert nicht!" })
+                                this.setState({
+                                    openSnackbar: true,
+                                    message: "Das Produkt exitiert nicht!"
+                                })
                             }
                         },
-                            (error) => {
-                                this.setState({ openSnackbar: true, message: "Prüfe deine Internetverbindung!" })
+                        (error) => {
+                            this.setState({
+                                openSnackbar: true,
+                                message: "Prüfe deine Internetverbindung!"
                             })
-                } else {
-                    this.setState({ openSnackbar: true, message: "Barcode nicht korrekt!" })
-                }
+                        })
             } else {
-                this.setState({ openSnackbar: true, message: "Bitte Barcode eingeben!" })
+                this.setState({
+                    openSnackbar: true,
+                    message: "Barcode nicht korrekt!"
+                })
             }
+        } else {
+            this.setState({
+                openSnackbar: true,
+                message: "Bitte Barcode eingeben!"
+            })
         }
     }
 
@@ -245,8 +266,10 @@ class AddProduct extends React.Component {
     onDetected(result) {
         this.setState({
             barcode: result,
-            camera: false
+            camera: false,
         })
+
+        this.getProductInformationByBarcode(this.state.barcode);
     }
 
     onStartScan(event) {
@@ -292,7 +315,7 @@ class AddProduct extends React.Component {
                                 value={this.state.barcode}
                                 className={classes.textField}
                                 onChange={this.handleInput}
-                                onKeyDown={this.getProductInformationByBarcode}
+                                onKeyDown={this.onSearchKeyDown}
 
                                 InputProps={{
                                     endAdornment: (
@@ -306,7 +329,7 @@ class AddProduct extends React.Component {
                             />
 
                             <div className="container">
-                                {this.state.camera && <Scanner onDetected={this.onDetected} />}
+                                {this.state.camera && <Scanner onDetected={this.onDetected} cameraStatus={this.state.camera} />}
                             </div>
 
                         </div>}
