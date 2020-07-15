@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
     },
     deleteIcon: {
         color: theme.palette.primary.dark
+    },
+    dialogActions: {
+        paddingRight: "20px",
+        paddingBottom: "10px"
     }
 }));
 
@@ -73,18 +77,18 @@ export default function AppHeader(props) {
                     aria-labelledby="alert-dialog-slide-title"
                     aria-describedby="alert-dialog-slide-description"
                 >
-                    <DialogTitle id="alert-dialog-slide-title">Alle Produkte löschen?</DialogTitle>
+                    <DialogTitle id="alert-dialog-slide-title">Löschen bestätigen</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
                             Möchten Sie wirklich alle Produkte in Xpire löschen?
                         </DialogContentText>
                     </DialogContent>
-                    <DialogActions>
+                    <DialogActions className={classes.dialogActions}>
                         <Button onClick={() => setOpenDialog(false)} color="primary">
                             Abbrechen
                         </Button>
                         <Button onClick={handleDelete} color="secondary">
-                            Alle Produkte löschen
+                            Löschen
                         </Button>
                     </DialogActions>
                 </Dialog>
