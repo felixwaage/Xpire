@@ -71,15 +71,21 @@ Das gesamte Team hat sich im wöchentlichen Rhythmus versammelt, um über den ak
 
 ## 10.07.2020
 - Bild, wenn man keinen Barcode eingibt --> informieren, wenn nicht dann auf bestehende Bilder zurückgreifen (Felix) - in progress
-- Barcode mit Handy-Kamera scannen (Felix) - in progress
-- Default-Kühlschrank (Jonas)
-- Doku Mitteilungen (Fabio)
-- Doku Deployment (Milena)
-- Logo für den Homescreen (iOS) (Milena, Verena)
-- Bug Anzahl (Yvonne)
-- Learnings sammeln bis Fr. 17.07. (alle)
-- Eigene Branches aufräumen (alle)
+- Barcode mit Handy-Kamera scannen (Felix) - done
+- Default-Kühlschrank (Jonas) - done
+- Doku Mitteilungen (Fabio) - done
+- Doku Deployment (Milena) - done
+- Logo für den Homescreen (iOS) (Milena, Verena) - done
+- Bug Anzahl (Yvonne) - done
+- Learnings sammeln bis Fr. 17.07. (alle) - done
+- Eigene Branches aufräumen (alle) - done
 
 ## 17.07.2020 14:00
-- TODO: Code Clean up
-- TODO: Readme aufräumen
+
+## 26.07.2020 
+- Code Clean up (alle, jeder seinen Code)
+- Readme aufräumen (Felix)
+- Button Suche hinzufügen (Verena)
+- alles Löschen nur auf der Listen-Ansicht (Verena)
+- default Kühlschrank, löschen aller default Produkte (Jonas)
+- Vorstellungsvideo (Milena)
