@@ -1,8 +1,57 @@
 % !TEX root =  master.tex
 \chapter{Zusammenfassung und Ausblick}
 
-% Was könnten nächste Schritte sein? Wie könnte die App erweitert werden?
+Ziel war es, zunächst ein Minimal-Viable-Product (MVP) zu entwickeln, um ein funktionierendes Produkt liefern zu können, welches sich in zukünftigen Schritten einfach erweitern lässt. Dieses Ziel haben wir nicht nur erreicht, sondern sogar übertreffen können, da bereits Funktionalitäten, die erst für eine zweite Version definiert wurden, umgesetzt werden konnten. Zu diesen Funktionalitäten zählen beispielsweise das Scannen des Barcodes zur Produktidentifikation und die Anzeige des Status eines Produktes. Die Umsetzung der PWA hat folglich wie geplant funktioniert, wodurch wir viele Vorteile hatten und auf das Entwickeln für mehrere Plattformen verzichten konnten.
 
-% Was passiert, wenn man ein Produkt löscht? Ist es dann in der Datenbank geschlöscht oder wird nur ein Attribut gesetzt? Welche Auswirkungen hätten diese Möglichkeiten?
+Zukünftige Schritte, um Xpire weiter zu entwickeln, könnten sein:
+\begin{itemize}[noitemsep]
+	\item Anbindung einer Rezepte-API, sodass dem Benutzer Vorschläge zu Rezepten entsprechend der hinterlegten Produkte erhalten kann
+	\item Hinterlegen von Standardbildern und Standard-Verfallswerten für Obst und Gemüse
+	\item die Liste der hinterlegten Produkte sortiert anzeigen und verschiedene Sortierungsmöglichkeiten zur Verfügung stellen
+	\item zusätzliche Informationen zu den Produkten anzeigen, wie beispielsweise Nährwerte oder Allergenkennzeichnungen
+	\item Synchronisation über mehrere Geräte hinweg ermöglichen
+	\item Automatische Erkennung des Mindesthaltbarkeitsdatum
+	\item Einrichtung einer Mitgliederverwaltung
+	\item Tipps für die Lagerung automatisch anzeigen
+\end{itemize}
 
-% Was waren unsere Learnings?
+Aktuell kann die App, wie bereits beschrieben, über den Link erreicht und auf einem beliebigen Endgerät installiert werden. Da das Konzept einer PWA jedoch noch nicht weit verbreitet ist und viele der Endanwender kein Fachwissen besitzen, vermuten wir, dass es vereinzelt zu Akzeptanz- und/oder Anwendungsproblemen seitens der Endanwender kommen kann. Daher halten wir eine zusätzliche Vermarktung über den App- bzw. den Google Play Store für sinnvoll, da Endanwender hauptsächlich diese Plattformen verwenden, um neue Apps zu downloaden. Falls diese Form der Vermarktung tatsächlich realisiert wird, ist es erforderlich, rechtliche Vorgaben einzuhalten und eine Datenschutzerklärung als auch ein Impressum zu erstellen.
+
+Abschließend wollen wir noch auf die Learnings eingehen, die wir während des Projektes gesammelt haben. 
+
+\textbf{Leanings bezüglich PWA}:\\
+Während der Entwicklung sind einige Eigenarten von PWAs ans Licht getreten. 
+Zunächst ist beim Testen immer daran zu denken, dass der jeweilige Browser eine Version der App im Cache behält und diese anzeigt, anstatt die Seite komplett neu zu laden. Für sinnvolles Testen musste daher immer der Browser-Cache inklusive Websitedaten gelöscht werden. Bei diesem Schritt wird auch die \ac{IndexedDB} geleert. Besonders bei kleinen Änderungen stellte sich dies als mühselig heraus. Eine Möglichkeit, dem vorzubeugen, wäre Service-Worker-Versioning einzuführen, was für uns zunächst aber zu viel Aufwand darstellte.
+Weiterhin ist bei der Entwicklung aufgefallen, dass speziell bei Funktionen von \ac{PWA}s die Unterschiede der Browser hinsichtlich Kompatibilität noch deutlicher werden, als sie uns ohnehin schon bekannt waren. Meistens hat der Chrome-Browser hier die Nase vorn und setzt auch als erster neue Schnittstellen um, wie am Origin Trial der Notification Triggers erkennbar ist. Doch selbst bei Verwendung des gleichen Browsers kann es je nach Betriebssystem (Windows, macOS, Android) sein, dass manche Funktionen anders beschaffen oder schlicht nicht verfügbar sind. Ein Beispiel sind auch hier die Push-Benachrichtigungen, die letzten Endes den Restriktionen des Betriebssystems unterliegen. Auch bei der Darstellung des App-Icons sind solche Eigenarten zu beobachten.
+
+\textbf{technische Learnings}:
+\begin{itemize}[noitemsep]
+	\item Implementierung eines übergeordneten Material UI-Themings
+	\item Verknüpfung des UIs mit der IndexedDB
+	\item besserer Umgang mit GitHub (Branching, Merging)
+	\item Back-End wird nicht unbedingt benötigt, Daten können im Browser gespeichert werden
+	\item Kenntnisse zum Arbeiten mit React gewonnen
+\end{itemize}
+
+\textbf{Learnings bezüglich Teamarbeit}:
+\begin{itemize}[noitemsep]
+	\item sinnvolle Verteilung der Aufgaben nach den jeweiligen Stärken
+	\item gegenseitige Unterstützung, wenn es Probleme gab $\rightarrow$ gute Gruppendynamik
+	\item Überlegungen vor der Entwicklung mit Value Proposition Canvas
+	\item Regelmäßige Meetings sind zwar zeitaufwändig, aber helfen enorm für den Projektverlauf (immer auf dem aktuellen Stand, woran gearbeitet wird und bei wem es gerade Probleme gibt)
+\end{itemize}
+
+\textbf{weitere Learnings}:
+\begin{itemize}[noitemsep]
+	\item durch schnelles Deployment mit GitHub-Pages wird Vorteil von PWAs deutlich. Dadurch einfaches Bereitstellen sowohl für ios als auch Android
+	\item Gute Vorbereitung mit Mockups, Release-Pläne und Priorisierung zahlen sich im Projektverlauf aus
+	\item teilweise schwieriger gute Tutorials für PWA bezogene Themen zu finden wie Offline Zugriffe, Push Benachrichtigungen, Handyzugriff, App öffnen von anderer App aus, auf lokale Dateien zugreifen, IndexedDb $\rightarrow$ native, spezifische Funktionen des Smartphones
+\end{itemize}
+
+\textbf{Fazit}:\\
+Aufgefallen ist uns, dass es einige Sachen gibt, die für PWAs noch nicht verfügbar sind. Außerdem agiert der Softwareentwickler Apple noch eher unkooperative bezüglich PWAs.\\
+Auch wenn es bei der Umsetzung teilweise noch Schwierigkeiten gibt und die PWA in ihrer Funktionalität noch nicht so mächtig wie native Apps ist, halten wir das Grundkonzept für sehr gut.
+Die Einarbeitung in das Thema PWA lohnt sich! Man  muss nur ein Entwicklungsstack beherrschen z.B. React, JavaScript, NodeJS und hat keinen Mehraufwand um die App auf vielen Plattformen anbieten zu können.
+
+Kurzgefasst lässt sich festhalten, dass wir durch das Projekt sehr viel (Neues) lernen konnten, nicht bezüglich PWA und der eingesetzten Technologien. Auch haben wir gelernt eine strukturierte Arbeitsweise als Team umzusetzen, gemäß unserer Stärken verschiedenen Aufgaben nachzugehen und bei Bedarf einander zu helfen. Die Kommunikation als auch die Kooperation im Team hat wunderbar funktioniert und wir gehen mit vielen neuen, wertvollen Erfahrungen aus diesem Projekt heraus. 
+
