@@ -1,14 +1,10 @@
 import React from 'react';
-//import IdbTest from './IdbTest'
 import AppHeader from './components/AppHeader'
 import ProductsList from './components/ProductsList';
 import AddProduct from './components/AddProduct';
 import FloatingButton from './components/FloatingButton';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { addProduct, deleteProductById, getAllProducts, updateProductById } from './Idb'
-import { Collapse, IconButton } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
-import CloseIcon from '@material-ui/icons/Close';
 import moment from 'moment';
 
 
@@ -35,24 +31,9 @@ class App extends React.Component {
   componentDidMount = () => {
     const fetch = async () => {
       await getAllProducts().then((arr) => {
-        if (arr.length === 0) {
-          addDefaultProducts()
-        }
         this.setState({ products: arr });
       })
     }
-
-    const addDefaultProducts = async () => {
-      let today = moment().format('YYYY-MM-DD')
-      let tomorrow = moment().add(1, 'days').format('YYYY-MM-DD')
-      let in1Week = moment().add(7, 'days').format('YYYY-MM-DD')
-
-      console.log(today)
-      await this.addProductToList('Milch', 1, today, today)
-      await this.addProductToList('Eier', 1, today, tomorrow)
-      await this.addProductToList('Hopfensmoothie', 1, today, in1Week)
-    }
-
     fetch();
   }
 
