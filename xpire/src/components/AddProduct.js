@@ -32,14 +32,16 @@ const styles = theme => ({
         marginLeft: "16px",
         marginTop: "10px",
         color: "white",
-        position: "fixed"
+        position: "fixed",
+        cursor: "pointer"
     },
     deleteIcon: {
         marginRight: "16px",
         marginTop: "10px",
         color: "white",
         position: "fixed",
-        right: "0"
+        right: "0",
+        cursor: "pointer"
     },
     datePicker: {
         width: '100%'
