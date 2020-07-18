@@ -42,6 +42,8 @@ const styles = theme => ({
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
+
+
 class AppHeader extends React.Component {
     constructor(props) {
         super(props);
@@ -63,22 +65,24 @@ class AppHeader extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
-       
+        const { classes } = this.props;       
+        const { location } = this.props;
+
         return (
             <AppBar position="fixed">
                 <Toolbar>
                     <img src={headerLogo} alt="logo" className={classes.logo} />
                     <Typography variant="h6" className={classes.title}>
                         Xpire
-                        </Typography>
-                    <div>
+                    </Typography>
+
+                    { !location.pathname.match("/Xpire/Product") && <div>
                         <DeleteForeverIcon
                             className={classes.deleteIcon}
                             fontSize='large'
                             onClick={() => this.setOpenDialog(true)}
                         />
-                    </div>
+                    </div>}
                     <Dialog
                         open={this.state.openDialog}
                         TransitionComponent={Transition}
@@ -107,4 +111,4 @@ class AppHeader extends React.Component {
         );
     }
 }
-export default withStyles(styles)(AppHeader);
+export default withRouter((withStyles(styles)(AppHeader)));
