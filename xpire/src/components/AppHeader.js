@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -13,8 +13,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import { withRouter } from 'react-router-dom';   
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
     root: {
         flexGrow: 1,
     },
@@ -23,76 +24,96 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
-        textAlign: 'center'
     },
     logo: {
         maxWidth: '2.5rem',
     },
     deleteIcon: {
-        color: theme.palette.primary.dark
+        color: theme.palette.primary.dark,
+        cursor: "pointer"
     },
     dialogActions: {
         paddingRight: "20px",
         paddingBottom: "10px"
+    },
+    hiddenDiv: {
+        width: "35px"
     }
-}));
+});
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AppHeader(props) {
-    const classes = useStyles();
-    const [openDialog, setOpenDialog] = React.useState(false)
 
-    const handleDelete = () => {
+class AppHeader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.setOpenDialog = this.setOpenDialog.bind(this);
+        this.state = {
+            openDialog: false,
+        }    
+    }
+
+    handleDelete = () => {
         clearTable('products')
-        setOpenDialog(false)
-        props.refreshPage()
+        this.setState({openDialog: false});
+        this.props.refreshPage()
     }
 
-    const handleIconClick = () => {
-        setOpenDialog(true)
+    setOpenDialog = (openState) => {
+        this.setState({openDialog: openState});
     }
 
-    return (
-        <AppBar position="fixed">
-            <Toolbar>
-                <img src={headerLogo} alt="logo" className={classes.logo} />
-                <Typography variant="h6" className={classes.title}>
-                    Xpire
+    render() {
+        const { classes } = this.props;       
+        const { location } = this.props;
+
+        return (
+            <AppBar position="fixed">
+                <Toolbar>
+                    <img src={headerLogo} alt="logo" className={classes.logo} />
+                    <Typography variant="h6" align="center" className={classes.title}>
+                        Xpire
                     </Typography>
-                <div>
-                    <DeleteForeverIcon
-                        className={classes.deleteIcon}
-                        fontSize='large'
-                        onClick={handleIconClick}
-                    />
-                </div>
-                <Dialog
-                    open={openDialog}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={() => setOpenDialog(false)}
-                    aria-labelledby="alert-dialog-slide-title"
-                    aria-describedby="alert-dialog-slide-description"
-                >
-                    <DialogTitle id="alert-dialog-slide-title">Löschen bestätigen</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            Möchten Sie wirklich alle Produkte in Xpire löschen?
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions className={classes.dialogActions}>
-                        <Button onClick={() => setOpenDialog(false)} color="primary">
-                            Abbrechen
-                        </Button>
-                        <Button onClick={handleDelete} color="secondary">
-                            Löschen
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </Toolbar>
-        </AppBar>
-    );
+
+                    { !location.pathname.match("/Xpire/Product") && <div>
+                        <DeleteForeverIcon
+                            className={classes.deleteIcon}
+                            fontSize='large'
+                            onClick={() => this.setOpenDialog(true)}
+                        />
+                    </div>}
+
+                    { location.pathname.match("/Xpire/Product") && <div className={classes.hiddenDiv}></div>}
+
+                    <Dialog
+                        open={this.state.openDialog}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={() => this.setOpenDialog(false)}
+                        aria-labelledby="alert-dialog-slide-title"
+                        aria-describedby="alert-dialog-slide-description"
+                    >
+                        <DialogTitle id="alert-dialog-slide-title">Löschen bestätigen</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-slide-description">
+                                Möchten Sie wirklich alle Produkte in Xpire löschen?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions className={classes.dialogActions}>
+                            <Button onClick={() => this.setOpenDialog(false)} color="primary">
+                                Abbrechen
+                            </Button>
+                            <Button onClick={() => this.handleDelete()} color="secondary">
+                                Löschen
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </Toolbar>
+            </AppBar>
+        );
+    }
 }
+export default withRouter((withStyles(styles)(AppHeader)));
