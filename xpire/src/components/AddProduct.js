@@ -49,10 +49,6 @@ const styles = theme => ({
     datePicker: {
         width: '100%'
     },
-    formContainer: {
-        //marginTop: "208px",
-        //backgroundColor: "white"
-    },
     form: {
         padding: '1.6rem'
     },
@@ -96,9 +92,6 @@ class AddProduct extends React.Component {
             product_expireDate: null,
             product_img_url: "",
             imgStyle: {
-                //zIndex: "-1",
-                //width: "100%",
-                //position: "fixed",
                 height: '13rem',
                 backgroundImage: "url(" + this.props.products.img_url + ")",
                 backgroundRepeat: "no-repeat",
@@ -309,7 +302,7 @@ class AddProduct extends React.Component {
                     </div>
                 </div>
 
-                <div className={classes.formContainer}>
+                <div>
                     <form className={classes.form}>
                         {this.props.productID === 0 && <div>
                             <TextField

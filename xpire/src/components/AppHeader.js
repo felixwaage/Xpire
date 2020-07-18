@@ -24,7 +24,6 @@ const styles = theme => ({
     },
     title: {
         flexGrow: 1,
-        textAlign: 'center'
     },
     logo: {
         maxWidth: '2.5rem',
@@ -36,6 +35,9 @@ const styles = theme => ({
     dialogActions: {
         paddingRight: "20px",
         paddingBottom: "10px"
+    },
+    hiddenDiv: {
+        width: "35px"
     }
 });
 
@@ -72,7 +74,7 @@ class AppHeader extends React.Component {
             <AppBar position="fixed">
                 <Toolbar>
                     <img src={headerLogo} alt="logo" className={classes.logo} />
-                    <Typography variant="h6" className={classes.title}>
+                    <Typography variant="h6" align="center" className={classes.title}>
                         Xpire
                     </Typography>
 
@@ -83,6 +85,9 @@ class AppHeader extends React.Component {
                             onClick={() => this.setOpenDialog(true)}
                         />
                     </div>}
+
+                    { location.pathname.match("/Xpire/Product") && <div className={classes.hiddenDiv}></div>}
+
                     <Dialog
                         open={this.state.openDialog}
                         TransitionComponent={Transition}
