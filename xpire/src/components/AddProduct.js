@@ -43,6 +43,9 @@ const styles = theme => ({
         right: "0",
         cursor: "pointer"
     },
+    barcodeIcon: {
+        cursor: "pointer"
+    },
     datePicker: {
         width: '100%'
     },
@@ -323,6 +326,7 @@ class AddProduct extends React.Component {
                                     endAdornment: (
                                         <InputAdornment position="end">
                                             <BarcodeIcon
+                                                className={classes.barcodeIcon}
                                                 onClick={this.onStartScan}
                                             />
                                         </InputAdornment>
