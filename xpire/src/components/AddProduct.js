@@ -84,6 +84,7 @@ class AddProduct extends React.Component {
         this.handleClickUpdate = this.handleClickUpdate.bind(this);
         this.onDetected = this.onDetected.bind(this);
         this.onStartScan = this.onStartScan.bind(this);
+        this.onSubmitEditing = this.onSubmitEditing.bind(this);
         this.state = {
             redirect: false,
             product_name: "",
@@ -142,10 +143,16 @@ class AddProduct extends React.Component {
         this.setState({ openSnackbar: false })
     };
 
+    // for PC
     onSearchKeyDown(event){
         if(event.keyCode === 13 || event.keyCode === 9){
             this.getProductInformationByBarcode(this.state.barcode)
         }
+    }
+
+    // for mobile
+    onSubmitEditing(){
+        this.getProductInformationByBarcode(this.state.barcode)
     }
 
     getProductInformationByBarcode(barcode) {
@@ -314,7 +321,7 @@ class AddProduct extends React.Component {
                                 className={classes.textField}
                                 onChange={this.handleInput}
                                 onKeyDown={this.onSearchKeyDown}
-                                returnKeyType={"done"}
+                                onSubmitEditing={this.onSubmitEditing}
 
                                 InputProps={{
                                     endAdornment: (
