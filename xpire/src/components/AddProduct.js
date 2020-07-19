@@ -314,7 +314,7 @@ class AddProduct extends React.Component {
                                 className={classes.textField}
                                 onChange={this.handleInput}
                                 onKeyDown={this.onSearchKeyDown}
-                                returnKeyType="done"
+                                returnKeyType={"done"}
 
                                 InputProps={{
                                     endAdornment: (
