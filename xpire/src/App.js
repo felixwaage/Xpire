@@ -5,7 +5,6 @@ import AddProduct from './components/AddProduct';
 import FloatingButton from './components/FloatingButton';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { addProduct, deleteProductById, getAllProducts, updateProductById } from './Idb'
-import moment from 'moment';
 
 
 class App extends React.Component {
@@ -58,12 +57,11 @@ class App extends React.Component {
       this.setState({ products: arr });
       productID = arr[arr.length - 1].id
     })
-    console.log("Added Product with ID: " + productID)
+    
     var dateForAlarm = new Date(expireDate)
     dateForAlarm.setDate(dateForAlarm.getDate() - 1);
     dateForAlarm.setHours(9, 0, 0, 0); // 9 o'clock on the day before expiration
     this.scheduleNotification(name + " läuft morgen ab!", "expireAlert:" + productID, dateForAlarm.getTime());
-    console.log("scheduled for " + dateForAlarm)
   }
 
   updateProduct = async (id, product) => {
@@ -71,16 +69,11 @@ class App extends React.Component {
       this.setState({ products: arr });
     })
   }
-  onNotificationClick = (event) => {
-    console.log("notification clicked")
-    console.log(event)
-    window.open('http://www.mozilla.org', '_blank');
-  }
   scheduleNotification = (text, id, timestamp) => {
     if (Notification.permission === "granted") {
       navigator.serviceWorker.ready.then(registration => {
         if ("showTrigger" in Notification.prototype) { //origin trial feature
-          console.log("Notification Trigger feature supported");
+          //Notification Trigger feature is supported
           registration.showNotification('Xpire - manage your fridge and get rich', {
             body: text,
             tag: id,
@@ -106,12 +99,6 @@ class App extends React.Component {
       this.displayAlert("Please allow Notifications or exit Incognito Mode");
     }
   }
-  displayNotification = () => {
-    console.log("sending Notification")
-    this.scheduleNotification("a product is about to expire", "test1", Date.now() + 2000);
-    this.scheduleNotification("another schimmel", "test2", Date.now() + 10000);
-  }
-
   displayAlert = (text) => {
     this.productListComponentRef.current.setState({
       alertOpen: true,
@@ -125,7 +112,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Route path="/Xpire" render={(props => <AppHeader refreshPage={this.refreshPage}></AppHeader>)} />
-          <Route exact path="/Xpire" render={(props) => <ProductsList ref={this.productListComponentRef} products={this.state.products} showProduct={this.showProduct} notification={this.displayNotification} />} />
+          <Route exact path="/Xpire" render={(props) => <ProductsList ref={this.productListComponentRef} products={this.state.products} showProduct={this.showProduct} />} />
           <Route exact path="/Xpire" render={(props) => <FloatingButton />} />
           <Route exact path="/Xpire/Product" render={(props) => <AddProduct productID={this.state.productID}
             products={this.state.products}

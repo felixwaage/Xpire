@@ -18,7 +18,7 @@ export const addProduct = async (name, amount, purchaseDate, expireDate, img_url
     });
 }
 export const updateProductById = async (id, product) => {
-    console.log(product) //has to be one or multiple key(s) + value(s) according to database table attributes
+    //product has to be one or multiple key(s) + value(s) according to database table attributes
     await db.products.update(id, product).then(function (updated) {
         if (updated)
             return getAllProducts();
@@ -48,7 +48,6 @@ export const getProductById = async (id) => {
 
 export const getAllProducts = async () => {
     return await db.products.toArray().then(function (arr) {
-        // console.log(arr);
         return arr;
     }).catch((err) => {
         return console.log(err)

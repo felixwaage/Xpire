@@ -105,7 +105,6 @@ class ProductsList extends React.Component {
                         </div>
                     ) : null}
                 </List>
-                {/* <button onClick={this.props.notification}>Notify me!</button> */}
             </div>
         );
     }
