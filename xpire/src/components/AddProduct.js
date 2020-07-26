@@ -80,7 +80,6 @@ class AddProduct extends React.Component {
         this.onSearchKeyDown = this.onSearchKeyDown.bind(this);
         this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this);
         this.setBackgroundImg = this.setBackgroundImg.bind(this);
-        this.setDate = this.setDate.bind(this);
         this.handleClickUpdate = this.handleClickUpdate.bind(this);
         this.onDetected = this.onDetected.bind(this);
         this.onStartScan = this.onStartScan.bind(this);
@@ -221,6 +220,7 @@ class AddProduct extends React.Component {
     }
 
     handleClickSave(event) {
+        //check if all mandatory fields are filled
         if (!this.state.product_name || !this.state.product_amount || !this.state.product_expireDate || !this.state.product_purchaseDate) {
             this.setState({ openSnackbar: true, message: "Bitte die Pflichtfelder ausfüllen." })
         } else {
@@ -239,12 +239,8 @@ class AddProduct extends React.Component {
         return isoDate;
     }
 
-    handleDateChange(event, id) {
-        this.setDate(event, id);
-    }
-
-    async setDate(date, id) {
-        const isoDate = date.toISOString().split('T')[0];
+    async handleDateChange(event, id) {
+        const isoDate = event.toISOString().split('T')[0];
         await this.setState({ [id]: isoDate });
     }
 
@@ -410,7 +406,7 @@ class AddProduct extends React.Component {
                             className={classes.submitButton}
                             onClick={this.handleClickSave}>
                             Speichern
-                    </Button>}
+                        </Button>}
 
                         {this.props.productID !== 0 && <Button
                             id="UpdateButton"
@@ -419,7 +415,7 @@ class AddProduct extends React.Component {
                             className={classes.submitButton}
                             onClick={this.handleClickUpdate}>
                             Ändern
-                    </Button>}
+                        </Button>}
                     </form>
                 </div>
 
