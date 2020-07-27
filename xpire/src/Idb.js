@@ -54,7 +54,8 @@ export const getAllProducts = async () => {
     })
 }
 
-export const createDatabase = async () => { //use for debugging 
+export const createDatabase = async () => { 
+    //use for debugging 
     const db = new Dexie('Xpire');
     db.version(1).stores({
         products: "++id,name,amount,purchaseDate,expireDate, img_url"

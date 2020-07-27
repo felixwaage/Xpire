@@ -36,8 +36,6 @@ class App extends React.Component {
     fetch();
   }
 
-
-
   refreshPage() {
     this.setState({ productID: 0 });
     this.componentDidMount();
@@ -81,7 +79,7 @@ class App extends React.Component {
             actions: [
               { action: 'show', title: 'Anzeigen' },
               { action: 'remind', title: 'Erinnern' }
-            ], // TODO: event listener for onclick must be added somehow
+            ], // Improvement: event listener for onclick must be added somehow
             showTrigger: new TimestampTrigger(timestamp) // eslint-disable-line no-undef
           });
         } else {

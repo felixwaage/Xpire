@@ -5,13 +5,11 @@ import Button from "@material-ui/core/Button";
 import ArrowIcon from '@material-ui/icons/KeyboardBackspace';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Redirect } from 'react-router';
-import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import BarcodeIcon from '@material-ui/icons/CropFree';
 import InputAdornment from '@material-ui/core/InputAdornment';
-//import Paper from '@material-ui/core/Paper';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -19,7 +17,6 @@ import Scanner from "./Scanner";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Popover from '@material-ui/core/Popover';
 
 
 const styles = theme => ({
@@ -61,9 +58,6 @@ const styles = theme => ({
     submitButton: {
         float: 'right',
         marginTop: '1rem'
-    },
-    typography: {
-        padding: theme.spacing(2)
     }
 });
 
@@ -100,7 +94,6 @@ class AddProduct extends React.Component {
             },
             barcode: "",
             openSnackbar: false,
-            simple_popover_message: "",
             result: null,
             camera: false,
             message: "",
@@ -157,8 +150,6 @@ class AddProduct extends React.Component {
     getProductInformationByBarcode(barcode) {
         if (barcode) {
             //check for valid barcode
-
-            //var searchResult = {};
             if (barcode.length === 13 || barcode.length === 8) {
                 fetch("https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json")
                     .then(res => res.json())
@@ -167,7 +158,6 @@ class AddProduct extends React.Component {
                             //check if product found
                             if (result.status === 1) {
                                 if (product.product_name) {
-                                    //this.props.update(product.product_name);
                                     this.setState({
                                         product_name: product.product_name,
                                     })
@@ -188,7 +178,7 @@ class AddProduct extends React.Component {
                                 })
                             }
                         },
-                        (error) => {
+                        () => {
                             this.setState({
                                 openSnackbar: true,
                                 message: "Prüfe deine Internetverbindung!"
@@ -208,18 +198,18 @@ class AddProduct extends React.Component {
         }
     }
 
-    handleClickArrow(event) {
+    handleClickArrow() {
         this.setState({ redirect: true });
         this.props.refreshPage();
     }
 
-    handleClickDelete(event) {
+    handleClickDelete() {
         this.props.delete(this.props.productID);
         this.setState({ redirect: true });
         this.props.refreshPage();
     }
 
-    handleClickSave(event) {
+    handleClickSave() {
         //check if all mandatory fields are filled
         if (!this.state.product_name || !this.state.product_amount || !this.state.product_expireDate || !this.state.product_purchaseDate) {
             this.setState({ openSnackbar: true, message: "Bitte die Pflichtfelder ausfüllen." })
@@ -273,7 +263,7 @@ class AddProduct extends React.Component {
         this.getProductInformationByBarcode(this.state.barcode);
     }
 
-    onStartScan(event) {
+    onStartScan() {
         this.setState({
             camera: !this.state.camera
         })
