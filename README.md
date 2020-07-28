@@ -1,79 +1,32 @@
-# Xpire
-Xpire - Manage your fridge and get rich!
+# Xpire - Manage your fridge and get rich!
 
-Verfügbar unter: https://felixwaage.github.io/Xpire/
+Available: https://felixwaage.github.io/Xpire/
+Demo Recording: https://github.com/felixwaage/Xpire/raw/master/iOS-Bildschirmaufnahme.mov
 
-Download Bildschirm-Video von Xpire in iOS: https://github.com/felixwaage/Xpire/raw/master/iOS-Bildschirmaufnahme.mov
+# Introduction
 
-# Version 1
+Xpire is a progressive web application (pwa) based on react.js. The goal is to reduce the waste of food by intelligently managing it locally in a database. For this purpose, the user can scan the products using the barcode and store an expiration date for them. Xpire then provides an overview of all stored products and proactively notifies the user of expiring food.
 
-- Manuelles Eingeben des Mindesthaltbarkeitsdatum
-  - Erfahrungswerte für Obst und Gemüse
-  - Produktsuche
-- Erinnerung an verfallende Lebensmittel per Benachrichtigung
+# Overview current functionality
 
-# Version 2
+- Adding a product manually 
+- Adding a product using a barcode
+- Get product information using openfoodfacts-api
+- reminder for expiring food
 
-- Automatische Erkennung des Mindesthaltbarkeitsdatum
-- Scannen des Barcodes zur Produktidentifikation
-- Mitgliederverwaltung
-- Tipps für die Lagerung automatisch anzeigen
-- Status für das Produkt
+# Planed/future functionality
 
-# Technologien
+- Automatic recognition of the expiration date
+- Member administration
+- Display storage tips automatically
+- Status for the product
 
-- PWA
-- Frontend: React; Backend: nicht benötigt
-- Lokale Entwicklung
-- Lokale Datenspeicherung: IndexedDB
+# How to setup the project
 
-# Mockups für die Version 1
+If you like to contribute to Xpire, feel free to fork this repository!
 
-Link: https://www.figma.com/proto/8NyI8CqalWfT71Fh6t4z6P/Xpire?node-id=4%3A2&scaling=min-zoom
+## Install dependencies
+npm install
 
-# Erkenntnisse
-## Produkt-API
-
-Es gibt den Service Openfoodfacts: https://world.openfoodfacts.org/
-Dieser bietet sowohl eine API als auch die Möglichkeit zur Kopie einer eigenen Datenbank an.
-
-Beispiel: https://world.openfoodfacts.org/api/v0/product/4316268552370.json
-
-## Indexed-DB
-
-Dexie - Library zum Zugriff auf IndexedDB
-
-https://dexie.org/
-
-## Push-Benachrichtigungen aus der PWA
-
-Keine Push-Benachrichtigungen auf Apple geräten. In Chrome trotzdem möglich auch unter Apple.
-Link: https://medium.com/better-programming/everything-you-need-to-know-about-pwas-push-notifications-e870bb54e14f
-
-Folgende Bestandteile sind notwendig:
-- Push-API (verwendet die Push-Serives der Webbrowser)
-- Notifaction-API (erstellen der Nachricht)
-- Service Worker (muss im Browser registriert werden)
-
-- Es sind Zustimmungen des Nutzer notwendig (lediglich wenige Zeilen Code)
-
-## Grundlagen PWA mit React
-
-Link:
-
-## App-Icon
-
-- Verschieden große Icons müssen hinterglegt werden
-- Testen ist notwendig --> Deployment auf Github-Pages abwarten
-
-## Deployment auf GitHub-Pages
-- github-pg branch
-- es muss ein neuer productiv build erzeugt werden, damit dies deployed wird
-- npm run deploy
-
-## Compatibility
-
-| Feature | Android | iOS |
-| ------ | ------ | ------ |
-| Icons on Homescreen | Yes | Yes |
-| Push-Notifications | Yes | ? |
+## Start Application
+npm start
