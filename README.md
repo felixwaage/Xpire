@@ -26,7 +26,11 @@ Xpire is a progressive web application (pwa) based on react.js. The goal is to r
 If you like to contribute to Xpire, feel free to fork this repository!
 
 ## Install dependencies
+```
 npm install
+```
 
 ## Start Application
+```
 npm start
+```
