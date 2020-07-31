@@ -2,6 +2,7 @@
 
 Available: https://felixwaage.github.io/Xpire/
 Demo Recording: https://github.com/felixwaage/Xpire/raw/master/iOS-Bildschirmaufnahme.mov
+Seminararbeit: https://github.com/felixwaage/Xpire/blob/master/Seminararbeit/master.pdf
 
 # Introduction
 
