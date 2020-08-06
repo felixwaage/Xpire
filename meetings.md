@@ -81,11 +81,11 @@ Das gesamte Team hat sich im wöchentlichen Rhythmus versammelt, um über den ak
 - Eigene Branches aufräumen (alle) - done
 
 ## 17.07.2020 14:00
+- Code Clean up (alle, jeder seinen Code) - done
+- Readme aufräumen (Felix) - done
+- Button Suche hinzufügen (Verena) - done
+- alles Löschen nur auf der Listen-Ansicht (Verena) - done
+- default Kühlschrank, löschen aller default Produkte (Jonas) - done
+- Vorstellungsvideo (Milena) -done
 
-## 26.07.2020 
-- Code Clean up (alle, jeder seinen Code)
-- Readme aufräumen (Felix)
-- Button Suche hinzufügen (Verena)
-- alles Löschen nur auf der Listen-Ansicht (Verena)
-- default Kühlschrank, löschen aller default Produkte (Jonas)
-- Vorstellungsvideo (Milena)
+
